@@ -34,9 +34,9 @@ const CardCollection = () => {
                     </div>
                 </div>
 
-                <div className="mt-3">
-                    <p className="mb-auto text-gray-800 text-lg font-semibold truncate"></p>
-                    <div className="flex text-sm space-x-1 font-regular mb-1">
+                <div className="mt-4">
+                    <p className="mb-auto text-gray-800 text-lg font-semibold truncate">{collection.title}</p>
+                    <div className="flex text-sm space-x-1 font-regular mt-2">
                         <p>8 makanan</p>
                         <p>·</p>
                         <p>10 cemilan</p>

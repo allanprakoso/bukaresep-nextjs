@@ -14,6 +14,33 @@ export default function Home() {
         creator: "Inem Susanti",
         image: "https://www.sidechef.com/recipe/c8738a39-6d2b-4905-a8b7-ad0f0c80311b.jpg",
     }
+    const recipe1 = {
+        title: "Udang Goreng",
+        level: "Mudah",
+        time: 30,
+        rating: 4.5,
+        category: "Makanan",
+        creator: "Inem Susanti",
+        image: "https://www.sidechef.com/recipe/c8738a39-6d2b-4905-a8b7-ad0f0c80311b.jpg",
+    }
+
+    const collection = {
+        title: "Inspirasi kreasi resep kayu manis wuenak tenan ra ngapusi",
+        images: ["https://www.sidechef.com/recipe/c8738a39-6d2b-4905-a8b7-ad0f0c80311b.jpg", "https://www.sidechef.com/recipe/c8738a39-6d2b-4905-a8b7-ad0f0c80311b.jpg", "https://www.sidechef.com/recipe/c8738a39-6d2b-4905-a8b7-ad0f0c80311b.jpg"],
+        categories: [{
+            name: "Makanan",
+            count: 2,
+        },
+        {
+            name: "Cemilan",
+            count: 2,
+        },
+        {
+            name: "Minuman",
+            count: 2,
+        }
+        ],
+    }
     return (
         <div className={styles.container}>
             <Head>
@@ -23,9 +50,12 @@ export default function Home() {
             </Head>
 
             <main className={styles.main}>
-                <CardCollection />
+                <CardCollection collection={collection} />
+                <div className="grid gap-8 grid-cols-2">
+                    <CardRecipe recipe={recipe} />
+                    <CardRecipe recipe={recipe1} />
+                </div>
 
-                <CardRecipe recipe={recipe} />
             </main>
         </div>
     )

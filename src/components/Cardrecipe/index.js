@@ -21,14 +21,16 @@ const CardRecipe = ({ recipe }) => {
                 </div>
 
                 <div className="ml-5 mr-8 mt-4">
-                    <div className="flex text-sm space-x-1 font-regular mb-1">
+                    <div className="flex text-sm space-x-1 font-regular mb-2">
                         <p>{recipe.category}</p>
                         <p>·</p>
                         <p>{recipe.level}</p>
                         <p>·</p>
                         <p>{recipe.time} menit</p>
                     </div>
-                    <text className="font-semibold text-lg">{recipe.title}</text>
+                    <div className="min-h-full h-12">
+                        <text className="font-semibold text-lg">{recipe.title}</text>
+                    </div>
                     <div className="flex space-x-2 mt-6">
                         <p className="font-regular">By</p>
                         <p className="font-semibold">{recipe.creator}</p>
