@@ -1,5 +1,10 @@
 import Footer from "../../components/test/footer";
+import Navbar from "../../components/test/navbar";
 
 export default function Home() {
-  return <div>preview components</div>;
+  return (
+    <div>
+      <Navbar />
+    </div>
+  );
 }
