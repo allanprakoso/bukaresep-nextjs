@@ -361,7 +361,7 @@ module.exports = {
       caption: ["0.688rem", { letterSpacing: "6%" }],
       sm: ["0.831rem", { letterSpacing: "2%" }],
       base: ["0.938rem", { lineHeight: "24px", letterSpacing: "2%" }],
-      lg: ["1.063rem", { lineHeight: "2px", letterSpacing: "1%" }],
+      lg: ["1.063rem", { letterSpacing: "1%" }],
       h6: ["1.188rem", { letterSpacing: "2%" }],
       h5: ["1.438rem", { letterSpacing: "2%" }],
       h4: ["1.75rem", { letterSpacing: "-1%" }],

@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import CardRecipe from '../components/Cardrecipe'
+import CardCollection from '../components/CardCollection'
 
 export default function Home() {
     const recipe = {
@@ -22,21 +23,10 @@ export default function Home() {
             </Head>
 
             <main className={styles.main}>
-                <CardRecipe title={recipe.title} rating={recipe.rating} category={recipe.category} image={recipe.image} time={recipe.time} creator={recipe.creator} level={recipe.level} />
-            </main>
+                <CardCollection />
 
-            <footer className={styles.footer}>
-                <a
-                    href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Powered by{' '}
-                    <span className={styles.logo}>
-                        <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-                    </span>
-                </a>
-            </footer>
+                <CardRecipe recipe={recipe} />
+            </main>
         </div>
     )
 }

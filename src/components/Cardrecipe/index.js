@@ -2,19 +2,19 @@ import Link from 'next'
 import { Star } from '../../assets/icons'
 
 //create card recipe using tailwindcss
-const CardRecipe = (recipe) => {
+const CardRecipe = ({ recipe }) => {
     return (
-        <div class="max-w-2xl font-inter text-gray-600 mx-auto">
-            <div className="bg-white rounded-lg shadow-lg max-w-sm pb-8">
-                <div class="relative">
-                    <img src={recipe.image} alt="recipe" className="rounded-t-lg h-3/5" />
-                    <div class="absolute top-0 left-0 mt-6 ml-6">
-                        <div class="bg-white rounded-full px-3 py-1">
-                            <div class="flex items-center">
+        <div className="font-inter text-gray-600 mx-auto">
+            <div className="bg-white rounded-lg shadow-lg max-w-sm w-64 pb-8">
+                <div className="relative">
+                    <img src={recipe.image} alt="recipe" className="rounded-t-lg object-cover h-full" />
+                    <div className="absolute top-0 left-0 mt-4 ml-4">
+                        <div className="bg-white rounded-full px-3 py-1">
+                            <div className="flex items-center">
                                 <svg width="9px" height="8.7px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <Star />
                                 </svg>
-                                <span class="ml-1 text-caption font-bold text-amber-400">{recipe.rating}</span>
+                                <span className="ml-1 text-caption font-bold text-amber-400">{recipe.rating}</span>
                             </div>
                         </div>
                     </div>
