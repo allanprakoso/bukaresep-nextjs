@@ -8,22 +8,22 @@ const Footer = () => {
       </div>
       <div className="flex justify-center my-4 md:my-6 lg:my-10">
         <Link href={"#"}>
-          <a className="mx-3 md:mx-5 text-caption md:text-base font-medium uppercase text-gray-600">
+          <a className="mx-3 md:mx-5 text-caption md:text-base font-medium uppercase text-gray-600 hover:text-brand-dark">
             Resep
           </a>
         </Link>
         <Link href={"#"}>
-          <a className="mx-3 md:mx-5 text-caption md:text-base font-medium uppercase text-gray-600">
+          <a className="mx-3 md:mx-5 text-caption md:text-base font-medium uppercase text-gray-600 hover:text-brand-dark">
             Artikel
           </a>
         </Link>
         <Link href={"#"}>
-          <a className="mx-3 md:mx-5 text-caption md:text-base font-medium uppercase text-gray-600">
+          <a className="mx-3 md:mx-5 text-caption md:text-base font-medium uppercase text-gray-600 hover:text-brand-dark">
             Tentang kami
           </a>
         </Link>
         <Link href={"#"}>
-          <a className="mx-3 md:mx-5 text-caption md:text-base font-medium uppercase text-gray-600">
+          <a className="mx-3 md:mx-5 text-caption md:text-base font-medium uppercase text-gray-600 hover:text-brand-dark">
             Kontak
           </a>
         </Link>
