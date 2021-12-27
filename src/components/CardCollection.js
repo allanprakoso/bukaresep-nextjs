@@ -1,24 +1,4 @@
-import { Menu_Burger } from "../../assets/icons"
-
-const CardCollection = () => {
-    const collection = {
-        title: "Inspirasi kreasi resep kayu manis wuenak tenan ra ngapusi",
-        images: ["https://www.sidechef.com/recipe/c8738a39-6d2b-4905-a8b7-ad0f0c80311b.jpg", "https://www.sidechef.com/recipe/c8738a39-6d2b-4905-a8b7-ad0f0c80311b.jpg", "https://www.sidechef.com/recipe/c8738a39-6d2b-4905-a8b7-ad0f0c80311b.jpg"],
-        categories: [{
-            name: "Makanan",
-            count: 2,
-        },
-        {
-            name: "Cemilan",
-            count: 2,
-        },
-        {
-            name: "Minuman",
-            count: 2,
-        }
-        ],
-    }
-
+const CardCollection = ({ collection }) => {
     return (
         <div className="font-inter max-2-xs text-gray-600 mx-auto">
             <div className="bg-white rounded-lg w-64 pb-8">

@@ -3,9 +3,12 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import CardRecipe from '../components/Cardrecipe'
 import CardCollection from '../components/CardCollection'
+import ItemCollectionSelection from '../components/ItemCollectionSelection'
+import Link from "next/Link";
 
 export default function Home() {
     const recipe = {
+        id: 1,
         title: "Udang Goreng Tepung Saus Asam Manis",
         level: "Mudah",
         time: 30,
@@ -25,7 +28,8 @@ export default function Home() {
     }
 
     const collection = {
-        title: "Inspirasi kreasi resep kayu manis wuenak tenan ra ngapusi",
+        id: 1,
+        title: "Inspirasi kreasi resep kayu manis",
         images: ["https://www.sidechef.com/recipe/c8738a39-6d2b-4905-a8b7-ad0f0c80311b.jpg", "https://www.sidechef.com/recipe/c8738a39-6d2b-4905-a8b7-ad0f0c80311b.jpg", "https://www.sidechef.com/recipe/c8738a39-6d2b-4905-a8b7-ad0f0c80311b.jpg"],
         categories: [{
             name: "Makanan",
@@ -52,8 +56,19 @@ export default function Home() {
             <main className={styles.main}>
                 <CardCollection collection={collection} />
                 <div className="grid gap-8 grid-cols-2">
-                    <CardRecipe recipe={recipe} />
+                    <Link href={{
+                        pathname: '/creator/recipes/[id]',
+                        query: { id: recipe.id },
+                    }}>
+                        <a>
+                            <CardRecipe recipe={recipe} />
+                        </a>
+                    </Link>
+
                     <CardRecipe recipe={recipe1} />
+                </div>
+                <div className="container mx-auto max-w-screen-sm">
+                    <ItemCollectionSelection collection={collection} />
                 </div>
 
             </main>
