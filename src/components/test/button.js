@@ -1,7 +1,15 @@
 import React from "react";
 
-const Button = ({ children, color, size, ...props }) => {
-  console.log(props);
+const Button = ({
+  children,
+  color,
+  size,
+  onClick,
+  onMouseEnter,
+  onMouseLeave,
+  ...props
+}) => {
+  // console.log(props);
   const BUTTON_COLOR = {
     PRIMARY:
       " bg-brand-dark text-white drop-shadow-lg hover:bg-brand-brighter hover:drop-shadow-none",
@@ -24,6 +32,9 @@ const Button = ({ children, color, size, ...props }) => {
 
   return (
     <button
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      onClick={onClick}
       className={
         "text-center rounded-lg font-semibold" + colorClassName + sizeClassName
       }

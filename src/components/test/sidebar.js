@@ -1,20 +1,19 @@
 import Link from "next/link";
 import Button from "./button";
 import { Crossl, Facebook, Instagram, Twitter } from "../../assets/icons";
-import { useState } from "react/cjs/react.development";
 
-function Menu() {
+function Sidebar({ closeMenu }) {
   return (
     <div
       id="default-modal"
       aria-hidden="true"
-      className="hidden bg-gray-400/30 fixed top-0 left-0 right-0"
+      className="bg-gray-400/30 fixed top-0 left-0 right-0"
     >
       {/* modal content */}
       <div className="bg-white h-[100vh] pt-9 w-80 drop-shadow-2xl ">
         <div className="mx-4 mb-9">
           {/* button menu */}
-          <Button type="button" color="LINK">
+          <Button type="button" color="LINK" onClick={() => closeMenu(false)}>
             <svg
               width="24px"
               height="24px"
@@ -92,4 +91,4 @@ function Menu() {
   );
 }
 
-export default Menu;
+export default Sidebar;
