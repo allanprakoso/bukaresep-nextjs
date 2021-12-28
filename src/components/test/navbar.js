@@ -12,7 +12,7 @@ function Navbar() {
 
   return (
     <>
-      <nav className="flex justify-between items-center px-[7.5rem] py-3 border-solid border-[1px] border-gray-200">
+      <nav className="flex justify-between items-center px-[7.5rem] py-1.5 border-solid border-[1px] border-gray-200">
         <div className="flex items-center">
           {/* button menu */}
           <Button color="LINK" onClick={() => setOpenMenu(true)}>
@@ -44,6 +44,7 @@ function Navbar() {
             />
           </form>
         </div>
+
         <Link href="#">
           <img src="/logo/logo-identity.svg" className="md:h-10" />
         </Link>

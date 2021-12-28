@@ -50,7 +50,9 @@ function Sidebar({ closeMenu }) {
             </Link>
           </div>
 
-          <Button size="LONG">Masuk/Daftar</Button>
+          <Link href="#">
+            <Button size="LONG">Bagikan resep </Button>
+          </Link>
 
           {/* sosmed */}
           <div className="mt-24 flex flex-col items-center">
