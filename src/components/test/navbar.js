@@ -43,6 +43,8 @@ function Navbar() {
         <Link href="#">
           <img src="/logo/logo-identity.svg" className="md:h-10" />
         </Link>
+
+        {/* blm login */}
         <div className="flex space-x-4">
           <Button color="NOBG">
             <svg
@@ -59,6 +61,8 @@ function Navbar() {
           </Button>
           <Button>Daftar</Button>
         </div>
+
+        {/* sudah login */}
       </nav>
     </>
   );
