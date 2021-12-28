@@ -1,5 +1,4 @@
-import Link from 'next'
-import { Star } from '../../assets/icons'
+import { Star } from '../assets/icons'
 
 //create card recipe using tailwindcss
 const CardRecipe = ({ recipe }) => {

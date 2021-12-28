@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Picture } from '../assets/icons';
 
 function Upload(props) {
     const [image, setImage] = useState();
@@ -11,11 +12,13 @@ function Upload(props) {
         } else {
             setImage(undefined);
         }
+        console.log('Upload', files[0])
+        props.onChange(files[0]);
     }
 
     return (
         <div className="font-inter text-gray-400 border relative bg-gray-50 h-full w-full rounded-lg ">
-            <div class="flex justify-center absolute top-0 right-0 left-0 h-full w-full">
+            <div className="flex justify-center absolute top-0 right-0 left-0 h-full w-full">
                 {(image == undefined) ?
                     <div className="grid content-center">
                         <svg className="mx-auto" width="36px" height="36px" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
