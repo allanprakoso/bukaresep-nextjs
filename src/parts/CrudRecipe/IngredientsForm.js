@@ -92,7 +92,7 @@ const IngredientsForm = (props) => {
                                 />
                                 <select name="unit_id" onChange={e => handleChangeIngredients(index, i, e)} className="focus:outline-none w-28 cursor-pointer">
                                     {props.units.map((unit) => (
-                                        <option className="cursor-pointer" value={unit.id}>{unit.unit}</option>
+                                        <option className="cursor-pointer" key={unit.id} value={unit.id}>{unit.unit}</option>
                                     ))}
                                 </select>
                                 <svg onClick={() => removeFormIngredents(index, i)} className="cursor-pointer"

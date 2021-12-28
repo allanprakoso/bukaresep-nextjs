@@ -6,13 +6,9 @@ function Upload(props) {
 
     const handleFileSelected = (e) => {
         const files = Array.from(e.target.files)
-        if (files.length > 0) {
-            const url = URL.createObjectURL(files[0]);
-            setImage(url);
-        } else {
+            (files.length > 0) ?
+            setImage(URL.createObjectURL(files[0])) :
             setImage(undefined);
-        }
-        console.log('Upload', files[0])
         props.onChange(files[0]);
     }
 
