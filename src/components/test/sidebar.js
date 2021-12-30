@@ -5,9 +5,9 @@ import { Crossl, Facebook, Instagram, Twitter } from "../../assets/icons";
 function Sidebar({ closeMenu }) {
   return (
     <div
-      id="default-modal"
+      id="sidebar"
       aria-hidden="true"
-      className="bg-gray-400/30 fixed top-0 left-0 right-0"
+      className="bg-gray-400/30 fixed top-0 left-0 right-0 z-50"
     >
       {/* modal content */}
       <div className="bg-white h-[100vh] pt-9 w-80 drop-shadow-2xl ">

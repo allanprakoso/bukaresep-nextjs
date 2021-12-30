@@ -1,87 +1,121 @@
 import Link from "next/link";
 import { useState } from "react";
-import { Menu_Burger, Sign_in, Search } from "../../assets/icons";
+import { Menu_Burger, Sign_in, Search, Upload } from "../../assets/icons";
 import Button from "./button";
 import Sidebar from "./sidebar";
 
 function Navbar() {
-  // cek user
-  var user = true;
+  var isLogin = false; // cek login
+  var user = false; //cek user ato creator (atau bisa dipisah, ditaruh di layout)
+
   const [openMenu, setOpenMenu] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
-      <nav className="flex justify-between items-center px-[7.5rem] py-1.5 border-solid border-[1px] border-gray-200">
-        <div className="flex items-center">
-          {/* button menu */}
-          <Button color="LINK" onClick={() => setOpenMenu(true)}>
-            <svg
-              width="16px"
-              height="16px"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <Menu_Burger />
-            </svg>
-          </Button>
+      <nav className="fixed top-0 z-50 w-screen bg-white border-solid border-[1px] border-gray-200">
+        <navlink className="flex justify-between items-center px-[7.5rem] py-1.5 ">
+          <div className="flex items-center">
+            {/* button menu */}
+            <Button color="LINK" onClick={() => setOpenMenu(true)}>
+              <svg
+                width="16px"
+                height="16px"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <Menu_Burger />
+              </svg>
+            </Button>
 
-          <form className="flex items-center ml-8">
-            <svg
-              width="16px"
-              height="16px"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-              className="mr-2"
-            >
-              <Search />
-            </svg>
-            <input
-              id="search"
-              type="text"
-              placeholder="Cari resep"
-              className="focus:outline-none focus:border-b-2 text-base text-gray-600"
-            />
-          </form>
-        </div>
+            <form className="flex items-center ml-8">
+              <svg
+                width="16px"
+                height="16px"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+                className="mr-2"
+              >
+                <Search />
+              </svg>
+              <input
+                id="search"
+                type="text"
+                placeholder="Cari resep"
+                className="focus:outline-none focus:border-b-2 text-base text-gray-600"
+              />
+            </form>
+          </div>
 
-        <Link href="#">
-          <img src="/logo/logo-identity.svg" className="md:h-10" />
-        </Link>
+          <Link href="#">
+            <img src="/logo/logo-identity.svg" className="md:h-10" />
+          </Link>
 
-        <div className="flex">
-          {/* if user is false */}
-          {!user && (
-            <div className="flex space-x-4">
-              <Button color="NOBG">
-                <svg
-                  width="16px"
-                  height="16px"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="mr-2"
-                  transform="translate(0,0) scale(-1, 1)"
-                >
-                  <Sign_in />
-                </svg>
-                Masuk
-              </Button>
-              <Button>Daftar</Button>
+          <div>
+            <div className="flex" id="user-navbar">
+              {/* if isLogin is false */}
+              {!isLogin && (
+                <div className="flex space-x-4">
+                  <Button color="NOBG">
+                    <svg
+                      width="16px"
+                      height="16px"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="mr-2"
+                      transform="translate(0,0) scale(-1, 1)"
+                    >
+                      <Sign_in />
+                    </svg>
+                    Masuk
+                  </Button>
+                  <Button>Daftar</Button>
+                </div>
+              )}
+
+              {/* if isLogin is true */}
+              {isLogin && (
+                <div id="profile">
+                  {/* if user is true */}
+                  {user && (
+                    <div className="flex items-center">
+                      <p className="text-sm font-semibold text-gray-600">
+                        User Account
+                      </p>
+                      <Button color="LINK" onMouseEnter={() => setIsOpen(true)}>
+                        <img
+                          src="pic/lp3.jpg"
+                          className="w-8 h-8 rounded-full"
+                        />
+                      </Button>
+                    </div>
+                  )}
+
+                  {/* if user is false */}
+                  <div className="flex items-center space-x-8">
+                    <Button color="LINK" onMouseEnter={() => setIsOpen(true)}>
+                      <img src="pic/lp3.jpg" className="w-8 h-8 rounded-full" />
+                    </Button>
+                    <Button color="PRIMARY">
+                      <div className="pr-2">
+                        <svg
+                          fill="#FFF"
+                          width="16px"
+                          height="16px"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <Upload />
+                        </svg>
+                      </div>
+                      Resep
+                    </Button>
+                  </div>
+                </div>
+              )}
             </div>
-          )}
-
-          {/* if user is true */}
-          {user && (
-            <div className="flex items-center">
-              <p className="text-sm font-semibold text-gray-600">
-                User Account
-              </p>
-              <Button color="LINK" onMouseEnter={() => setIsOpen(true)}>
-                <img src="pic/lp3.jpg" className="w-8 h-8 rounded-full" />
-              </Button>
-            </div>
-          )}
-        </div>
+          </div>
+        </navlink>
       </nav>
 
       {isOpen && (
