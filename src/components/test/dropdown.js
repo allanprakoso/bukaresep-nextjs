@@ -35,7 +35,7 @@ const DropdownItem = ({ children, color, ...props }) => {
     <Link href="#">
       <button
         className={
-          "w-full hover:bg-gray-100 py-2 px-8 text-base text-left capitalize" +
+          "cursor-pointer w-full hover:bg-gray-100 py-2 px-8 text-base text-left capitalize" +
           colorClassName
         }
       >

@@ -36,7 +36,9 @@ const Button = ({
       onMouseLeave={onMouseLeave}
       onClick={onClick}
       className={
-        "text-center rounded-lg font-semibold" + colorClassName + sizeClassName
+        "cursor-pointer text-center rounded-lg font-semibold" +
+        colorClassName +
+        sizeClassName
       }
     >
       {children}
