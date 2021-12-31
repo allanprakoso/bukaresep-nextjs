@@ -5,11 +5,7 @@ import {
   Divider,
 } from "../../components/test/dropdown";
 import { useState } from "react";
-import {
-  InputCheckbox,
-  InputRadio,
-  InputText,
-} from "../../components/test/inputfield";
+import { InputOption, InputText } from "../../components/test/inputfield";
 
 export default function Home() {
   const [value, setValue] = useState({
@@ -29,6 +25,8 @@ export default function Home() {
         name="name"
         onChange={onChange}
       />
+      <InputOption type="checkbox" label="this is checkbox" />
+      <InputOption type="radio" label="this is checkbox" />
     </div>
   );
 }

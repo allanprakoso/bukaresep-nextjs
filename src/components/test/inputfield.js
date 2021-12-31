@@ -22,12 +22,13 @@ const InputText = ({
   );
 };
 
-const InputCheckbox = ({ id, value, label, name, onChange, ...props }) => {
+const InputOption = ({ id, type, value, label, name, onChange, ...props }) => {
+  // for checkbox and radio
   return (
     <div className="input-checkbox flex items-center">
       <input
         id={id}
-        type="checkbox"
+        type={type}
         value={value}
         onChange={onChange}
         className="h-4 w-4 border-[1.4px] border-gray-400 rounded-sm mr-2 transition duration-200 cursor-pointer"
@@ -36,20 +37,4 @@ const InputCheckbox = ({ id, value, label, name, onChange, ...props }) => {
     </div>
   );
 };
-
-const InputRadio = ({ id, value, label, name, onChange, ...props }) => {
-  return (
-    <div className="input-checkbox flex items-center">
-      <input
-        id={id}
-        type="radio"
-        value={value}
-        onChange={onChange}
-        className="h-4 w-4 border-[1.4px] border-gray-400 rounded-sm mr-2 transition duration-200 cursor-pointer"
-      />
-      <label className="text-gray-600 text-base ">{label}</label>
-    </div>
-  );
-};
-
-module.exports = { InputText, InputCheckbox, InputRadio };
+module.exports = { InputText, InputOption };
