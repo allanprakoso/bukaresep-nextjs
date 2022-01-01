@@ -1,4 +1,4 @@
-import Button from "./button";
+import Button from "./Button";
 import { Crossl } from "../assets/icons";
 const Modal = ({ children }) => {
   return (

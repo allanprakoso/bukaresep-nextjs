@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Menu_Burger, Sign_in, Search, Upload } from "../assets/icons";
-import { DropdownMenu, DropdownItem, Divider } from "./dropdown";
-import Button from "./button";
-import Sidebar from "./sidebar";
+import { DropdownMenu, DropdownItem, Divider } from "./Dropdown";
+import Button from "./Button";
+import Sidebar from "./Sidebar";
 
 function NavbarCreator() {
   var isLogin = true; // cek login
@@ -46,7 +46,7 @@ function NavbarCreator() {
             </form>
           </div>
 
-          <Link href="#">
+          <Link href="#" className="cursor-pointer">
             <img src="/logo/logo-identity.svg" className="md:h-10" />
           </Link>
 

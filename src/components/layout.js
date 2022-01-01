@@ -1,6 +1,6 @@
-import Footer from "./footer";
-import NavbarUser from "./navbar-user";
-import NavbarCreator from "./navbar-creator";
+import Footer from "./Footer";
+import NavbarUser from "./NavbarUser";
+import NavbarCreator from "./NavbarCreator";
 
 const Layout = ({ children }) => {
   // cek akun user ato creator

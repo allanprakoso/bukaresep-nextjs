@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { InputOption, InputText } from "../../components/inputfield";
+import { InputOption, InputText } from "../../components/InputField";
 
 export default function Home() {
   const [value, setValue] = useState({
