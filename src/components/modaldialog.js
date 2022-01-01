@@ -1,5 +1,5 @@
 import Button from "./button";
-import { Crossl } from "../../assets/icons";
+import { Crossl } from "../assets/icons";
 const Modal = ({ children }) => {
   return (
     // wrapper & bg

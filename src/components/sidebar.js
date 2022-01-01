@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Button from "./button";
-import { Crossl, Facebook, Instagram, Twitter } from "../../assets/icons";
+import { Crossl, Facebook, Instagram, Twitter } from "../assets/icons";
 
 function Sidebar({ closeMenu }) {
   return (

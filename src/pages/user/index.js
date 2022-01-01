@@ -1,11 +1,5 @@
-import Button from "../../components/test/button";
-import {
-  DropdownMenu,
-  DropdownItem,
-  Divider,
-} from "../../components/test/dropdown";
 import { useState } from "react";
-import { InputOption, InputText } from "../../components/test/inputfield";
+import { InputOption, InputText } from "../../components/inputfield";
 
 export default function Home() {
   const [value, setValue] = useState({

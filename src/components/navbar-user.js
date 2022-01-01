@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { useState } from "react";
-import { Menu_Burger, Sign_in, Search, Upload } from "../../assets/icons";
+import { Menu_Burger, Sign_in, Search, Upload } from "../assets/icons";
 import { DropdownMenu, DropdownItem, Divider } from "./dropdown";
 import Button from "./button";
 import Sidebar from "./sidebar";
 
-function NavbarCreator() {
+function NavbarUser() {
   var isLogin = true; // cek login
 
   const [openMenu, setOpenMenu] = useState(false);
@@ -74,23 +74,12 @@ function NavbarCreator() {
 
               {/* if isLogin is true */}
               {isLogin && (
-                <div className="profile flex items-center space-x-8">
+                <div className="profile flex items-center space-x-2">
+                  <p className="text-sm font-semibold text-gray-600">
+                    User Account
+                  </p>
                   <Button color="LINK" onMouseEnter={() => setIsOpen(true)}>
                     <img src="pic/lp3.jpg" className="w-8 h-8 rounded-full" />
-                  </Button>
-                  <Button color="PRIMARY">
-                    <div className="pr-2">
-                      <svg
-                        fill="#FFF"
-                        width="16px"
-                        height="16px"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <Upload />
-                      </svg>
-                    </div>
-                    Resep
                   </Button>
                 </div>
               )}
@@ -105,7 +94,7 @@ function NavbarCreator() {
           <DropdownItem>Edit profil</DropdownItem>
           <Divider />
           <DropdownItem>Koleksi</DropdownItem>
-          <DropdownItem>Draft</DropdownItem>
+          <DropdownItem>Review</DropdownItem>
           <Divider />
           <DropdownItem color="RED">Keluar</DropdownItem>
         </DropdownMenu>
@@ -116,4 +105,4 @@ function NavbarCreator() {
   );
 }
 
-export default NavbarCreator;
+export default NavbarUser;
