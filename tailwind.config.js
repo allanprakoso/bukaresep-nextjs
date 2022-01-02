@@ -2,6 +2,7 @@ module.exports = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx}",
     "./src/components/**/*.{js,ts,jsx,tsx}",
+    "./src/parts/**/*.{js,ts,jsx,tsx}",
   ],
   presets: [],
   darkMode: "media", // or 'class'
@@ -108,6 +109,11 @@ module.exports = {
       72: "18rem",
       80: "20rem",
       96: "24rem",
+      112: "28rem",
+      128: "32rem",
+      144: "36rem",
+      160: "40rem",
+      176: "44rem",
     },
     animation: {
       none: "none",
@@ -361,7 +367,7 @@ module.exports = {
       caption: ["0.688rem", { letterSpacing: "6%" }],
       sm: ["0.831rem", { letterSpacing: "2%" }],
       base: ["0.938rem", { lineHeight: "24px", letterSpacing: "2%" }],
-      lg: ["1.063rem", { lineHeight: "2px", letterSpacing: "1%" }],
+      lg: ["1.063rem", { letterSpacing: "1%" }],
       h6: ["1.188rem", { letterSpacing: "2%" }],
       h5: ["1.438rem", { letterSpacing: "2%" }],
       h4: ["1.75rem", { letterSpacing: "-1%" }],
