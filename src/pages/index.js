@@ -5,6 +5,9 @@ import CardRecipe from '../components/Cardrecipe'
 import CardCollection from '../components/CardCollection'
 import ItemCollectionSelection from '../components/ItemCollectionSelection'
 import Link from "next/Link";
+import ItemIngredient from '../components/ItemIngredient'
+import ItemInstruction from '../components/ItemInstruction'
+import ActiveRating from '../components/ActiveRating'
 
 export default function Home() {
     const recipe = {
@@ -18,6 +21,7 @@ export default function Home() {
         image: "https://www.sidechef.com/recipe/c8738a39-6d2b-4905-a8b7-ad0f0c80311b.jpg",
     }
     const recipe1 = {
+        id: 2,
         title: "Udang Goreng",
         level: "Mudah",
         time: 30,
@@ -56,21 +60,23 @@ export default function Home() {
             <main className={styles.main}>
                 <CardCollection collection={collection} />
                 <div className="grid gap-8 grid-cols-2">
-                    <Link href={{
-                        pathname: '/creator/recipes/[id]',
-                        query: { id: recipe.id },
-                    }}>
-                        <a>
-                            <CardRecipe recipe={recipe} />
-                        </a>
-                    </Link>
-
+                    <CardRecipe recipe={recipe} />
                     <CardRecipe recipe={recipe1} />
                 </div>
                 <div className="container mx-auto max-w-screen-sm">
                     <ItemCollectionSelection collection={collection} />
+                    <ItemCollectionSelection collection={collection} />
+                    <ItemCollectionSelection collection={collection} />
                 </div>
 
+                <div className="container mx-auto w-96">
+                    <ItemIngredient />
+                    <ActiveRating onChange={value => console.log(value)} />
+                </div>
+
+                <div className="container mx-auto w-176">
+                    <ItemInstruction />
+                </div>
             </main>
         </div>
     )
