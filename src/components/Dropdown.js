@@ -32,16 +32,15 @@ const DropdownItem = ({ children, color, ...props }) => {
   const colorClassName = TEXTCOLOR[color || "GRAY"];
 
   return (
-    <Link href="#">
-      <button
-        className={
-          "cursor-pointer w-full hover:bg-gray-100 py-2 px-8 text-base text-left capitalize" +
-          colorClassName
-        }
-      >
-        {children}
-      </button>
-    </Link>
+    <button
+      onClick={props.onClick}
+      className={
+        "cursor-pointer w-full hover:bg-gray-100 py-2 px-8 text-base text-left capitalize" +
+        colorClassName
+      }
+    >
+      {children}
+    </button>
   );
 };
 

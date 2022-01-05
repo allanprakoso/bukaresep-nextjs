@@ -1,19 +1,24 @@
 import Link from "next/link";
-import { useState } from "react";
-import { Menu_Burger, Sign_in, Search, Upload } from "../assets/icons";
-import { DropdownMenu, DropdownItem, Divider } from "./Dropdown";
-import Button from "./Button";
-import Sidebar from "./Sidebar";
+import { useState, useContext } from "react";
+import { Menu_Burger, Sign_in, Search, Upload } from "../../assets/icons";
+import { DropdownMenu, DropdownItem, Divider } from "../../components/Dropdown";
+import Button from "../../components/Button";
+import Sidebar from "../../components/Sidebar";
+import AuthContext from "../../context/CreatorAuthContext";
+import LoginForm from "./LoginForm";
 
 function NavbarCreator() {
-  var isLogin = true; // cek login
+  const { creator, logoutCreator } = useContext(AuthContext);
+  var isLogin = creator ? true : false; // cek login
 
   const [openMenu, setOpenMenu] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [openLogin, setOpenLogin] = useState(false);
 
   return (
     <>
       <nav className="absolute top-0 z-10 w-screen bg-white border-solid border-[1px] border-gray-200">
+        {(openLogin && !isLogin) && <LoginForm close={() => setOpenLogin(false)} />}
         <navlink className="flex justify-between items-center px-[7.5rem] py-1.5 ">
           <div className="flex items-center">
             <Button color="LINK" onClick={() => setOpenMenu(true)}>
@@ -55,7 +60,7 @@ function NavbarCreator() {
               {/* if isLogin is false */}
               {!isLogin && (
                 <div className="flex space-x-4">
-                  <Button color="NOBG">
+                  <Button color="NOBG" onClick={() => setOpenLogin(true)}>
                     <svg
                       width="16px"
                       height="16px"
@@ -99,6 +104,7 @@ function NavbarCreator() {
         </navlink>
       </nav>
 
+
       {isOpen && (
         <DropdownMenu onMouseLeave={() => setIsOpen(false)}>
           <DropdownItem>Profil Saya</DropdownItem>
@@ -107,7 +113,10 @@ function NavbarCreator() {
           <DropdownItem>Koleksi</DropdownItem>
           <DropdownItem>Draft</DropdownItem>
           <Divider />
-          <DropdownItem color="RED">Keluar</DropdownItem>
+          <DropdownItem color="RED" onClick={() => {
+            setOpenLogin(false)
+            logoutCreator()
+          }}>Keluar</DropdownItem>
         </DropdownMenu>
       )}
 

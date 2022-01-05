@@ -1,26 +1,41 @@
-import { useState } from "react";
-import { InputOption, InputText } from "../../components/InputField";
+import { useState, useContext } from "react";
+import AuthContext from "../../context/CreatorAuthContext"
+import { InputText } from "../../components/InputField";
 
 export default function Home() {
-  const [value, setValue] = useState({
-    name: "",
-    email: "",
+  const { loginUser, user, logoutUser } = useContext(AuthContext);
+  const [valueForm, setValue] = useState({
+    username: "",
+    password: "",
   });
   const onChange = (event) => {
-    setValue(event.target.value);
+    const { name, value } = event.target;
+    setValue({ ...valueForm, [name]: value });
   };
+
   return (
     <div className="flex flex-col space-y-10 pt-[120px] px-[200px] ">
-      <InputText
-        label="Nama"
-        type="text"
-        value={value.name}
-        placeholder="Namamu sopo"
-        name="name"
-        onChange={onChange}
-      />
-      <InputOption type="checkbox" label="this is checkbox" />
-      <InputOption type="radio" label="this is checkbox" />
+      {user && <h1>{user.username}</h1>}
+      <form onSubmit={loginUser}>
+        <InputText
+          label="Nama"
+          type="text"
+          value={valueForm.username}
+          placeholder="Namamu sopo"
+          name="username"
+          onChange={onChange}
+        />
+        <InputText
+          label="email"
+          type="password"
+          value={valueForm.password}
+          placeholder="emailmu opo"
+          name="password"
+          onChange={onChange}
+        />
+        <button type="submit">Submit</button>
+      </form>
+      <button onClick={logoutUser}>Submit</button>
     </div>
   );
 }

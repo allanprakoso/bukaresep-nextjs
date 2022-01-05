@@ -1,16 +1,12 @@
 import Footer from "./Footer";
 import NavbarUser from "./NavbarUser";
-import NavbarCreator from "./NavbarCreator";
+import NavbarCreator from "../parts/Creator/NavbarCreator";
 
-const Layout = ({ children }) => {
-  // cek akun user ato creator
-  var user = true;
-
+const Layout = ({ type, children }) => {
   return (
     <>
       <div className="flex flex-col h-screen justify-between">
-        {user && <NavbarUser />}
-        {!user && <NavbarCreator />}
+        {type == 'creator' ? <NavbarCreator /> : <NavbarUser />}
         <section className="main-content mb-auto">{children}</section>
         <Footer />
       </div>
