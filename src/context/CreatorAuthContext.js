@@ -2,7 +2,7 @@ import { createContext, useState, useEffect } from 'react'
 import jwt_decode from "jwt-decode";
 
 const AuthContext = createContext()
-
+const baseURL = "http://127.0.0.1:5000/"
 export default AuthContext;
 
 export const CreatorAuthProvider = ({ children }) => {
@@ -40,10 +40,20 @@ export const CreatorAuthProvider = ({ children }) => {
     }
 
 
-    let logoutCreator = () => {
-        setAuthTokens(null)
-        setCreator(null)
-        localStorage.removeItem('authTokens')
+    let logoutCreator = async () => {
+        await fetch(`${baseURL}creator/authentications`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ 'refreshToken': authTokens.refreshToken })
+        }).then(res => {
+            if (res.status === 200) {
+                setAuthTokens(null)
+                setCreator(null)
+                localStorage.removeItem('authTokens')
+            }
+        })
     }
 
     let contextData = {

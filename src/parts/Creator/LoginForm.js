@@ -23,7 +23,10 @@ const LoginForm = ({ close }) => {
         >
             <ModalTitle>Login</ModalTitle>
             <ModalContent>
-                <form onSubmit={loginCreator}>
+                <form onSubmit={e =>{
+                    close();
+                    loginCreator(e);
+                    }}>
                     <div className="form-group grid grid-cols-1 gap-10">
                         <InputText
                             label="Username"

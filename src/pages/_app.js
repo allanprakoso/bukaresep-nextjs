@@ -8,7 +8,7 @@ function MyApp({ Component, pageProps }) {
   const router = useRouter()
   const { pathname } = router;
 
-  if (pathname.search('creator')){
+  if (pathname.search('creator') > 0) {
     return (
       <CreatorAuthProvider>
         <Layout type="creator">
@@ -16,14 +16,13 @@ function MyApp({ Component, pageProps }) {
         </Layout>
       </CreatorAuthProvider>
     );
-  }
-
-  return (
+  } else {
+    return (
       <Layout type="user">
         <Component {...pageProps} />
       </Layout>
-  );
-
+    );
+  }
 }
 
 export default MyApp;

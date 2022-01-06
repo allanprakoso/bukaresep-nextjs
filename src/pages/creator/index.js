@@ -1,12 +1,13 @@
-import { useState, useContext } from "react";
-import AuthContext from "../../context/CreatorAuthContext"
-import { InputText } from "../../components/InputField";
+import CarouselRecipe from "../../parts/CarouselRecipe";
+import RecipeSlider from "../../parts/RecipeSlider";
 
-export default function Home() {
-    const { creator } = useContext(AuthContext);
+function Home() {
     return (
-        <div className="space-y-10 pt-[120px] px-[200px] ">
-            {creator && <h1>{creator.username}</h1>}
+        <div className="space-y-20 mt-[120px] mx-[360px]">
+            <RecipeSlider />
+            <CarouselRecipe />
         </div>
     );
 }
+
+export default Home;

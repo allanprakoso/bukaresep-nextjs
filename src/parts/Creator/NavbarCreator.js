@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState, useContext } from "react";
 import { Menu_Burger, Sign_in, Search, Upload } from "../../assets/icons";
 import { DropdownMenu, DropdownItem, Divider } from "../../components/Dropdown";
@@ -8,8 +9,9 @@ import AuthContext from "../../context/CreatorAuthContext";
 import LoginForm from "./LoginForm";
 
 function NavbarCreator() {
+  const router = useRouter();
   const { creator, logoutCreator } = useContext(AuthContext);
-  var isLogin = creator ? true : false; // cek login
+  var isLogin = creator ? true : false;
 
   const [openMenu, setOpenMenu] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -19,6 +21,7 @@ function NavbarCreator() {
     <>
       <nav className="absolute top-0 z-10 w-screen bg-white border-solid border-[1px] border-gray-200">
         {(openLogin && !isLogin) && <LoginForm close={() => setOpenLogin(false)} />}
+
         <navlink className="flex justify-between items-center px-[7.5rem] py-1.5 ">
           <div className="flex items-center">
             <Button color="LINK" onClick={() => setOpenMenu(true)}>
@@ -83,7 +86,7 @@ function NavbarCreator() {
                   <Button color="LINK" onMouseEnter={() => setIsOpen(true)}>
                     <img src="pic/lp3.jpg" className="w-8 h-8 rounded-full" />
                   </Button>
-                  <Button color="PRIMARY">
+                  <Button onClick={() => router.push('/creator/upload')} color="PRIMARY">
                     <div className="pr-2">
                       <svg
                         fill="#FFF"
@@ -114,8 +117,8 @@ function NavbarCreator() {
           <DropdownItem>Draft</DropdownItem>
           <Divider />
           <DropdownItem color="RED" onClick={() => {
-            setOpenLogin(false)
-            logoutCreator()
+            logoutCreator();
+            router.push("/creator");
           }}>Keluar</DropdownItem>
         </DropdownMenu>
       )}
