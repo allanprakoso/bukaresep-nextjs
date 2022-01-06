@@ -1,0 +1,7 @@
+.slick-dots li button:before {
+  color: orange;
+}
+.slick-dots li.slick-active button::before {
+  color: aqua;
+  opacity: 0.75;
+}
