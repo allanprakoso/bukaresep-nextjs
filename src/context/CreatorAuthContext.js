@@ -2,7 +2,7 @@ import { createContext, useState, useEffect } from 'react'
 import jwt_decode from "jwt-decode";
 
 const AuthContext = createContext()
-const baseURL = "http://127.0.0.1:5000/"
+const baseURL = "http://47.254.242.193:5000/"
 export default AuthContext;
 
 export const CreatorAuthProvider = ({ children }) => {
@@ -21,7 +21,7 @@ export const CreatorAuthProvider = ({ children }) => {
 
     let loginCreator = async (e) => {
         e.preventDefault()
-        let response = await fetch('http://127.0.0.1:5000/creator/authentications', {
+        let response = await fetch('http://47.254.242.193:5000/creator/authentications', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -69,7 +69,7 @@ export const CreatorAuthProvider = ({ children }) => {
         if (authTokens) {
             const { id } = jwt_decode(authTokens.accessToken);
             async function getUser() {
-                let response = await fetch('http://127.0.0.1:5000/creators/' + id);
+                let response = await fetch('http://47.254.242.193:5000/creators/' + id);
                 let data = await response.json();
                 setCreator(data.data.creator);
             }
