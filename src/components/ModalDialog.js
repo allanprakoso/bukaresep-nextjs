@@ -3,7 +3,7 @@ import { Crossl } from "../assets/icons";
 const Modal = ({ close, children }) => {
   return (
     // wrapper & bg
-    <div className="modalbg bg-gray-400/30 h-[100vh] absolute inset-0 flex justify-center items-center">
+    <div className="modalbg bg-gray-400/30 h-[100vh] absolute inset-0 flex justify-center items-center overflow:hidden">
       <div className="modalbody relative bg-white rounded-xl w-[587px]">
         <div id="closeModal" className="flex justify-end mt-4 mx-2">
           <Button type="button" onClick={close} color="LINK">
