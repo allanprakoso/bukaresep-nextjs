@@ -19,8 +19,10 @@ function NavbarCreator() {
 
   return (
     <>
-      <nav className="absolute top-0 z-10 w-screen bg-white border-solid border-[1px] border-gray-200">
-        {(openLogin && !isLogin) && <LoginForm close={() => setOpenLogin(false)} />}
+      <nav className="absolute top-0 z-5 w-screen bg-white border-solid border-[1px] border-gray-200">
+        {openLogin && !isLogin && (
+          <LoginForm close={() => setOpenLogin(false)} />
+        )}
 
         <navlink className="flex justify-between items-center px-[7.5rem] py-1.5 ">
           <div className="flex items-center">
@@ -86,7 +88,10 @@ function NavbarCreator() {
                   <Button color="LINK" onMouseEnter={() => setIsOpen(true)}>
                     <img src="pic/lp3.jpg" className="w-8 h-8 rounded-full" />
                   </Button>
-                  <Button onClick={() => router.push('/creator/upload')} color="PRIMARY">
+                  <Button
+                    onClick={() => router.push("/creator/upload")}
+                    color="PRIMARY"
+                  >
                     <div className="pr-2">
                       <svg
                         fill="#FFF"
@@ -107,7 +112,6 @@ function NavbarCreator() {
         </navlink>
       </nav>
 
-
       {isOpen && (
         <DropdownMenu onMouseLeave={() => setIsOpen(false)}>
           <DropdownItem>Profil Saya</DropdownItem>
@@ -116,10 +120,15 @@ function NavbarCreator() {
           <DropdownItem>Koleksi</DropdownItem>
           <DropdownItem>Draft</DropdownItem>
           <Divider />
-          <DropdownItem color="RED" onClick={() => {
-            logoutCreator();
-            router.push("/creator");
-          }}>Keluar</DropdownItem>
+          <DropdownItem
+            color="RED"
+            onClick={() => {
+              logoutCreator();
+              router.push("/creator");
+            }}
+          >
+            Keluar
+          </DropdownItem>
         </DropdownMenu>
       )}
 
