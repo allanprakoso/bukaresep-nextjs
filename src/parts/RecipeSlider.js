@@ -1,30 +1,10 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "../styles/Carousel.module.css";
 import CardRecipe from "../components/CardRecipe";
-import Button from "../components/Button";
 import { Angle_right } from "../assets/icons";
 
 function RecipeSlider() {
-  const ArrowRight = ({ onClick }) => (
-    <div className="absolute top-[160px] right-[-20px]">
-      <button
-        onClick={onClick}
-        className="flex items-center justify-center w-8 h-8 bg-white rounded-full border-[1.6px] border-gray-300"
-      >
-        <svg
-          width="16px"
-          height="16px"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <Angle_right />
-        </svg>
-      </button>
-    </div>
-  );
-
   const recipe = [
     {
       id: 1,
@@ -83,6 +63,25 @@ function RecipeSlider() {
     },
   ];
 
+  //custom nextButton
+  const ArrowRight = ({ onClick }) => (
+    <div className="absolute top-[160px] right-[-20px]">
+      <button
+        onClick={onClick}
+        className="flex items-center justify-center w-8 h-8 bg-white rounded-full border-[1.6px] border-gray-300"
+      >
+        <svg
+          width="16px"
+          height="16px"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <Angle_right />
+        </svg>
+      </button>
+    </div>
+  );
+
   // settings slider
   const settings = {
     dots: true,
@@ -91,8 +90,8 @@ function RecipeSlider() {
     slidesToShow: 4,
     slidesToScroll: 4,
     arrows: true,
-
     nextArrow: <ArrowRight />,
+    className: "pb-8",
   };
 
   return (
