@@ -5,8 +5,8 @@ import disableScroll from "disable-scroll";
 const Modal = ({ children, close }) => {
   return (
     // wrapper & bg
-    disableScroll.on(),
-    (
+    <>
+      {disableScroll.on()}
       <div className="modalDialog absolute inset-0 z-50">
         <div className="modalbg bg-gray-400/30 h-[100vh] fixed inset-0 flex justify-center items-center overflow-y:hidden">
           <div className="modalbody relative bg-white rounded-xl w-[587px] ">
@@ -32,7 +32,7 @@ const Modal = ({ children, close }) => {
           </div>
         </div>
       </div>
-    )
+    </>
   );
 };
 
