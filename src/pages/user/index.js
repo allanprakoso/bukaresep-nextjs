@@ -10,12 +10,12 @@ function Home() {
 
   return (
     <div className="flex flex-col space-y-20 mt-[120px] mx-[360px]">
-      <RecipeSlider />
-      <CarouselRecipe />
-
       <Button color="PRIMARY" onClick={() => setOpenModal(true)}>
         Open Modal
       </Button>
+
+      <RecipeSlider />
+      <CarouselRecipe />
 
       {openModal &&
         (disableScroll.on(),
