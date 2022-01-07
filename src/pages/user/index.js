@@ -17,16 +17,14 @@ function Home() {
       <RecipeSlider />
       <CarouselRecipe />
 
-      {openModal &&
-        (disableScroll.on(),
-        (
-          <Modal closeModal={setOpenModal}>
-            <ModalTitle>test modal</ModalTitle>
-            <ModalContent>
-              <p>yeas</p>
-            </ModalContent>
-          </Modal>
-        ))}
+      {openModal && (
+        <Modal closeModal={setOpenModal}>
+          <ModalTitle>test modal</ModalTitle>
+          <ModalContent>
+            <p>yeas</p>
+          </ModalContent>
+        </Modal>
+      )}
     </div>
   );
 }
