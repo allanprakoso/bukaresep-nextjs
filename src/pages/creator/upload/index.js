@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import Upload from "../../../components/Upload";
 import Button from "../../../components/Button";
 import { Modal, ModalTitle, ModalContent, ModalFooter } from "../../../components/ModalDialog";
+<<<<<<< HEAD
 import UploadImageRecipe from "../../../utils/UploadImageRecipe";
 import { Angle_right } from "../../../assets/icons";
 import useAxios from "../../../configs/creator/useAxios";
@@ -54,6 +55,32 @@ export default function UploadRecipe(props) {
         return setIsLoading(false);
     }
 
+=======
+
+export async function getServerSideProps() {
+    const req = await fetch('http://47.254.242.193:5000/unit').catch(() => {
+        return { props: { units: [] } }
+    });
+    const data = await req.json();
+    return { props: { units: data.results } }
+}
+
+export default function Home(props) {
+    const [recipe, setRecipe] = useState({
+        name: "Ayam Ayaman",
+        url_image: "",
+        group_ingredients: [],
+        instructions: [],
+        cooking_time: 0,
+        serving: 1,
+        category_id: 0,
+        cuisiuse_id: 0,
+        level_id: 0,
+        tags: [],
+    })
+    const [image, setImage] = useState(null);
+    const [openAtribute, setOpenAtribute] = useState(true);
+>>>>>>> origin/olin
 
     const onChangeForm = (e) => {
         setRecipe({ ...recipe, [e.target.name]: e.target.value })
@@ -65,6 +92,13 @@ export default function UploadRecipe(props) {
         setRecipe({ ...recipe, group_ingredients: ingredients })
     }
 
+<<<<<<< HEAD
+=======
+    const submitImagesInstuctions = async (instructions) => {
+
+    }
+
+>>>>>>> origin/olin
     return (
         <>
             <div className="space-y-10 mt-32 container mx-auto relative">
@@ -92,6 +126,10 @@ export default function UploadRecipe(props) {
                     <section name="ingredients">
                         <h3 className="font-quicksand font-bold text-h3 text-gray-600">Bahan</h3>
                         <IngredientsForm
+<<<<<<< HEAD
+=======
+                            units={props.units}
+>>>>>>> origin/olin
                             onChange={ingredient => handleChangeIngredients(ingredient)}
                         />
                     </section>
@@ -100,7 +138,10 @@ export default function UploadRecipe(props) {
                         <InstructionsForm
                             onChange={instruction => handleChangeInstruction(instruction)} />
                     </section>
+<<<<<<< HEAD
                     <p>{JSON.stringify(recipe)}</p>
+=======
+>>>>>>> origin/olin
                 </div>
             </div>
 
@@ -130,6 +171,7 @@ export default function UploadRecipe(props) {
                 </ModalContent>
                 <ModalFooter>
                     <div className="w-full grid grid-cols-1 gap-y-4">
+<<<<<<< HEAD
                         <Button size="LONG" onClick={async () => {
                             await UploadRecipe();
                             setOpenAtribute(false)
@@ -152,6 +194,10 @@ export default function UploadRecipe(props) {
                         <Button color="SECONDARY" size="LONG" onClick={() => setOpenAtribute(false)}>
                             Simpan Draft
                         </Button>
+=======
+                        <Button size="LONG" onClick={() => setOpenAtribute(false)}>Unggah Resep</Button>
+                        <Button color="SECONDARY" size="LONG" onClick={() => setOpenAtribute(false)}>Simpan Draft</Button>
+>>>>>>> origin/olin
                         <Button color="NOBG" size="LONG" onClick={() => setOpenAtribute(false)}>Lihat Priview</Button>
                     </div>
                 </ModalFooter>
