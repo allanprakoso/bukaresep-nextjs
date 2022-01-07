@@ -1,12 +1,18 @@
 import Button from "./Button";
 import { Crossl } from "../assets/icons";
-const Modal = ({ children }) => {
+import disableScroll from "disable-scroll";
+
+const Modal = ({ children, closeModal }) => {
   return (
     // wrapper & bg
-    <div className="modalbg bg-gray-400/30 h-[100vh] absolute inset-0 flex justify-center items-center">
-      <div className="modalbody relative bg-white rounded-xl w-[587px]">
+    <div className="modalbg bg-gray-400/30 h-[100vh] fixed inset-0 flex justify-center items-center overflow-y:hidden">
+      <div className="modalbody relative bg-white rounded-xl w-[587px] ">
         <div id="closeModal" className="flex justify-end mt-4 mx-2">
-          <Button type="button" color="LINK">
+          <Button
+            type="button"
+            color="LINK"
+            onClick={() => closeModal(false, disableScroll.off())}
+          >
             <svg
               width="24px"
               height="24px"
