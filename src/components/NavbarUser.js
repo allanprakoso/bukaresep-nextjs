@@ -13,7 +13,7 @@ function NavbarUser() {
 
   return (
     <>
-      <nav className="absolute top-0 z-5 w-screen bg-white border-solid border-[1px] border-gray-200">
+      <nav className="absolute top-0 z-5 w-full bg-white border-solid border-[1px] border-gray-200">
         <navlink className="flex justify-between items-center px-[7.5rem] py-1.5 ">
           <div className="flex items-center">
             <Button color="LINK" onClick={() => setOpenMenu(true)}>
