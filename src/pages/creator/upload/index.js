@@ -42,10 +42,6 @@ export default function Home(props) {
         setRecipe({ ...recipe, group_ingredients: ingredients })
     }
 
-    const submitImagesInstuctions = async (instructions) => {
-
-    }
-
     return (
         <>
             <div className="space-y-10 mt-32 container mx-auto relative">
