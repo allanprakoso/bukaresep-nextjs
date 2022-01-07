@@ -8,6 +8,34 @@ import Upload from "../../../components/Upload";
 import Button from "../../../components/Button";
 import { Modal, ModalTitle, ModalContent, ModalFooter } from "../../../components/ModalDialog";
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+export async function getServerSideProps() {
+    const req = await fetch('http://47.254.242.193:5000/unit').catch(() => {
+        return { props: { units: [] } }
+    });
+    const data = await req.json();
+    return { props: { units: data.results } }
+}
+
+export default function Home(props) {
+    const [recipe, setRecipe] = useState({
+        name: "Ayam Ayaman",
+        url_image: "",
+        group_ingredients: [],
+        instructions: [],
+        cooking_time: 0,
+        serving: 1,
+        category_id: 0,
+        cuisiuse_id: 0,
+        level_id: 0,
+        tags: [],
+    })
+    const [image, setImage] = useState(null);
+    const [openAtribute, setOpenAtribute] = useState(true);
+=======
+>>>>>>> origin/olin
 import UploadImageRecipe from "../../../utils/UploadImageRecipe";
 import { Angle_right } from "../../../assets/icons";
 import useAxios from "../../../configs/creator/useAxios";
@@ -55,6 +83,7 @@ export default function UploadRecipe(props) {
         return setIsLoading(false);
     }
 
+<<<<<<< HEAD
 =======
 
 export async function getServerSideProps() {
@@ -81,6 +110,9 @@ export default function Home(props) {
     const [image, setImage] = useState(null);
     const [openAtribute, setOpenAtribute] = useState(true);
 >>>>>>> origin/olin
+=======
+>>>>>>> origin/allan
+>>>>>>> origin/olin
 
     const onChangeForm = (e) => {
         setRecipe({ ...recipe, [e.target.name]: e.target.value })
@@ -93,11 +125,19 @@ export default function Home(props) {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> origin/olin
     const submitImagesInstuctions = async (instructions) => {
 
     }
 
+<<<<<<< HEAD
+>>>>>>> origin/olin
+=======
+=======
+>>>>>>> origin/allan
 >>>>>>> origin/olin
     return (
         <>
@@ -127,8 +167,14 @@ export default function Home(props) {
                         <h3 className="font-quicksand font-bold text-h3 text-gray-600">Bahan</h3>
                         <IngredientsForm
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
                             units={props.units}
+>>>>>>> origin/olin
+=======
+                            units={props.units}
+=======
+>>>>>>> origin/allan
 >>>>>>> origin/olin
                             onChange={ingredient => handleChangeIngredients(ingredient)}
                         />
@@ -139,8 +185,14 @@ export default function Home(props) {
                             onChange={instruction => handleChangeInstruction(instruction)} />
                     </section>
 <<<<<<< HEAD
+<<<<<<< HEAD
                     <p>{JSON.stringify(recipe)}</p>
 =======
+>>>>>>> origin/olin
+=======
+=======
+                    <p>{JSON.stringify(recipe)}</p>
+>>>>>>> origin/allan
 >>>>>>> origin/olin
                 </div>
             </div>
@@ -172,6 +224,12 @@ export default function Home(props) {
                 <ModalFooter>
                     <div className="w-full grid grid-cols-1 gap-y-4">
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+                        <Button size="LONG" onClick={() => setOpenAtribute(false)}>Unggah Resep</Button>
+                        <Button color="SECONDARY" size="LONG" onClick={() => setOpenAtribute(false)}>Simpan Draft</Button>
+=======
+>>>>>>> origin/olin
                         <Button size="LONG" onClick={async () => {
                             await UploadRecipe();
                             setOpenAtribute(false)
@@ -194,9 +252,13 @@ export default function Home(props) {
                         <Button color="SECONDARY" size="LONG" onClick={() => setOpenAtribute(false)}>
                             Simpan Draft
                         </Button>
+<<<<<<< HEAD
 =======
                         <Button size="LONG" onClick={() => setOpenAtribute(false)}>Unggah Resep</Button>
                         <Button color="SECONDARY" size="LONG" onClick={() => setOpenAtribute(false)}>Simpan Draft</Button>
+>>>>>>> origin/olin
+=======
+>>>>>>> origin/allan
 >>>>>>> origin/olin
                         <Button color="NOBG" size="LONG" onClick={() => setOpenAtribute(false)}>Lihat Priview</Button>
                     </div>

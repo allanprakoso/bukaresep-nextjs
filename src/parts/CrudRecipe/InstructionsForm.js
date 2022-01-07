@@ -6,9 +6,16 @@ import Upload from '../../components/Upload'
 const InstructionsForm = (props) => {
     const [formValues, setFormValues] = useState([
 <<<<<<< HEAD
+<<<<<<< HEAD
         { step: 1, instruction: '', file_image: null, url_image: '' }
 =======
         { step: 1, instruction: '', file_image: {}, url_image: '' }
+>>>>>>> origin/olin
+=======
+        { step: 1, instruction: '', file_image: {}, url_image: '' }
+=======
+        { step: 1, instruction: '', file_image: null, url_image: '' }
+>>>>>>> origin/allan
 >>>>>>> origin/olin
     ])
     const handleChangeImage = (index, file) => {
