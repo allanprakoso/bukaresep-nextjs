@@ -1,24 +1,11 @@
 import Button from "./Button";
 import { Crossl } from "../assets/icons";
-<<<<<<< HEAD
-const Modal = ({ close, children }) => {
-  return (
-    // wrapper & bg
-    <div className="modalbg bg-gray-400/30 h-[100vh] absolute inset-0 flex justify-center items-center overflow:hidden">
-      <div className="modalbody relative bg-white rounded-xl w-[587px]">
-        <div id="closeModal" className="flex justify-end mt-4 mx-2">
-          <Button type="button" onClick={close} color="LINK">
-            <svg
-              width="24px"
-              height="24px"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-=======
 import disableScroll from "disable-scroll";
 
-const Modal = ({ children, closeModal }) => {
+const Modal = ({ children, close }) => {
   return (
     // wrapper & bg
+    disableScroll.on(),
     <div className="modalDialog absolute inset-0 z-50">
       <div className="modalbg bg-gray-400/30 h-[100vh] fixed inset-0 flex justify-center items-center overflow-y:hidden">
         <div className="modalbody relative bg-white rounded-xl w-[587px] ">
@@ -26,8 +13,7 @@ const Modal = ({ children, closeModal }) => {
             <Button
               type="button"
               color="LINK"
-              onClick={() => closeModal(false, disableScroll.off())}
->>>>>>> origin/olin
+              onClick={() => close(false, disableScroll.off())}
             >
               <svg
                 width="24px"
