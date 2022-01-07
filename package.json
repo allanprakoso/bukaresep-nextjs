@@ -9,10 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.24.0",
-<<<<<<< HEAD
     "disable-scroll": "^0.6.0",
-=======
->>>>>>> origin/allan
     "dayjs": "^1.10.7",
     "form-data": "^4.0.0",
     "jwt-decode": "^3.1.2",
