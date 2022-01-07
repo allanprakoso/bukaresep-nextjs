@@ -5,8 +5,8 @@ function Upload(props) {
     const [image, setImage] = useState();
 
     const handleFileSelected = (e) => {
-        const files = Array.from(e.target.files)
-            (files.length > 0) ?
+        const files = e.target.files;
+        (files.length > 0) ?
             setImage(URL.createObjectURL(files[0])) :
             setImage(undefined);
         props.onChange(files[0]);

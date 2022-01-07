@@ -1,5 +1,6 @@
 import Button from "./Button";
 import { Crossl } from "../assets/icons";
+<<<<<<< HEAD
 import disableScroll from "disable-scroll";
 
 const Modal = ({ children, close }) => {
@@ -30,6 +31,27 @@ const Modal = ({ children, close }) => {
               {children}
             </div>
           </div>
+=======
+const Modal = ({ close, children }) => {
+  return (
+    // wrapper & bg
+    <div className="modalbg bg-gray-400/30 h-[100vh] absolute inset-0 flex justify-center items-center overflow:hidden">
+      <div className="modalbody relative bg-white rounded-xl w-[587px]">
+        <div id="closeModal" className="flex justify-end mt-4 mx-2">
+          <Button type="button" onClick={close} color="LINK">
+            <svg
+              width="24px"
+              height="24px"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <Crossl />
+            </svg>
+          </Button>
+        </div>
+        <div id="modalContent" className="mx-12 flex flex-col pb-8">
+          {children}
+>>>>>>> origin/allan
         </div>
       </div>
     </>

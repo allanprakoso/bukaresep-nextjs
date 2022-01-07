@@ -1,12 +1,28 @@
 import Layout from "../components/layout";
 import "../styles/globals.css";
+import { CreatorAuthProvider } from '../context/CreatorAuthContext'
+import { useRouter } from 'next/router'
+
 
 function MyApp({ Component, pageProps }) {
-  return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
-  );
+  const router = useRouter()
+  const { pathname } = router;
+
+  if (pathname.search('creator') > 0) {
+    return (
+      <CreatorAuthProvider>
+        <Layout type="creator">
+          <Component {...pageProps} />
+        </Layout>
+      </CreatorAuthProvider>
+    );
+  } else {
+    return (
+      <Layout type="user">
+        <Component {...pageProps} />
+      </Layout>
+    );
+  }
 }
 
 export default MyApp;
