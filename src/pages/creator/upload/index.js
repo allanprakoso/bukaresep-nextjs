@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import Upload from "../../../components/Upload";
 import Button from "../../../components/Button";
 import { Modal, ModalTitle, ModalContent, ModalFooter } from "../../../components/ModalDialog";
+<<<<<<< HEAD
 
 export async function getServerSideProps() {
     const req = await fetch('http://47.254.242.193:5000/unit').catch(() => {
@@ -31,6 +32,55 @@ export default function Home(props) {
     })
     const [image, setImage] = useState(null);
     const [openAtribute, setOpenAtribute] = useState(true);
+=======
+import UploadImageRecipe from "../../../utils/UploadImageRecipe";
+import { Angle_right } from "../../../assets/icons";
+import useAxios from "../../../configs/creator/useAxios";
+export default function UploadRecipe(props) {
+    const api = useAxios();
+    const [recipe, setRecipe] = useState({
+        name: "",
+        status: "published",
+        url_image: "",
+        group_ingredients: [],
+        instructions: [{ step: "1", instruction: '', file_image: null, url_image: '' }],
+        cooking_time: 1,
+        serving: 1,
+        category_id: 1,
+        cuisine_id: 1,
+        level_id: 1,
+        tags: ['tea'],
+    })
+    const [isLoading, setIsLoading] = useState(false);
+
+    const [image, setImage] = useState(null);
+    const [openAtribute, setOpenAtribute] = useState(false);
+
+    async function UploadRecipe() {
+        setIsLoading(true);
+        if (image) {
+            const url_image = await UploadImageRecipe(image);
+            recipe.url_image = url_image;
+        }
+        for (const [index, instruction] of recipe.instructions.entries()) {
+            if (instruction.file_image) {
+                const url_image = await UploadImageRecipe(instruction.file_image);
+                console.log(url_image);
+                recipe.instructions[index].url_image = url_image;
+                delete recipe.instructions[index].file_image;
+                setRecipe(recipe);
+            }
+        }
+        const data = JSON.stringify(recipe);
+        await api.post('/creator/recipes', data).then(res => {
+            console.log(res);
+        }).catch(err => {
+            console.error(err);
+        })
+        return setIsLoading(false);
+    }
+
+>>>>>>> origin/allan
 
     const onChangeForm = (e) => {
         setRecipe({ ...recipe, [e.target.name]: e.target.value })
@@ -42,10 +92,13 @@ export default function Home(props) {
         setRecipe({ ...recipe, group_ingredients: ingredients })
     }
 
+<<<<<<< HEAD
     const submitImagesInstuctions = async (instructions) => {
 
     }
 
+=======
+>>>>>>> origin/allan
     return (
         <>
             <div className="space-y-10 mt-32 container mx-auto relative">
@@ -73,7 +126,10 @@ export default function Home(props) {
                     <section name="ingredients">
                         <h3 className="font-quicksand font-bold text-h3 text-gray-600">Bahan</h3>
                         <IngredientsForm
+<<<<<<< HEAD
                             units={props.units}
+=======
+>>>>>>> origin/allan
                             onChange={ingredient => handleChangeIngredients(ingredient)}
                         />
                     </section>
@@ -82,6 +138,10 @@ export default function Home(props) {
                         <InstructionsForm
                             onChange={instruction => handleChangeInstruction(instruction)} />
                     </section>
+<<<<<<< HEAD
+=======
+                    <p>{JSON.stringify(recipe)}</p>
+>>>>>>> origin/allan
                 </div>
             </div>
 
@@ -111,8 +171,33 @@ export default function Home(props) {
                 </ModalContent>
                 <ModalFooter>
                     <div className="w-full grid grid-cols-1 gap-y-4">
+<<<<<<< HEAD
                         <Button size="LONG" onClick={() => setOpenAtribute(false)}>Unggah Resep</Button>
                         <Button color="SECONDARY" size="LONG" onClick={() => setOpenAtribute(false)}>Simpan Draft</Button>
+=======
+                        <Button size="LONG" onClick={async () => {
+                            await UploadRecipe();
+                            setOpenAtribute(false)
+                        }}>
+                            {isLoading ?
+                                <div className="flex justify-center">
+
+                                    <svg
+                                        className="animate-spin h-5 w-5 mr-3"
+                                        width="16px"
+                                        height="16px"
+                                        viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <Angle_right />
+                                    </svg>
+                                    <span>Mengupload Resep</span>
+                                </div> :
+                                <>Unggah Resep</>}
+                        </Button>
+                        <Button color="SECONDARY" size="LONG" onClick={() => setOpenAtribute(false)}>
+                            Simpan Draft
+                        </Button>
+>>>>>>> origin/allan
                         <Button color="NOBG" size="LONG" onClick={() => setOpenAtribute(false)}>Lihat Priview</Button>
                     </div>
                 </ModalFooter>

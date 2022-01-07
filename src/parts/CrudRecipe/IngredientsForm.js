@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Crossl } from '../../assets/icons'
 import ButtonPlus from '../../components/ButtonPlus'
 
@@ -8,6 +8,7 @@ const IngredientsForm = (props) => {
             { name: "", description: "", amount: 1, unit_id: 1 }
         ]
     },])
+    const [units, setUnits] = useState([]);
 
     const handleChangeIngredients = (index, i, e) => {
         const newFormValues = [...formValues];
@@ -91,7 +92,7 @@ const IngredientsForm = (props) => {
                                     placeholder="jml"
                                 />
                                 <select name="unit_id" onChange={e => handleChangeIngredients(index, i, e)} className="focus:outline-none w-28 cursor-pointer">
-                                    {props.units.map((unit) => (
+                                    {units.map((unit) => (
                                         <option className="cursor-pointer" key={unit.id} value={unit.id}>{unit.unit}</option>
                                     ))}
                                 </select>
