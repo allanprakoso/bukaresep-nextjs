@@ -50,10 +50,10 @@ export const CreatorAuthProvider = ({ children }) => {
             body: JSON.stringify({ 'refreshToken': authTokens.refreshToken })
         }).then(res => {
             if (res.status === 200) {
-                setAuthTokens(null)
-                setCreator(null)
                 Cookies.remove('authTokens')
             }
+            setAuthTokens(null)
+            setCreator(null)
         })
     }
 

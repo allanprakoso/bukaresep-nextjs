@@ -1,20 +1,28 @@
 import Button from "./Button";
 import { Crossl } from "../assets/icons";
 import disableScroll from "disable-scroll";
+import { useEffect } from 'react';
 
-const Modal = ({ children, close }) => {
+const Modal = ({ children, show, onClose }) => {
+  useEffect(() => {
+    if (show) {
+      disableScroll.on();
+    } else {
+      disableScroll.off();
+    }
+  }, [show]);
+
   return (
     // wrapper & bg
     <>
-      {disableScroll.on()}
-      <div className="modalDialog absolute inset-0 z-50">
+      <div className={"modalDialog absolute inset-0 z-50", show ? "" : "hidden"}>
         <div className="modalbg bg-gray-400/30 h-[100vh] fixed inset-0 flex justify-center items-center overflow-y:hidden">
           <div className="modalbody relative bg-white rounded-xl w-[587px] ">
             <div id="closeModal" className="flex justify-end mt-4 mx-2">
               <Button
                 type="button"
                 color="LINK"
-                onClick={() => close(false, disableScroll.off())}
+                onClick={() => onClose(false)}
               >
                 <svg
                   width="24px"

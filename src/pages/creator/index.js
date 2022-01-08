@@ -10,7 +10,7 @@ function Home() {
                     <h3 className="text-h3 leading-[2.25rem] font-bold font-quicksand text-gray-800 mb-20">Bagikan resepmu dan dapatkan penghasilan dari resep masakanmu</h3>
                     <Button>Bergabung sekarang</Button>
                 </div>
-                <div className="basis-6/12 translate-x-20">
+                <div className="basis-6/12 -right-20">
                     <img src="/pic/lp0.jpg" className="object-cover h-full" />
                 </div>
             </section>
@@ -22,21 +22,21 @@ function Home() {
                         <h4 className="text-h4 font-semibold font-quicksand mb-6">Buat akun</h4>
                         <Link href="#"><a className="text-base text-brand-dark hover:text-brand-brighter font-medium">Daftar</a></Link>
                     </div>
-                    <span className="ml-20 text-[10rem] font-quicksand font-bold text-[#fce8e8] -translate-y-4">1</span>
+                    <span className="ml-20 text-[10rem] font-quicksand font-bold text-[#fce8e8] mb-4">1</span>
                 </div>
                 <div className="flex items-center">
                     <div>
                         <p className="text-base font-semibold text-gray-400">Langkah 2</p>
                         <h4 className="text-h4 font-semibold font-quicksand mb-8">Bagikan <br />resepmu</h4>
                     </div>
-                    <span className="ml-20 text-[10rem] font-quicksand font-bold text-[#fce8e8] -translate-y-4">2</span>
+                    <span className="ml-20 text-[10rem] font-quicksand font-bold text-[#fce8e8] mb-4">2</span>
                 </div>
                 <div className="flex items-center">
                     <div>
                         <p className="text-base font-semibold text-gray-400">Langkah 3</p>
                         <h4 className="text-h4 font-semibold font-quicksand mb-8">Dapatkan<br />penghasilan</h4>
                     </div>
-                    <span className="ml-20 text-[10rem] font-quicksand font-bold text-[#fce8e8] -translate-y-4">3</span>
+                    <span className="ml-20 text-[10rem] font-quicksand font-bold text-[#fce8e8] mb-4">3</span>
                 </div>
             </section>
 
@@ -47,7 +47,7 @@ function Home() {
                         <p className="text-lg text-gray-600 leading-7">Tunjukan hasil kreasi masakanmu dan kembangkan keterampilan memasakmu bersama kami. </p>
                     </div>
                     <div className="basis-5/12 ">
-                        <img src="/pic/lp1.png" className="rounded-lg object-cover h-full drop-shadow-[0_8px_24px_rgba(31,41,55,0.08)] border-solid-[0.3px] border-gray-400" />
+                        <img src="/pic/lp1.png" className="rounded-lg object-cover h-full drop-shadow-[0_8px_24px_rgba(31,41,55,0.08)] border-solid-[0.3px] border-gray-400 " />
                     </div>
                 </div>
                 <div className="flex flex-row justify-between items-center">
