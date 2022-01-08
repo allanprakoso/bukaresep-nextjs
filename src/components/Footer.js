@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <footer className="bg-gray-50 py-3 md:py-6 lg:pt-10 mt-[120px] ">
       <div className="flex justify-center">
-        <img src="logo/logo-identity.svg" className="h-8 md:h-[3.125rem] " />
+        <img src="/logo/logo-identity.svg" className="h-8 md:h-[3.125rem] " />
       </div>
       <div className="flex justify-center my-4 md:my-8">
         <Link href={"#"}>

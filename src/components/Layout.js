@@ -7,7 +7,7 @@ const Layout = ({ type, children }) => {
     <>
       <div className="flex flex-col h-screen justify-between">
         {type == 'creator' ? <NavbarCreator /> : <NavbarUser />}
-        <section className="main-content mb-auto">{children}</section>
+        <section className="md:mt-16 main-content mb-auto">{children}</section>
         <Footer />
       </div>
     </>

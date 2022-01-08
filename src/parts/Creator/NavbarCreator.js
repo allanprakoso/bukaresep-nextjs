@@ -84,7 +84,7 @@ function NavbarCreator() {
               {isLogin && (
                 <div className="profile flex items-center space-x-8 ">
                   <Button color="LINK" onMouseEnter={() => setIsOpen(true)}>
-                    <img src="pic/lp3.jpg" className="w-8 h-8 rounded-full" />
+                    <img src="/pic/lp3.jpg" className="w-8 h-8 rounded-full" />
                   </Button>
                   <Button
                     onClick={() => router.push("/creator/upload")}
