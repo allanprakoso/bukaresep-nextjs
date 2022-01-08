@@ -13,6 +13,7 @@ import { useAxiosWithContext } from "../../../configs/creator/useAxios";
 
 
 export default function UploadRecipe(props) {
+  const router = useRouter()
   const api = useAxiosWithContext();
 
   const [recipe, setRecipe] = useState({
@@ -213,6 +214,7 @@ export default function UploadRecipe(props) {
                 onClick={async () => {
                   await UploadRecipe();
                   setOpenAtribute(false);
+                  router.push("/creator/profiles");
                 }}
               >
                 {isLoading ? (
