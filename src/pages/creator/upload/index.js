@@ -6,17 +6,15 @@ import IngredientsForm from "../../../parts/CrudRecipe/IngredientsForm";
 import { useRouter } from "next/router";
 import Upload from "../../../components/Upload";
 import Button from "../../../components/Button";
-import {
-  Modal,
-  ModalTitle,
-  ModalContent,
-  ModalFooter,
-} from "../../../components/ModalDialog";
+import { Modal, ModalTitle, ModalContent, ModalFooter } from "../../../components/ModalDialog";
 import UploadImageRecipe from "../../../utils/UploadImageRecipe";
 import { Angle_right } from "../../../assets/icons";
 import useAxios from "../../../configs/creator/useAxios";
+
+
 export default function UploadRecipe(props) {
   const api = useAxios();
+
   const [recipe, setRecipe] = useState({
     name: "",
     status: "published",
@@ -32,6 +30,7 @@ export default function UploadRecipe(props) {
     level_id: 1,
     tags: ["tea"],
   });
+
   const [isLoading, setIsLoading] = useState(false);
 
   const [image, setImage] = useState(null);
@@ -53,23 +52,25 @@ export default function UploadRecipe(props) {
       }
     }
     const data = JSON.stringify(recipe);
-    await api
-      .post("/creator/recipes", data)
+    await api.post("/creator/recipes", data)
       .then((res) => {
         console.log(res);
       })
       .catch((err) => {
         console.error(err);
       });
+
     return setIsLoading(false);
   }
 
   const onChangeForm = (e) => {
     setRecipe({ ...recipe, [e.target.name]: e.target.value });
   };
+
   const handleChangeInstruction = (instruction) => {
     setRecipe({ ...recipe, instructions: instruction });
   };
+
   const handleChangeIngredients = (ingredients) => {
     setRecipe({ ...recipe, group_ingredients: ingredients });
   };

@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from 'react'
 import jwt_decode from "jwt-decode";
+import Cookies from 'js-cookie';
 
 const AuthContext = createContext()
 const baseURL = "http://47.254.242.193:5000/"
@@ -11,13 +12,13 @@ export const CreatorAuthProvider = ({ children }) => {
     let [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        if (!authTokens && localStorage.getItem("authTokens")) {
-            const token = JSON.parse(localStorage.getItem("authTokens"))
+        if (!authTokens && Cookies.get('authTokens')) {
+            const token = JSON.parse(Cookies.get('authTokens'))
             if (token) {
                 setAuthTokens(token)
             }
         }
-    }, [])
+    }, [authTokens])
 
     let loginCreator = async (e) => {
         e.preventDefault()
@@ -32,7 +33,7 @@ export const CreatorAuthProvider = ({ children }) => {
         if (response.status === 201) {
             setAuthTokens(data.data)
             setCreator(jwt_decode(data.data.accessToken))
-            localStorage.setItem('authTokens', JSON.stringify(data.data))
+            Cookies.set('authTokens', JSON.stringify(data.data))
             // history.push('/')
         } else {
             alert('Something went wrong!')
@@ -51,7 +52,7 @@ export const CreatorAuthProvider = ({ children }) => {
             if (res.status === 200) {
                 setAuthTokens(null)
                 setCreator(null)
-                localStorage.removeItem('authTokens')
+                Cookies.remove('authTokens')
             }
         })
     }
