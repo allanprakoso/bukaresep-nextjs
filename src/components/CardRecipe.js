@@ -1,15 +1,9 @@
 import { Star } from "../assets/icons";
 import Link from "next/link";
 //create card recipe using tailwindcss
-const CardRecipe = ({ recipe }) => {
+const CardRecipe = ({ recipe, path }) => {
   return (
-    <Link
-      href={{
-        pathname: "/creator/recipes/[id]",
-        query: { id: recipe.id },
-      }}
-    >
-      <a>
+      <>
         <div className="font-inter text-gray-600 mx-auto my-4">
           <div className="bg-white rounded-lg shadow-lg max-w-sm w-64 pb-8">
             <div className="relative">
@@ -45,8 +39,13 @@ const CardRecipe = ({ recipe }) => {
                 <p>·</p>
                 <p>{recipe.time} menit</p>
               </div>
-              <div className="min-h-full h-12">
+            <div className="min-h-full h-12">
+              <Link
+                href={{
+                  pathname: {path} + '[id]',
+                  query: { id: recipe.id }, }}>
                 <text className="font-semibold text-lg">{recipe.title}</text>
+              </Link>
               </div>
               <div className="flex space-x-2 mt-6">
                 <p className="font-regular">By</p>
@@ -55,8 +54,8 @@ const CardRecipe = ({ recipe }) => {
             </div>
           </div>
         </div>
-      </a>
-    </Link>
+      </>
+    
   );
 };
 
