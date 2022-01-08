@@ -10,7 +10,7 @@ function Home() {
                     <h3 className="text-h3 leading-[2.25rem] font-bold font-quicksand text-gray-800 mb-20">Bagikan resepmu dan dapatkan penghasilan dari resep masakanmu</h3>
                     <Button>Bergabung sekarang</Button>
                 </div>
-                <div className="basis-6/12 -right-20">
+                <div className="basis-6/12 relative -right-20">
                     <img src="/pic/lp0.jpg" className="object-cover h-full" />
                 </div>
             </section>

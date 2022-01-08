@@ -2,20 +2,14 @@ import Button from "./Button";
 import { Crossl } from "../assets/icons";
 import disableScroll from "disable-scroll";
 import { useEffect } from 'react';
+import { Dialog } from '@headlessui/react'
 
 const Modal = ({ children, show, onClose }) => {
-  useEffect(() => {
-    if (show) {
-      disableScroll.on();
-    } else {
-      disableScroll.off();
-    }
-  }, [show]);
 
   return (
     // wrapper & bg
     <>
-      <div className={"modalDialog absolute inset-0 z-50", show ? "" : "hidden"}>
+      <Dialog onClose={onClose} open={show}>
         <div className="modalbg bg-gray-400/30 h-[100vh] fixed inset-0 flex justify-center items-center overflow-y:hidden">
           <div className="modalbody relative bg-white rounded-xl w-[587px] ">
             <div id="closeModal" className="flex justify-end mt-4 mx-2">
@@ -39,7 +33,7 @@ const Modal = ({ children, show, onClose }) => {
             </div>
           </div>
         </div>
-      </div>
+      </Dialog>
     </>
   );
 };
