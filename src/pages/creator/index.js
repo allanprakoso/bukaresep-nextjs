@@ -1,9 +1,11 @@
 import Link from "next/link";
+import ContainerXL  from "../../components/Container"
 import Button from "../../components/Button"
+import ContainerXL from "../../components/ContainerXL";
 
 function Home() {
     return (
-        <div className="mt-28 xl:mx-[22.5rem] lg:mx-14 md:mx-10 sm:mx-4">
+        <ContainerXL>        
             <section className="flex flex-row items-center mb-20">
                 <div className="basis-6/12">
                     <p className="text-lg font-semibold text-brand-dark mb-3">Jadilah penulis resep</p>
@@ -74,7 +76,8 @@ function Home() {
                 <h3 className="text-h3 font-bold font-quicksand text-gray-800 mb-4 text-center">Yuk, tulis dan bagikan<br />resepmu sekarang</h3>
                 <Button>Bergabung sekarang</Button>
             </section>
-        </div>
+        
+        </ContainerXL>
     );
 }
 

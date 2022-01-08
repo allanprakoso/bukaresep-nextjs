@@ -1,11 +1,15 @@
+import ContainerXL from '../../../components/ContainerXL';
 import { useAxios } from '../../../configs/creator/useAxios';
 import GridListRecipe from '../../../parts/GridListRecipe';
 
 const Profiles = (props) => {
     return (
-        <div className="mt-[200px] container">
-            <GridListRecipe recipes={props.recipes} />
-        </div>
+        <ContainerXL>
+             <div className="mt-[200px] container">
+                <GridListRecipe recipes={props.recipes} />
+            </div>
+        </ContainerXL>         
+        
     );
 }
 

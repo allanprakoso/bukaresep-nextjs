@@ -4,22 +4,20 @@ import Link from "next/link";
 const DropdownMenu = ({ children, size, onMouseLeave, ...props }) => {
   // size : LARGE, FULL, SMALL
   const DROPDOWNSIZE = {
-    LARGE: " w-[244px] z-50 top-16 right-20",
+    LARGE: " w-[244px] z-50 right-20",
     FULL: " w-full",
     SMALL: " w-[152px]",
   };
   const sizeClassName = DROPDOWNSIZE[size || "LARGE"];
 
   return (
-    <div
-      onMouseLeave={onMouseLeave}
-      aria-hidden="true"
-      className={
-        "absolute bg-white py-6 rounded-md drop-shadow-xl flex flex-col space-y-2 border-solid border-[0.8px] border-gray-200 overflow-hidden" +
-        sizeClassName
-      }
+    <div onMouseLeave={onMouseLeave} aria-hidden="true" className={"absolute" + sizeClassName}>
+      <div
+      
+      className="mt-16 bg-white py-6 rounded-md drop-shadow-xl flex flex-col space-y-2 border-solid border-[0.8px] border-gray-200 overflow-hidden" 
     >
       {children}
+    </div>
     </div>
   );
 };
