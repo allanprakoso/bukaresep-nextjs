@@ -1,5 +1,7 @@
 import { createContext, useState, useEffect } from 'react'
 import jwt_decode from "jwt-decode";
+import dayjs from 'dayjs';
+import axios from 'axios'
 import Cookies from 'js-cookie';
 
 const AuthContext = createContext()
@@ -15,6 +17,16 @@ export const CreatorAuthProvider = ({ children }) => {
         if (!authTokens && Cookies.get('authTokens')) {
             const token = JSON.parse(Cookies.get('authTokens'))
             if (token) {
+                const user = jwt_decode(token.accessToken)
+                const isExpired = dayjs.unix(user.exp).diff(dayjs()) < 1;
+                if (isExpired) {
+                    axios.put(`${baseURL}/creator/authentications`, {
+                        refreshToken: authTokens.refreshToken
+                    }).then(res => {
+                        Cookies.set('authTokens', JSON.stringify(res.data.data))
+                        setAuthTokens(res.data.data)
+                    });
+                }
                 setAuthTokens(token)
             }
         }

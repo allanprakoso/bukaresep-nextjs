@@ -9,11 +9,11 @@ import Button from "../../../components/Button";
 import { Modal, ModalTitle, ModalContent, ModalFooter } from "../../../components/ModalDialog";
 import UploadImageRecipe from "../../../utils/UploadImageRecipe";
 import { Angle_right } from "../../../assets/icons";
-import useAxios from "../../../configs/creator/useAxios";
+import { useAxiosWithContext } from "../../../configs/creator/useAxios";
 
 
 export default function UploadRecipe(props) {
-  const api = useAxios();
+  const api = useAxiosWithContext();
 
   const [recipe, setRecipe] = useState({
     name: "",
@@ -131,8 +131,8 @@ export default function UploadRecipe(props) {
         </div>
       </div>
 
-      {openAtribute && (
-        <Modal close={() => setOpenAtribute(false)}>
+      {
+        <Modal onClose={() => setOpenAtribute(false)} show={openAtribute}>
           <ModalTitle>{recipe.name}</ModalTitle>
           <ModalContent>
             <form>
@@ -249,7 +249,7 @@ export default function UploadRecipe(props) {
             </div>
           </ModalFooter>
         </Modal>
-      )}
+      }
     </>
   );
 }
