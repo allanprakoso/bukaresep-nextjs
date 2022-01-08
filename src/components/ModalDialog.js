@@ -9,7 +9,7 @@ const Modal = ({ children, show, onClose }) => {
   return (
     // wrapper & bg
     <>
-      <Dialog onClose={onClose} open={show}>
+      <Dialog onClose={onClose} open={show ?? false}>
         <div className="modalbg bg-gray-400/30 h-[100vh] fixed inset-0 flex justify-center items-center overflow-y:hidden">
           <div className="modalbody relative bg-white rounded-xl w-[587px] ">
             <div id="closeModal" className="flex justify-end mt-4 mx-2">
