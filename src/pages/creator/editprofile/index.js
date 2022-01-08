@@ -1,4 +1,4 @@
-import ContainerXL from "../../../components/ContainerXL";
+import ContainerXL from "../../../components/ContainerXL"
 const EditProfile = () => {
     return ( 
         <ContainerXL>

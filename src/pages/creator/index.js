@@ -1,11 +1,11 @@
-import Link from "next/link";
-import ContainerXL  from "../../components/Container"
+import Link from "next/link"
 import Button from "../../components/Button"
-import ContainerXL from "../../components/ContainerXL";
+import ContainerXL from "../../components/ContainerXL"
 
 function Home() {
     return (
-        <ContainerXL>        
+        <ContainerXL>    
+           
             <section className="flex flex-row items-center mb-20">
                 <div className="basis-6/12">
                     <p className="text-lg font-semibold text-brand-dark mb-3">Jadilah penulis resep</p>
