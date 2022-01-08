@@ -255,3 +255,18 @@ export default function UploadRecipe(props) {
     </>
   );
 }
+
+export async function getServerSideProps(context) {
+  const { req, res } = context;
+  if (!req.cookies.authTokens) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/creator"
+      }
+    }
+  }
+  return {
+    props: {}
+  }
+}

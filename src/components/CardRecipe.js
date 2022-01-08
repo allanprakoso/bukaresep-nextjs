@@ -10,7 +10,7 @@ const CardRecipe = ({ recipe, path }) => {
             <img
               src={recipe.image}
               alt="recipe"
-              className="rounded-t-lg object-cover h-full"
+              className="rounded-t-lg object-cover h-[184px]"
             />
             <div className="absolute top-0 left-0 mt-4 ml-4">
               <div className="bg-white rounded-full px-3 py-1">

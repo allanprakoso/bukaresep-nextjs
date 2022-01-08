@@ -36,17 +36,20 @@ const CardCollection = ({ collection, path }) => {
               }}>
               <a>
                 <p className="mb-auto text-gray-800 text-lg font-semibold truncate">
-                  {collection.title}
+                  {collection.name}
                 </p>
               </a>
             </Link>
 
             <div className="flex text-sm space-x-1 font-regular mt-2">
-              <p>8 makanan</p>
-              <p>·</p>
-              <p>10 cemilan</p>
-              <p>·</p>
-              <p>8 minuman</p>
+              {
+                collection.categories.map((category, index) => (
+                  <>
+                    <span key={index}>{category.count} {category.name}</span>
+                    {index !== collection.categories.length - 1 && <span>·</span>}
+                  </>
+                ))
+              }
             </div>
           </div>
         </div>
