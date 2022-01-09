@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Crossl } from '../../assets/icons'
-import ButtonPlus from '../../components/ButtonPlus'
+import { Crossl } from '../../../assets/icons'
+import ButtonPlus from '../../../components/ButtonPlus'
 
 const IngredientsForm = (props) => {
     const [formValues, setFormValues] = useState([{

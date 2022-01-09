@@ -1,16 +1,16 @@
-import Button from "../../components/Button";
-import { InputText } from "../../components/InputField";
+import Button from "../../../components/Button";
+import { InputText } from "../../../components/InputField";
 import {
   Modal,
   ModalTitle,
   ModalContent,
-} from "../../components/ModalDialog.js";
+} from "../../../components/ModalDialog.js";
 
-const CreateCollection = () => {
+const EditCollection = () => {
   return (
     <Modal>
       <Modal close={close}>
-        <ModalTitle>Buat koleksi baru</ModalTitle>
+        <ModalTitle>Edit Koleksi</ModalTitle>
         <ModalContent>
           <InputText
             name="name"
@@ -18,11 +18,11 @@ const CreateCollection = () => {
             label="Nama Koleksi"
           ></InputText>
 
-          <Button size="LONG">Buat Koleksi</Button>
+          <Button size="LONG">Simpan</Button>
         </ModalContent>
       </Modal>
     </Modal>
   );
 };
 
-export default CreateCollection;
+export default EditCollection;

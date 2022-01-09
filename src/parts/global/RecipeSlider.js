@@ -1,8 +1,8 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import CardRecipe from "../components/CardRecipe";
-import { Angle_right } from "../assets/icons";
+import CardRecipe from "../../components/CardRecipe";
+import { Angle_right } from "../../assets/icons";
 
 function RecipeSlider() {
   const recipe = [

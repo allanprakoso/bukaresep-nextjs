@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Crossl } from "../../assets/icons";
-import ButtonPlus from "../../components/ButtonPlus";
-import Upload from "../../components/Upload";
+import { Crossl } from "../../../assets/icons";
+import ButtonPlus from "../../../components/ButtonPlus";
+import Upload from "../../../components/Upload";
 
 const InstructionsForm = (props) => {
   const [formValues, setFormValues] = useState([

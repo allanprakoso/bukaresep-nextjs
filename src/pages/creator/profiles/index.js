@@ -1,6 +1,6 @@
 import { useAxios, useAxiosWithContext } from '../../../configs/creator/useAxios';
-import GridListRecipe from '../../../parts/GridListRecipe';
-import GridListCollection from '../../../parts/GridListCollection';
+import GridListRecipe from '../../../parts/global/GridListRecipe';
+import GridListCollection from '../../../parts/global/GridListCollection';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Button from '../../../components/Button';

@@ -2,10 +2,10 @@ import {
   Modal,
   ModalTitle,
   ModalContent,
-} from "../../components/ModalDialog.js";
-import ItemCollectionSelection from "../../components/ItemCollectionSelection";
-import Button from "../../components/Button.js";
-import { Plusl } from "../../assets/icons/index.js";
+} from "../../../components/ModalDialog.js";
+import ItemCollectionSelection from "../../../components/ItemCollectionSelection";
+import Button from "../../../components/Button.js";
+import { Plusl } from "../../../assets/icons/index.js";
 
 const AddRecipetoCollection = () => {
   const collection = [

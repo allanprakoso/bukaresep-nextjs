@@ -1,4 +1,4 @@
-import RecipePrev from "../components/RecipePrev";
+import RecipePrev from "../../components/RecipePrev";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";

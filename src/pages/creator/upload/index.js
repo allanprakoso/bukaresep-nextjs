@@ -1,8 +1,8 @@
 import { useState, useEffect, useContext } from "react";
 import AuthContext from "../../../context/CreatorAuthContext";
 import { InputText, InputOption } from "../../../components/InputField";
-import InstructionsForm from "../../../parts/CrudRecipe/InstructionsForm";
-import IngredientsForm from "../../../parts/CrudRecipe/IngredientsForm";
+import InstructionsForm from "../../../parts/creator/CrudRecipe/InstructionsForm";
+import IngredientsForm from "../../../parts/creator/CrudRecipe/IngredientsForm";
 import { useRouter } from "next/router";
 import Upload from "../../../components/Upload";
 import Button from "../../../components/Button";

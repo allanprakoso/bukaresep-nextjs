@@ -1,4 +1,4 @@
-import CardRecipe from "../components/CardRecipe";
+import CardRecipe from "../../components/CardRecipe";
 
 export default function GridListRecipe({ recipes }) {
   return (

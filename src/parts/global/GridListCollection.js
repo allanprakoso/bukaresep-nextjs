@@ -1,4 +1,4 @@
-import CardCollection from "../components/CardCollection";
+import CardCollection from "../../components/CardCollection";
 
 export default function GridListCollection({ collections }) {
 

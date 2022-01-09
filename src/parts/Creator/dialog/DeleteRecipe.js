@@ -1,9 +1,9 @@
-import Button from "../../components/Button";
+import Button from "../../../components/Button";
 import {
   Modal,
   ModalTitle,
   ModalContent,
-} from "../../components/ModalDialog.js";
+} from "../../../components/ModalDialog.js";
 
 const DeleteRecipe = () => {
   return (
