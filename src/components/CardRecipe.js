@@ -37,7 +37,7 @@ const CardRecipe = ({ recipe, path }) => {
               <p>·</p>
               <p>{recipe.level}</p>
               <p>·</p>
-              <p>{recipe.time} menit</p>
+              <p>{recipe.cooking_time} menit</p>
             </div>
             <div className="min-h-full h-12">
               <Link

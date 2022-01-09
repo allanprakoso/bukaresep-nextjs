@@ -10,25 +10,24 @@ import { Share } from '../../../assets/icons';
 const Profiles = (props) => {
     const api = useAxiosWithContext();
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(true);
     const [tabIndex, setTabIndex] = useState(0);
     const [recipes, setRecipes] = useState([]);
+    const [drafts, setDrafts] = useState([])
     const [collections, setCollections] = useState([]);
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
             switch (tabIndex) {
                 case 0:
-                    var { data } = await api.get('/creator/collections');
-                    console.log(data);
-                    setCollections(data.collections);
+                    await api.get('/creator/collections').then(res => setCollections(res.data.collections))
+                        .catch((_) => setCollections([]));
                     break;
                 case 1:
-                    var { data: recipes } = await api.get('/creator/recipes');
-                    setRecipes(recipes.results);
+                    await api.get('/creator/recipes').then(res => setRecipes(res.data.results)).catch((_) => setRecipes([]));
                     break;
                 case 2:
-                    // var { data } = await api.get('/creator/recipes/drafts');
-                    // setCollections(data.results);
+                    await api.get('/creator/recipes/drafts').then(res => setDrafts(res.data.results)).catch((_) => setDrafts([]));
                     break;
                 default:
                     break;
@@ -73,15 +72,16 @@ const Profiles = (props) => {
                     </Tab.List>
                 </div>
                 <Tab.Panels>
+                    {loading && <div className="text-center text-gray-600 h-[500px]">Loading...</div>}
                     <Tab.Panel>
-                        {loading && <div className="text-center text-gray-600">Loading...</div>}
                         {(tabIndex === 0 && !loading) && <GridListCollection collections={collections} />}
                     </Tab.Panel>
                     <Tab.Panel>
-                        {loading && <div className="text-center text-gray-600">Loading...</div>}
                         {(tabIndex === 1 && !loading) && <GridListRecipe recipes={recipes} />}
                     </Tab.Panel>
-                    <Tab.Panel>Content 3</Tab.Panel>
+                    <Tab.Panel>
+                        {(tabIndex === 2 && !loading) && <GridListRecipe recipes={drafts} />}
+                    </Tab.Panel>
                 </Tab.Panels>
             </Tab.Group>
         </div>
