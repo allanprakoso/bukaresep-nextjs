@@ -10,13 +10,12 @@ import Button from "../../../components/Button";
 import { Modal, ModalTitle, ModalContent, ModalFooter } from "../../../components/ModalDialog";
 import UploadImageRecipe from "../../../utils/UploadImageRecipe";
 import { Angle_right } from "../../../assets/icons";
-import AddRecipetoCollection from "../../../parts/creator/dialog/AddRecipetoCollection";
 
 
 export default function UploadRecipe(props) {
   const router = useRouter()
   const api = useAxiosWithContext();
-  const { setTempRecipe } = useContext(AuthContext);
+  const { creator } = useContext(AuthContext);
 
   const [recipe, setRecipe] = useState({
     name: "",
@@ -36,14 +35,13 @@ export default function UploadRecipe(props) {
   });
 
   const [isLoading, setIsLoading] = useState(false);
-
   const [image, setImage] = useState(null);
   const [openAtribute, setOpenAtribute] = useState(false);
-  const [openSaveCollection, setOpenSaveCollection] = useState(false);
 
-
-  async function UploadRecipe() {
+  async function UploadRecipe(type) {
     setIsLoading(true);
+    if (type != 'published') recipe.status = 'drafted';
+    var recipe_id;
     if (image) {
       const url_image = await UploadImageRecipe(image);
       recipe.url_image = url_image;
@@ -59,10 +57,10 @@ export default function UploadRecipe(props) {
     const data = JSON.stringify(recipe);
     await api.post("/creator/recipes", data)
       .then((res) => {
-        setRecipeId(res.data.data.recipe_id)
+        recipe_id = res.data.data.recipe_id
       })
-
-    return setIsLoading(false);
+    setIsLoading(false);
+    return recipe_id;
   }
 
   const onChangeForm = (e) => {
@@ -216,8 +214,9 @@ export default function UploadRecipe(props) {
               <Button
                 size="LONG"
                 onClick={async () => {
-                  await UploadRecipe();
+                  await UploadRecipe('published');
                   setOpenAtribute(false);
+                  router.push(`/creator/${creator.id}`)
                 }}
               >
                 {isLoading ? (
@@ -240,16 +239,21 @@ export default function UploadRecipe(props) {
               <Button
                 color="SECONDARY"
                 size="LONG"
-                onClick={() => setOpenAtribute(false)}
+                onClick={async () => {
+                  const id = await UploadRecipe();
+                  setOpenAtribute(false);
+                  router.push(`/upload/preview?id=${id}`, '/creator/upload/preview')
+                }}
               >
                 Simpan Draft
               </Button>
               <Button
                 color="NOBG"
                 size="LONG"
-                onClick={() => {
-                  setTempRecipe(recipe);
-                  router.push(`/creator/upload/preview`);
+                onClick={async () => {
+                  const id = await UploadRecipe();
+                  setOpenAtribute(false);
+                  router.push(`/creator/upload/preview?id=${id}`, '/upload/preview')
                 }}
               >
                 Lihat Priview
@@ -257,9 +261,6 @@ export default function UploadRecipe(props) {
             </div>
           </ModalFooter>
         </Modal>
-      }
-      {
-        <AddRecipetoCollection close={setOpenSaveCollection} show={openSaveCollection} />
       }
     </>
   );

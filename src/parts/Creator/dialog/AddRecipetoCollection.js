@@ -9,23 +9,24 @@ import { Plusl } from "../../../assets/icons/index.js";
 import { useEffect, useState } from "react";
 import { useAxiosWithContext } from "../../../configs/creator/useAxios";
 
-const AddRecipetoCollection = ({ close, show, recipe_id }) => {
+const AddRecipetoCollection = ({ onClose, show, recipe_id }) => {
   const [collections, setCollections] = useState([]);
-  const api = useAxiosWithContext();
   useEffect(() => {
     async function getCollections() {
+      const api = useAxiosWithContext();
       const { data } = await api.get("/creator/collections");
-      setCollections(data.collections);
+      setCollections(data);
     }
     getCollections();
   }, [])
   return (
-    <Modal onClose={close} show={show}>
+    <Modal onClose={close}
+      show={show}>
       <ModalTitle>Simpan resep ke koleksi</ModalTitle>
       <ModalContent>
         <div>
           {collections.map((collection) => (
-            <ItemCollectionSelection collection={collection} recipe_id={recipe_id} />
+            <ItemCollectionSelection collection={collection} />
           ))}
         </div>
         <div className="flex space-x-3">

@@ -3,43 +3,10 @@ import { Bookmark, Clock, Leve, Minus, Plusl, Share, Star } from "../../../asset
 import ItemIngredient from "../../../components/ItemIngredient"
 import ItemInstruction from "../../../components/ItemInstruction"
 import Button from "../../../components/Button"
-import { useState, useEffect, useContext } from "react";
-import { useAxiosWithContext } from "../../../configs/creator/useAxios";
-import AuthContext from "../../../context/CreatorAuthContext";
-import { useRouter } from "next/router";
+import { useState } from "react";
 
-const DetailRecipe = () => {
-    const router = useRouter()
-    const api = useAxiosWithContext();
-    const { tempRecipe, creator } = useContext(AuthContext);
-    const [recipe, setRecipe] = useState({
-        name: "",
-        status: "",
-        url_image: "",
-        group_ingredients: [],
-        instructions: [
-            { step: "1", instruction: "", file_image: null, url_image: "" },
-        ],
-        cooking_time: 1,
-        serving: 1,
-        category_id: 1,
-        cuisine_id: 1,
-        level_id: 1,
-        tags: [""],
-    });
-
-    useEffect(() => {
-        if (tempRecipe) {
-            const levels = ['Mudah', 'Sedang', 'Sulit'];
-            const categories = ['Makanan', 'Minuman', 'Cemilan'];
-            const cuisines = ['Indonesia'];
-            tempRecipe.category_id = categories[tempRecipe.category_id - 1];
-            tempRecipe.cuisine_id = cuisines[tempRecipe.cuisine_id - 1];
-            tempRecipe.level_id = levels[tempRecipe.level_id - 1];
-            setRecipe(tempRecipe);
-            console.log(tempRecipe);
-        }
-    }, [tempRecipe])
+const DetailRecipe = (props) => {
+    const [recipe, setRecipe] = useState(props.recipe);
     const onChangeForm = (e) => {
         setRecipe({ ...recipe, [e.target.name]: e.target.value });
     };
@@ -48,7 +15,7 @@ const DetailRecipe = () => {
         <ContainterXL>
             <section className="preview flex flex-row justify-between items-center mt-20">
                 <div className="basis-5/12">
-                    <h5 className="text-h5 font-quicksand font-bold text-brand-dark mb-3">{recipe.category_id}</h5>
+                    <h5 className="text-h5 font-quicksand font-bold text-brand-dark mb-3">{recipe.category.name}</h5>
                     <h2 className="text-h2 font-quicksand font-bold text-gray-600 leading-[48px] mb-3">{recipe.name}</h2>
 
                     <div className="flex justify-between items-center">
@@ -124,7 +91,7 @@ const DetailRecipe = () => {
                                 >
                                     <Leve />
                                 </svg>
-                                <p className="text-lg font-semibold text-gray-600">{recipe.level_id}</p>
+                                <p className="text-lg font-semibold text-gray-600">{recipe.level.name}</p>
                             </div>
                         </div>
                     </div>
@@ -135,7 +102,7 @@ const DetailRecipe = () => {
                         </div>
                         <div>
                             <p className="text-lg text-gray-800 font-semibold">Penulis</p>
-                            <p className="text-lg text-gray-600">{creator?.username}</p>
+                            <p className="text-lg text-gray-600">{recipe.creator ?? "Inem Painem"}</p>
                         </div>
                     </div>
 
@@ -170,7 +137,7 @@ const DetailRecipe = () => {
 
                 <div className="basis-6/12">
                     <img
-                        src={recipe.file_image ? URL.createObjectURL(recipe.file_image) : ""}
+                        src={recipe.url_image}
                         alt="recipe"
                         className="rounded-[20px] object-cover h-96 w-full"
                     />
@@ -186,7 +153,7 @@ const DetailRecipe = () => {
                             <h3 className="text-h3 font-quicksand font-bold text-gray-800">Bahan</h3>
                             <div className="flex items-center space-x-14">
                                 <h5 className="text-h5 font-quicksand font-bold text-gray-600">Porsi saji</h5>
-                                <form className="portion flex space-x-3">
+                                <div className="portion flex space-x-3">
                                     <button className="bg-gray-300 p-2 rounded-md">
                                         <svg
                                             fill="#4B5563"
@@ -211,7 +178,7 @@ const DetailRecipe = () => {
                                             <Minus />
                                         </svg>
                                     </button>
-                                </form>
+                                </div>
                             </div>
 
                             <section className="flex flex-col space-y-3 mt-10">
@@ -237,7 +204,7 @@ const DetailRecipe = () => {
                             <div>
                                 {
                                     recipe.instructions.map((instruction, index) => (
-                                        <ItemInstruction instruction={instruction} url_image={(instruction.file_image != null) ? URL.createObjectURL(instruction.file_image) : ""} />
+                                        <ItemInstruction instruction={instruction} />
                                     ))
                                 }
                             </div>
@@ -264,7 +231,7 @@ const DetailRecipe = () => {
                         <h4 className="text-h4 font-quicksand font-bold text-gray-800">Tags</h4>
                         {
                             recipe.tags.map((tag, index) => (
-                                <button key={index} className="border border-gray-400 px-4 py-2 rounded-full">{tag}</button>
+                                <button key={index} className="border border-gray-400 px-4 py-2 rounded-full">{tag.id}</button>
                             ))
                         }
                     </div>
@@ -275,4 +242,15 @@ const DetailRecipe = () => {
     );
 }
 
+export async function getServerSideProps(context) {
+    const { id } = context.query;
+    const res = await fetch(`http://47.254.242.193:5000/recipes/${id}`);
+    const { recipe } = await res.json();
+
+    return {
+        props: {
+            recipe
+        }
+    }
+}
 export default DetailRecipe;
