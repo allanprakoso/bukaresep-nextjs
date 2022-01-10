@@ -10,6 +10,16 @@ const IngredientsForm = (props) => {
     },])
     const [units, setUnits] = useState([]);
 
+    useEffect(() => {
+        const fetchUnits = async () => {
+            const response = await fetch(`http://47.254.242.193:5000/unit`);
+            const data = await response.json();
+            setUnits(data.results);
+        }
+        fetchUnits();
+
+    }, [])
+
     const handleChangeIngredients = (index, i, e) => {
         const newFormValues = [...formValues];
         newFormValues[index]['ingredients'][i][e.target.name] = e.target.value;

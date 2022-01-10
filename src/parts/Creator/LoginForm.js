@@ -5,7 +5,7 @@ import { useState, useContext } from 'react';
 import AuthContext from '../../context/CreatorAuthContext';
 
 const LoginForm = ({ onClose, show }) => {
-    const { loginCreator } = useContext(AuthContext)
+    const { loginCreator, creator } = useContext(AuthContext)
     const [valueForm, setValue] = useState({
         username: "",
         password: "",
@@ -15,6 +15,10 @@ const LoginForm = ({ onClose, show }) => {
         setValue({ ...valueForm, [name]: value });
     };
 
+    const onSubmit = async (e) => {
+        await loginCreator(e);
+        onClose();
+    }
 
     return (
         <Modal
@@ -24,10 +28,7 @@ const LoginForm = ({ onClose, show }) => {
         >
             <ModalTitle>Login</ModalTitle>
             <ModalContent>
-                <form onSubmit={e => {
-                    onClose();
-                    loginCreator(e);
-                }}>
+                <form onSubmit={onSubmit}>
                     <div className="form-group grid grid-cols-1 gap-10">
                         <InputText
                             label="Username"

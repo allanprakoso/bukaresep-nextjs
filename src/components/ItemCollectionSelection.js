@@ -1,10 +1,16 @@
 import { useState } from "react";
 import Button from "./Button";
 
-const ItemCollectionSelection = ({ collection }) => {
+const ItemCollectionSelection = ({ collection, recipe_id }) => {
   const [isHovering, setIsHovered] = useState(false);
   const onMouseEnter = () => setIsHovered(true);
   const onMouseLeave = () => setIsHovered(false);
+  const [count, setCount] = useState(0)
+
+  for (var i = 0; i < collection.categories.length; i++) {
+    setCount(count + collection.categories[i].count)
+  }
+
   return (
     <div
       className="flex p-5 items-center rounded-lg border-2 border-transparent hover:border-gray-300"
@@ -20,8 +26,8 @@ const ItemCollectionSelection = ({ collection }) => {
       </div>
       <div className="basis-6/12 mr-2 font-inter text-gray-600">
         <div className="h-fit">
-          <p className="font-semibold text-lg mb-1">{collection.title}</p>
-          <p className="font-regular text-sm">11 Resep</p>
+          <p className="font-semibold text-lg mb-1">{collection.name}</p>
+          <p className="font-regular text-sm">{ } Resep</p>
         </div>
       </div>
       <div className="basis-3/12 h-fit grid justify-items-end">

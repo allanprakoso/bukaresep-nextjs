@@ -112,16 +112,17 @@ function NavbarCreator() {
 
       {isOpen && (
         <DropdownMenu onMouseLeave={() => setIsOpen(false)}>
-          <DropdownItem>Profil Saya</DropdownItem>
-          <DropdownItem>Edit profil</DropdownItem>
+          <DropdownItem onClick={() => router.push(`/creator/${creator.username}`)}>Profil Saya</DropdownItem>
+          <DropdownItem onClick={() => router.push(`/creator/${creator.username}/edit`)}>Edit profil</DropdownItem>
           <Divider />
-          <DropdownItem>Koleksi</DropdownItem>
-          <DropdownItem>Draft</DropdownItem>
+          <DropdownItem onClick={() => router.push(`/creator/${creator.username}?tab=collection`)}>Koleksi</DropdownItem>
+          <DropdownItem onClick={() => router.push(`/creator/${creator.username}?tab=draft`)}>Draft</DropdownItem>
           <Divider />
           <DropdownItem
             color="RED"
-            onClick={() => {
-              logoutCreator();
+            onClick={async () => {
+              await logoutCreator();
+              setIsOpen(false);
               router.push("/creator");
             }}
           >

@@ -2,31 +2,33 @@ import { useAxios, useAxiosWithContext } from '../../../configs/creator/useAxios
 import GridListRecipe from '../../../parts/global/GridListRecipe';
 import GridListCollection from '../../../parts/global/GridListCollection';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import Button from '../../../components/Button';
 import { Tab } from '@headlessui/react'
 import { Share } from '../../../assets/icons';
-
+import Link from 'next/link';
+import AuthContext from '../../../context/CreatorAuthContext';
 const Profiles = (props) => {
+    const { creator } = useContext(AuthContext);
+    const router = useRouter();
+    const tab = router.query.tab ?? "collections";
     const api = useAxiosWithContext();
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(true);
-    const [tabIndex, setTabIndex] = useState(0);
     const [recipes, setRecipes] = useState([]);
     const [drafts, setDrafts] = useState([])
     const [collections, setCollections] = useState([]);
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
-            switch (tabIndex) {
-                case 0:
+            switch (tab) {
+                case 'collections':
                     await api.get('/creator/collections').then(res => setCollections(res.data.collections))
                         .catch((_) => setCollections([]));
                     break;
-                case 1:
+                case 'recipes':
                     await api.get('/creator/recipes').then(res => setRecipes(res.data.results)).catch((_) => setRecipes([]));
                     break;
-                case 2:
+                case 'drafts':
                     await api.get('/creator/recipes/drafts').then(res => setDrafts(res.data.results)).catch((_) => setDrafts([]));
                     break;
                 default:
@@ -35,7 +37,7 @@ const Profiles = (props) => {
             setLoading(false);
         };
         fetchData();
-    }, [tabIndex]);
+    }, [tab]);
 
     return (
         <div className="mt-16 md:mt-24 xl:mx-[22.5rem] lg:mx-14 md:mx-10 sm:mx-4">
@@ -43,12 +45,15 @@ const Profiles = (props) => {
                 <div className="my-auto">
                     <img src="https://i.pravatar.cc/300" class="rounded-full h-[100px] w-[100px]" />
                 </div>
+                <button onClick={() => {
+                    fetch();
+                }}>click</button>
                 <div>
-                    <h1 class="text-h1 font-bold font-quicksand mb-4">Poniem Olino</h1>
+                    {creator && <h1 class="text-h1 font-bold font-quicksand mb-4">{creator?.front_name ?? ""}{" " + creator?.last_name ?? creator?.username}</h1>}
                     <div className="flex gap-3">
-                        <Button color="SECONDARY" size="MEDIUM">Edit Profil</Button>
+                        <Button color="SECONDARY" size="MEDIUM" onClick={() => router.push(`/creator/${router.query.username}/edit`)}>Edit Profil</Button>
                         <Button color="SECONDARY" size="MEDIUM">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <Share />
                             </svg>
                         </Button>
@@ -56,34 +61,33 @@ const Profiles = (props) => {
                 </div>
             </div>
 
-            <Tab.Group onChange={(index) => {
-                setTabIndex(index);
-            }} >
+            <Tab.Group>
                 <div className="border-b-[0.8px] border-gray-300 mb-6">
                     <Tab.List>
                         <div className="flex gap-14 text-base font-inter font-medium font-gray-600">
                             <Tab className={({ selected }) =>
-                                selected ? "border-b-2 border-brand-dark text-brand-dark" : ''}>Koleksi</Tab>
+                                selected ? "border-b-2 border-brand-dark text-brand-dark" : ''}><Link href={`/creator/${router.query.username}?tab=collections`}><a>Koleksi</a></Link></Tab>
                             <Tab className={({ selected }) =>
-                                selected ? "border-b-2 border-brand-dark text-brand-dark" : ''}>Semua Resep</Tab>
+                                selected ? "border-b-2 border-brand-dark text-brand-dark" : ''}><Link href={`/creator/${router.query.username}?tab=recipes`}><a>Semua Resep</a></Link></Tab>
                             <Tab className={({ selected }) =>
-                                selected ? "border-b-2 border-brand-dark text-brand-dark" : ''}>Draft</Tab>
+                                selected ? "border-b-2 border-brand-dark text-brand-dark" : ''}><Link href={`/creator/${router.query.username}?tab=drafts`}><a>Draft</a></Link></Tab>
                         </div>
                     </Tab.List>
                 </div>
                 <Tab.Panels>
                     {loading && <div className="text-center text-gray-600 h-[500px]">Loading...</div>}
                     <Tab.Panel>
-                        {(tabIndex === 0 && !loading) && <GridListCollection collections={collections} />}
+                        {((tab == 'collections' || tab == null) && !loading) && <GridListCollection collections={collections} />}
                     </Tab.Panel>
                     <Tab.Panel>
-                        {(tabIndex === 1 && !loading) && <GridListRecipe recipes={recipes} />}
+                        {(tab === 'recipes' && !loading) && <GridListRecipe recipes={recipes} />}
                     </Tab.Panel>
                     <Tab.Panel>
-                        {(tabIndex === 2 && !loading) && <GridListRecipe recipes={drafts} />}
+                        {(tab == 'drafts' && !loading) && <GridListRecipe recipes={drafts} />}
                     </Tab.Panel>
                 </Tab.Panels>
             </Tab.Group>
+
         </div>
     );
 }

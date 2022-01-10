@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import { useAxiosWithContext } from "../../../configs/creator/useAxios";
 import AuthContext from "../../../context/CreatorAuthContext";
 import { InputText, InputOption } from "../../../components/InputField";
 import InstructionsForm from "../../../parts/creator/CrudRecipe/InstructionsForm";
@@ -9,17 +10,19 @@ import Button from "../../../components/Button";
 import { Modal, ModalTitle, ModalContent, ModalFooter } from "../../../components/ModalDialog";
 import UploadImageRecipe from "../../../utils/UploadImageRecipe";
 import { Angle_right } from "../../../assets/icons";
-import { useAxiosWithContext } from "../../../configs/creator/useAxios";
+import AddRecipetoCollection from "../../../parts/creator/dialog/AddRecipetoCollection";
 
 
 export default function UploadRecipe(props) {
   const router = useRouter()
   const api = useAxiosWithContext();
+  const { setTempRecipe } = useContext(AuthContext);
 
   const [recipe, setRecipe] = useState({
     name: "",
     status: "published",
     url_image: "",
+    file_image: null,
     group_ingredients: [],
     instructions: [
       { step: "1", instruction: "", file_image: null, url_image: "" },
@@ -29,13 +32,15 @@ export default function UploadRecipe(props) {
     category_id: 1,
     cuisine_id: 1,
     level_id: 1,
-    tags: ["tea"],
+    tags: [],
   });
 
   const [isLoading, setIsLoading] = useState(false);
 
   const [image, setImage] = useState(null);
   const [openAtribute, setOpenAtribute] = useState(false);
+  const [openSaveCollection, setOpenSaveCollection] = useState(false);
+  const [recipeId, setRecipeId] = useState(null);
 
   async function UploadRecipe() {
     setIsLoading(true);
@@ -46,7 +51,6 @@ export default function UploadRecipe(props) {
     for (const [index, instruction] of recipe.instructions.entries()) {
       if (instruction.file_image) {
         const url_image = await UploadImageRecipe(instruction.file_image);
-        console.log(url_image);
         recipe.instructions[index].url_image = url_image;
         delete recipe.instructions[index].file_image;
         setRecipe(recipe);
@@ -55,11 +59,8 @@ export default function UploadRecipe(props) {
     const data = JSON.stringify(recipe);
     await api.post("/creator/recipes", data)
       .then((res) => {
-        console.log(res);
+        setRecipeId(res.data.data.recipe_id)
       })
-      .catch((err) => {
-        console.error(err);
-      });
 
     return setIsLoading(false);
   }
@@ -108,7 +109,10 @@ export default function UploadRecipe(props) {
               Foto Masakan
             </h3>
             <div className="h-128">
-              <Upload onChange={(file) => setImage(file)} />
+              <Upload onChange={(file) => {
+                recipe.file_image = file;
+                setImage(file)
+              }} />
             </div>
           </section>
 
@@ -214,7 +218,6 @@ export default function UploadRecipe(props) {
                 onClick={async () => {
                   await UploadRecipe();
                   setOpenAtribute(false);
-                  router.push("/creator/profiles");
                 }}
               >
                 {isLoading ? (
@@ -244,13 +247,19 @@ export default function UploadRecipe(props) {
               <Button
                 color="NOBG"
                 size="LONG"
-                onClick={() => setOpenAtribute(false)}
+                onClick={() => {
+                  setTempRecipe(recipe);
+                  router.push(`/creator/upload/preview`);
+                }}
               >
                 Lihat Priview
               </Button>
             </div>
           </ModalFooter>
         </Modal>
+      }
+      {
+        <AddRecipetoCollection close={setOpenSaveCollection} show={openSaveCollection} />
       }
     </>
   );

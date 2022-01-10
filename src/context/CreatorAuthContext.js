@@ -3,15 +3,19 @@ import jwt_decode from "jwt-decode";
 import dayjs from 'dayjs';
 import axios from 'axios'
 import Cookies from 'js-cookie';
+import { useRouter } from 'next/router'
 
 const AuthContext = createContext()
 const baseURL = "http://47.254.242.193:5000/"
 export default AuthContext;
 
 export const CreatorAuthProvider = ({ children }) => {
-    let [authTokens, setAuthTokens] = useState()
-    let [creator, setCreator] = useState()
-    let [loading, setLoading] = useState(true)
+    const router = useRouter();
+    let [tempRecipe, setTempRecipe] = useState({});
+    let [authTokens, setAuthTokens] = useState();
+    let [creator, setCreator] = useState();
+    let [loading, setLoading] = useState(true);
+
 
     useEffect(() => {
         if (!authTokens && Cookies.get('authTokens')) {
@@ -46,6 +50,14 @@ export const CreatorAuthProvider = ({ children }) => {
             setAuthTokens(data.data)
             setCreator(jwt_decode(data.data.accessToken))
             Cookies.set('authTokens', JSON.stringify(data.data))
+            const { id } = jwt_decode(data.data.accessToken)
+            async function getUser() {
+                let response = await fetch('http://47.254.242.193:5000/creators/' + id);
+                let res = await response.json();
+                setCreator(res.data.creator);
+                router.push("/creator/" + res.data.creator.username)
+            }
+            getUser();
             // history.push('/')
         } else {
             alert('Something went wrong!')
@@ -71,6 +83,8 @@ export const CreatorAuthProvider = ({ children }) => {
 
     let contextData = {
         creator: creator,
+        tempRecipe: tempRecipe,
+        setTempRecipe: setTempRecipe,
         authTokens: authTokens,
         setAuthTokens: setAuthTokens,
         setCreator: setCreator,

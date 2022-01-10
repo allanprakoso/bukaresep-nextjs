@@ -6,64 +6,26 @@ import {
 import ItemCollectionSelection from "../../../components/ItemCollectionSelection";
 import Button from "../../../components/Button.js";
 import { Plusl } from "../../../assets/icons/index.js";
+import { useEffect, useState } from "react";
+import { useAxiosWithContext } from "../../../configs/creator/useAxios";
 
-const AddRecipetoCollection = () => {
-  const collection = [
-    {
-      id: 1,
-      title: "Inspirasi kreasi resep kayu manis",
-      images: [
-        "https://www.sidechef.com/recipe/c8738a39-6d2b-4905-a8b7-ad0f0c80311b.jpg",
-        "https://www.sidechef.com/recipe/c8738a39-6d2b-4905-a8b7-ad0f0c80311b.jpg",
-        "https://www.sidechef.com/recipe/c8738a39-6d2b-4905-a8b7-ad0f0c80311b.jpg",
-      ],
-      categories: [
-        {
-          name: "Makanan",
-          count: 2,
-        },
-        {
-          name: "Cemilan",
-          count: 2,
-        },
-        {
-          name: "Minuman",
-          count: 2,
-        },
-      ],
-    },
-    {
-      id: 2,
-      title: "Inspirasi kreasi resep kayu manis",
-      images: [
-        "https://www.sidechef.com/recipe/c8738a39-6d2b-4905-a8b7-ad0f0c80311b.jpg",
-        "https://www.sidechef.com/recipe/c8738a39-6d2b-4905-a8b7-ad0f0c80311b.jpg",
-        "https://www.sidechef.com/recipe/c8738a39-6d2b-4905-a8b7-ad0f0c80311b.jpg",
-      ],
-      categories: [
-        {
-          name: "Makanan",
-          count: 2,
-        },
-        {
-          name: "Cemilan",
-          count: 2,
-        },
-        {
-          name: "Minuman",
-          count: 2,
-        },
-      ],
-    },
-  ];
-
+const AddRecipetoCollection = ({ close, show, recipe_id }) => {
+  const [collections, setCollections] = useState([]);
+  const api = useAxiosWithContext();
+  useEffect(() => {
+    async function getCollections() {
+      const { data } = await api.get("/creator/collections");
+      setCollections(data.collections);
+    }
+    getCollections();
+  }, [])
   return (
-    <Modal>
+    <Modal onClose={close} show={show}>
       <ModalTitle>Simpan resep ke koleksi</ModalTitle>
       <ModalContent>
         <div>
-          {collection.map((collection) => (
-            <ItemCollectionSelection collection={collection} />
+          {collections.map((collection) => (
+            <ItemCollectionSelection collection={collection} recipe_id={recipe_id} />
           ))}
         </div>
         <div className="flex space-x-3">

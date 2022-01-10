@@ -4,20 +4,42 @@ import ItemIngredient from "../../../components/ItemIngredient"
 import ItemInstruction from "../../../components/ItemInstruction"
 import Button from "../../../components/Button"
 import { useState, useEffect, useContext } from "react";
+import { useAxiosWithContext } from "../../../configs/creator/useAxios";
+import AuthContext from "../../../context/CreatorAuthContext";
+import { useRouter } from "next/router";
 
 const DetailRecipe = () => {
-
+    const router = useRouter()
+    const api = useAxiosWithContext();
+    const { tempRecipe, creator } = useContext(AuthContext);
     const [recipe, setRecipe] = useState({
-        id: 1,
-        title: "Udang Goreng Tepung Saus Asam Manis",
-        level: "Mudah",
-        time: 30,
-        rating: 4.5,
-        category: "Makanan",
-        creator: "Inem Susanti",
-        image: "https://www.sidechef.com/recipe/c8738a39-6d2b-4905-a8b7-ad0f0c80311b.jpg",
+        name: "",
+        status: "",
+        url_image: "",
+        group_ingredients: [],
+        instructions: [
+            { step: "1", instruction: "", file_image: null, url_image: "" },
+        ],
+        cooking_time: 1,
+        serving: 1,
+        category_id: 1,
+        cuisine_id: 1,
+        level_id: 1,
+        tags: [""],
     });
 
+    useEffect(() => {
+        if (tempRecipe) {
+            const levels = ['Mudah', 'Sedang', 'Sulit'];
+            const categories = ['Makanan', 'Minuman', 'Cemilan'];
+            const cuisines = ['Indonesia'];
+            tempRecipe.category_id = categories[tempRecipe.category_id - 1];
+            tempRecipe.cuisine_id = cuisines[tempRecipe.cuisine_id - 1];
+            tempRecipe.level_id = levels[tempRecipe.level_id - 1];
+            setRecipe(tempRecipe);
+            console.log(tempRecipe);
+        }
+    }, [tempRecipe])
     const onChangeForm = (e) => {
         setRecipe({ ...recipe, [e.target.name]: e.target.value });
     };
@@ -26,8 +48,8 @@ const DetailRecipe = () => {
         <ContainterXL>
             <section className="preview flex flex-row justify-between items-center mt-20">
                 <div className="basis-5/12">
-                    <h5 className="text-h5 font-quicksand font-bold text-brand-dark mb-3">{recipe.category}</h5>
-                    <h2 className="text-h2 font-quicksand font-bold text-gray-600 leading-[48px] mb-3">{recipe.title}</h2>
+                    <h5 className="text-h5 font-quicksand font-bold text-brand-dark mb-3">{recipe.category_id}</h5>
+                    <h2 className="text-h2 font-quicksand font-bold text-gray-600 leading-[48px] mb-3">{recipe.name}</h2>
 
                     <div className="flex justify-between items-center">
                         <div className="rating flex space-x-3 items-center">
@@ -91,7 +113,7 @@ const DetailRecipe = () => {
                                 >
                                     <Clock />
                                 </svg>
-                                <p className="text-lg font-semibold text-gray-600">{recipe.time}</p>
+                                <p className="text-lg font-semibold text-gray-600">{recipe.cooking_time}</p>
                             </div>
                             <div className="flex space-x-2 items-center">
                                 <svg
@@ -102,7 +124,7 @@ const DetailRecipe = () => {
                                 >
                                     <Leve />
                                 </svg>
-                                <p className="text-lg font-semibold text-gray-600">{recipe.level}</p>
+                                <p className="text-lg font-semibold text-gray-600">{recipe.level_id}</p>
                             </div>
                         </div>
                     </div>
@@ -113,7 +135,7 @@ const DetailRecipe = () => {
                         </div>
                         <div>
                             <p className="text-lg text-gray-800 font-semibold">Penulis</p>
-                            <p className="text-lg text-gray-600">{recipe.creator}</p>
+                            <p className="text-lg text-gray-600">{creator?.username}</p>
                         </div>
                     </div>
 
@@ -148,7 +170,7 @@ const DetailRecipe = () => {
 
                 <div className="basis-6/12">
                     <img
-                        src={recipe.image}
+                        src={recipe.file_image ? URL.createObjectURL(recipe.file_image) : ""}
                         alt="recipe"
                         className="rounded-[20px] object-cover h-96 w-full"
                     />
@@ -193,15 +215,31 @@ const DetailRecipe = () => {
                             </div>
 
                             <section className="flex flex-col space-y-3 mt-10">
-                                <h5 className="text-h5 font-quicksand font-bold text-gray-800">Bahan Isi</h5>
-                                <ItemIngredient />
+                                {
+                                    recipe.group_ingredients.map((ingredient, index) => (
+                                        <>
+                                            <h5 className="text-h5 font-quicksand font-bold text-gray-800" key={index}>{ingredient.group}</h5>
+                                            {
+                                                ingredient.ingredients.map((ingredient, i) => (
+                                                    <ItemIngredient ingredient={ingredient} />
+                                                ))
+                                            }
+                                        </>
+                                    ))
+                                }
+
+
                             </section>
                         </section>
 
                         <section className="steps mt-20">
                             <h3 className="text-h3 font-quicksand font-bold text-gray-800 mb-16">Cara Membuat</h3>
                             <div>
-                                <ItemInstruction />
+                                {
+                                    recipe.instructions.map((instruction, index) => (
+                                        <ItemInstruction instruction={instruction} url_image={(instruction.file_image != null) ? URL.createObjectURL(instruction.file_image) : ""} />
+                                    ))
+                                }
                             </div>
                         </section>
 
@@ -221,16 +259,17 @@ const DetailRecipe = () => {
                         </div>
                         <div>rating</div>
                     </div>
+
                     <div className="tag mt-16">
                         <h4 className="text-h4 font-quicksand font-bold text-gray-800">Tags</h4>
-                        <button className="border border-gray-400 px-4 py-2 rounded-full">Ayam</button>
+                        {
+                            recipe.tags.map((tag, index) => (
+                                <button key={index} className="border border-gray-400 px-4 py-2 rounded-full">{tag}</button>
+                            ))
+                        }
                     </div>
                 </div>
             </div>
-
-
-
-
         </ContainterXL>
 
     );
