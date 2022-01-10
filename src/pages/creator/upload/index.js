@@ -83,7 +83,11 @@ export default function UploadRecipe(props) {
             Buat Resep
           </h1>
           <div className="flex h-11 gap-3">
-            <Button color="SECONDARY" size="MEDIUM">
+            <Button color="SECONDARY" size="MEDIUM" onClick={async () => {
+              await UploadRecipe();
+              setOpenAtribute(false);
+              router.push(`/creator/${creator.id}`)
+            }}>
               Simpan Draft
             </Button>
             <Button size="MEDIUM" onClick={() => setOpenAtribute(true)}>
@@ -130,7 +134,6 @@ export default function UploadRecipe(props) {
               onChange={(instruction) => handleChangeInstruction(instruction)}
             />
           </section>
-          <p>{JSON.stringify(recipe)}</p>
         </div>
       </div>
 
@@ -240,9 +243,9 @@ export default function UploadRecipe(props) {
                 color="SECONDARY"
                 size="LONG"
                 onClick={async () => {
-                  const id = await UploadRecipe();
+                  await UploadRecipe();
                   setOpenAtribute(false);
-                  router.push(`/upload/preview?id=${id}`, '/creator/upload/preview')
+                  router.push(`/creator/${creator.id}`)
                 }}
               >
                 Simpan Draft

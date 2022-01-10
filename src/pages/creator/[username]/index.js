@@ -43,11 +43,8 @@ const Profiles = (props) => {
         <div className="mt-16 md:mt-24 xl:mx-[22.5rem] lg:mx-14 md:mx-10 sm:mx-4">
             <div class="flex justify-center gap-7 pb-24 pt-12">
                 <div className="my-auto">
-                    <img src="https://i.pravatar.cc/300" class="rounded-full h-[100px] w-[100px]" />
+                    <img src={creator?.url_image ?? ""} class="rounded-full h-[100px] w-[100px]" />
                 </div>
-                <button onClick={() => {
-                    fetch();
-                }}>click</button>
                 <div>
                     {creator && <h1 class="text-h1 font-bold font-quicksand mb-4">{creator?.front_name ?? ""}{" " + creator?.last_name ?? creator?.username}</h1>}
                     <div className="flex gap-3">
