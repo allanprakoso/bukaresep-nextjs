@@ -40,7 +40,7 @@ export default function UploadRecipe(props) {
   const [image, setImage] = useState(null);
   const [openAtribute, setOpenAtribute] = useState(false);
   const [openSaveCollection, setOpenSaveCollection] = useState(false);
-  const [recipeId, setRecipeId] = useState(null);
+
 
   async function UploadRecipe() {
     setIsLoading(true);
