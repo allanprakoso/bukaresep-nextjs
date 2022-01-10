@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ContainerXL from "../../../components/ContainerXL"
 import Button from "../../../components/Button"
+import styles from "../../../styles/EditSelect.module.css"
 import { DropdownMenu, DropdownItem } from "../../../components/Dropdown"
 import { Menu } from '@headlessui/react'
 import { InputText } from "../../../components/InputField"
@@ -49,7 +50,7 @@ const EditProfile = () => {
     }, [creator]
     )
 
-    const [isOpen, setIsOpen] = useState(false);
+
 
     return (
         <ContainerXL>
@@ -80,7 +81,7 @@ const EditProfile = () => {
                         </div>
                     </div>
 
-                    <form className="pt-14 flex flex-col space-y-14">
+                    <form className="pt-14 flex flex-col space-y-14 mb-16">
                         <InputText
                             name="username"
                             value={valueForm.username}
@@ -121,13 +122,34 @@ const EditProfile = () => {
                             placeholder="Umur"
                             onChange={onChange}
                         />
-                        <label className="text-gray-600 font-semibold text-lg">Jenis Kelamin</label>
-                        <select name="gender" value={valueForm.gender} onChange={onChange} className="border-[1.4px] border-gray-400 rounded-md w-full py-3 px-4 text-base font-medium text-gray-400 focus:outline-gray-600 flex justify-between items-center cursor-pointer" >
-                            <option value="Wanita">Wanita</option>
-                            <option value="Pria">Pria</option>
-                        </select>
-                        {/* <div>
-                            
+
+                        <div>
+                            <label className="text-gray-600 font-semibold text-lg">Jenis Kelamin</label>
+                            <select name="gender"
+                                value={valueForm.gender}
+                                onChange={onChange}
+                                className="border-[1.4px] border-gray-400 rounded-md w-full py-3 px-4 text-base font-medium text-gray-400 focus:outline-gray-600 flex justify-between items-center cursor-pointer" >
+                                <option value="Wanita">Wanita</option>
+                                <option value="Pria">Pria</option>
+                            </select>
+                        </div>
+
+                        <div className="custom-select flex flex-col">
+                            <label className="text-gray-600 font-semibold text-lg">Jenis Kelamin</label>
+                            <div className={styles.wrapper}>
+                                <select name="gender"
+                                    value={valueForm.gender}
+                                    onChange={onChange}
+                                    className={styles.select}>
+                                    <option value="Wanita">Wanita</option>
+                                    <option value="Pria">Pria</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+
+                        {/* <div>                            
                             <div onClick={() => setIsOpen(true)} className="border-[1.4px] border-gray-400 rounded-md w-full py-3 px-4 mt-2 text-base font-medium text-gray-400 focus:outline-gray-600 flex justify-between items-center cursor-pointer">
                                 Wanita
                                 <svg
@@ -150,7 +172,7 @@ const EditProfile = () => {
                             )}
                         </div> */}
                     </form>
-                    <Button size="MEDIUM" onClick={onSubmit}>Simpan Perubahan</Button>
+                    <Button size="LARGE" onClick={onSubmit}>Simpan Perubahan</Button>
                 </div>
             </div>
         </ContainerXL>
