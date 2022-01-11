@@ -7,28 +7,9 @@ import { useState } from "react";
 
 const DetailRecipe = (props) => {
     const [recipe, setRecipe] = useState(props.recipe);
-    const onChangeForm = (e) => {
-        setRecipe({ ...recipe, [e.target.name]: e.target.value });
-    };
 
     return (
         <>
-            <div className="sticky top-0 bg-white mt-4 drop-shadow-sm">
-                <div className="flex justify-between mx-36 py-6">
-                    <h4 className="font-quicksand font-bold text-h4 text-gray-800">
-                        Preview Resep
-                    </h4>
-                    <div className="flex h-11 gap-3">
-                        <Button color="SECONDARY" size="MEDIUM">
-                            Simpan Draft
-                        </Button>
-                        <Button size="MEDIUM" onClick={() => setOpenAtribute(true)}>
-                            Selanjutnya
-                        </Button>
-                    </div>
-                </div>
-            </div>
-
             <ContainterXL>
                 <section className="preview flex flex-row justify-between items-center mt-20">
                     <div className="basis-5/12">

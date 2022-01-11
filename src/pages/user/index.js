@@ -66,7 +66,7 @@ const Home = () => {
         <section className="grid-recipe">
           <div className="grid grid-cols-4 gap-x-8 gap-y-11">
             {recipes.map((recipe) => (
-              <CardRecipe recipe={recipe} path="recipes" type="user" />
+              <CardRecipe recipe={recipe} path="/user/recipes" type="user" />
             ))}
           </div>
         </section>
