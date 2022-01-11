@@ -3,6 +3,7 @@ import { Bookmark, Clock, Leve, Minus, Plusl, Share, Star, StarBorder } from "..
 import ItemIngredient from "../../../components/ItemIngredient"
 import ItemInstruction from "../../../components/ItemInstruction"
 import Button from "../../../components/Button"
+import ActiveRating from "../../../components/ActiveRating"
 import { useState } from "react";
 
 const DetailRecipe = (props) => {
@@ -216,37 +217,19 @@ const DetailRecipe = (props) => {
                                 <h4 className="text-h4 font-quicksand font-bold text-gray-800">Beri ulasan</h4>
                                 <p className="text-lg text-gray-600">Apakah kamu suka dengan resep ini?</p>
                             </div>
-                            <div className="flex space-x-3">
-                                <svg width="28px" className="fill-white" height="28px" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
-                                    <StarBorder />
-                                </svg>
-                                <svg width="28px" className="fill-white" height="28px" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
-                                    <StarBorder />
-                                </svg>
-                                <svg width="28px" className="fill-white" height="28px" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
-                                    <StarBorder />
-                                </svg>
-                                <svg width="28px" className="fill-white" height="28px" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
-                                    <StarBorder />
-                                </svg>
-                                <svg width="28px" className="fill-white" height="28px" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
-                                    <StarBorder />
-                                </svg>
-                            </div>
+                            <ActiveRating />
                         </div>
 
-                        <div className="tag mt-16">
+                        {/* <div className="tag mt-16">
                             <h4 className="text-h4 font-quicksand font-bold text-gray-800">Tags</h4>
                             {
                                 recipe.tags.map((tag, index) => (
                                     <button key={index} className="border border-gray-400 px-4 py-2 rounded-full">{tag.id}</button>
                                 ))
                             }
-                        </div>
+                        </div> */}
                     </section>
                 </div>
-
-
             </ContainterXL>
 
         </>
