@@ -4,7 +4,22 @@ import CarouselRecipe from "../../parts/global/CarouselRecipe"
 import GridListRecipe from "../../parts/global/GridListRecipe"
 import ContainerXL from "../../components/ContainerXL"
 import Button from "../../components/Button";
+import CardRecipe from "../../components/CardRecipe";
+import { useEffect, useState } from 'react'
 const Home = () => {
+  const [recipes, setRecipes] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    async function fetchData() {
+      setLoading(true);
+      const response = await fetch("http://47.254.242.193:5000/recipes");
+      const data = await response.json();
+      setRecipes(data.results);
+      setLoading(false);
+    }
+    fetchData();
+  }, [])
   return (
     <>
       <section className="header">
@@ -41,7 +56,7 @@ const Home = () => {
       <ContainerXL>
         <section className="resep-terbaru mt-32">
           <h4 className="text-h4 font-quicksand font-bold text-gray-800 mb-5">Resep Terbaru</h4>
-          <RecipeSlider />
+          <RecipeSlider recipes={recipes} />
         </section>
 
         <section className="resep-carousel mt-28">
@@ -49,7 +64,11 @@ const Home = () => {
         </section>
 
         <section className="grid-recipe">
-          {/* <GridListRecipe /> */}
+          <div className="grid grid-cols-4 gap-x-8 gap-y-11">
+            {recipes.map((recipe) => (
+              <CardRecipe recipe={recipe} path="recipes" type="user" />
+            ))}
+          </div>
         </section>
 
         <section className="banner mt-32">

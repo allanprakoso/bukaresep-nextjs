@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick-theme.css";
 import CardRecipe from "../../components/CardRecipe";
 import { Angle_right } from "../../assets/icons";
 
-function RecipeSlider() {
+function RecipeSlider({ recipes }) {
   const recipe = [
     {
       id: 1,
@@ -97,8 +97,8 @@ function RecipeSlider() {
   return (
     <div className="relative">
       <Slider {...settings}>
-        {recipe.map((recipe) => (
-          <CardRecipe recipe={recipe} />
+        {recipes.map((recipe) => (
+          <CardRecipe recipe={recipe} path="/user/recipes" type="user" />
         ))}
       </Slider>
     </div>
