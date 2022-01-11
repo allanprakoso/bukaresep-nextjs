@@ -4,7 +4,7 @@ import { useState } from "react";
 import { DropdownMenu, DropdownItem } from "../components/Dropdown"
 
 //create card recipe using tailwindcss
-const CardRecipe = ({ recipe, path }) => {
+const CardRecipe = ({ recipe, path, type = 'creator' }) => {
 
   //open dropdown
   const [openOption, setOpenOption] = useState();
@@ -21,7 +21,7 @@ const CardRecipe = ({ recipe, path }) => {
                 className="rounded-t-lg object-cover"
               />
             </div>
-            <div className="absolute top-0 left-0 mt-4 ml-4 visible group-hover:invisible ">
+            {type != "creator" && <div className="absolute top-0 left-0 mt-4 ml-4">
               <div className="bg-white rounded-full px-3 py-1.5 max-w-14 max-h-6 overflow-hidden flex items-center">
                 <div className="flex items-center">
                   <svg
@@ -38,10 +38,10 @@ const CardRecipe = ({ recipe, path }) => {
                 </div>
 
               </div>
-            </div>
+            </div>}
 
             {/* dropdown button  */}
-            <div className="absolute top-0 left-0 mt-4 ml-4 cursor-pointer invisible group-hover:visible" onMouseEnter={() => setOpenOption(true)}>
+            {type == "creator" && <div className="absolute top-0 left-0 mt-4 ml-4 cursor-pointer" onMouseEnter={() => setOpenOption(true)}>
               <div className="bg-white rounded-full px-3 py-2 max-w-14 max-h-6 overflow-hidden flex items-center">
                 <div className="action-option">
                   <div className="flex items-center">
@@ -66,7 +66,7 @@ const CardRecipe = ({ recipe, path }) => {
                 </div>
 
               </div>
-            </div>
+            </div>}
             {/* dropdown menu */}
             {openOption && (
               <div className="absolute top-0 left-4">
