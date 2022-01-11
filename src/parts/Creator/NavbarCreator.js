@@ -7,6 +7,7 @@ import Button from "../../components/Button";
 import Sidebar from "../../components/Sidebar";
 import AuthContext from "../../context/CreatorAuthContext";
 import LoginForm from "./LoginForm";
+import RegisterForm from "./RegisterForm";
 
 function NavbarCreator() {
   const router = useRouter();
@@ -16,11 +17,13 @@ function NavbarCreator() {
   const [openMenu, setOpenMenu] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [openLogin, setOpenLogin] = useState(false);
+  const [openRegister, setOpenRegister] = useState(false);
 
   return (
     <>
       <nav className="absolute top-0 z-5 w-full bg-white border-solid border-[1px] border-gray-200">
         <LoginForm onClose={setOpenLogin} show={openLogin} />
+        <RegisterForm onClose={setOpenRegister} show={openRegister} />
 
         <navlink className="flex justify-between items-center px-[7.5rem] py-1.5 ">
           <div className="flex items-center">
@@ -76,7 +79,7 @@ function NavbarCreator() {
                     </svg>
                     Masuk
                   </Button>
-                  <Button>Daftar</Button>
+                  <Button onClick={() => setOpenRegister(true)}>Daftar</Button>
                 </div>
               )}
 
