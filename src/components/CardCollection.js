@@ -8,21 +8,21 @@ const CardCollection = ({ collection, path }) => {
           <div className="grid gap-1 grid-rows-2 grid-flow-col h-48">
             <div className="row-span-2 col-span-2">
               <img
-                src={collection.images[0]}
+                src={collection.images[0] ?? "/placeholder.jpeg"}
                 alt="recipe"
                 className="rounded-l-lg object-cover h-full"
               />
             </div>
             <div className="col-span-1">
               <img
-                src={collection.images[1]}
+                src={collection.images[1] ?? "/placeholder.jpeg"}
                 alt="recipe"
                 className="rounded-tr-lg object-cover h-full"
               />
             </div>
             <div className="col-span-1">
               <img
-                src={collection.images[2]}
+                src={collection.images[2] ?? "/placeholder.jpeg"}
                 alt="recipe"
                 className="rounded-br-lg object-cover h-full"
               />

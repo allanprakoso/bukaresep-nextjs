@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Picture } from '../assets/icons';
 
 function Upload(props) {
-    const [image, setImage] = useState();
+    const [image, setImage] = useState(props.value == "" ? undefined : props.value ?? undefined);
 
     const handleFileSelected = (e) => {
         const files = e.target.files;

@@ -1,46 +1,46 @@
 import { useState, useEffect, useContext } from "react";
-import { useAxiosWithContext } from "../../../configs/creator/useAxios";
-import AuthContext from "../../../context/CreatorAuthContext";
-import { InputText, InputOption } from "../../../components/InputField";
-import InstructionsForm from "../../../parts/creator/CrudRecipe/InstructionsForm";
-import IngredientsForm from "../../../parts/creator/CrudRecipe/IngredientsForm";
+import { useAxiosWithContext } from "../../../../configs/creator/useAxios";
+import AuthContext from "../../../../context/CreatorAuthContext";
+import { InputText, InputOption } from "../../../../components/InputField";
+import InstructionsForm from "../../../../parts/creator/CrudRecipe/InstructionsForm";
+import IngredientsForm from "../../../../parts/creator/CrudRecipe/IngredientsForm";
 import { useRouter } from "next/router";
-import Upload from "../../../components/Upload";
-import Button from "../../../components/Button";
-import { Modal, ModalTitle, ModalContent, ModalFooter } from "../../../components/ModalDialog";
-import UploadImageRecipe from "../../../utils/UploadImageRecipe";
-import { Spinner } from "../../../assets/icons";
+import Upload from "../../../../components/Upload";
+import Button from "../../../../components/Button";
+import { Modal, ModalTitle, ModalContent, ModalFooter } from "../../../../components/ModalDialog";
+import UploadImageRecipe from "../../../../utils/UploadImageRecipe";
+import { Angle_right } from "../../../../assets/icons";
 
 
 export default function UploadRecipe(props) {
   const router = useRouter()
   const api = useAxiosWithContext();
-  const { creator } = useContext(AuthContext);
-
+  const { creator, deleteRecipe } = useContext(AuthContext);
+  const data = props.recipe;
+  console.log(data);
   const [recipe, setRecipe] = useState({
-    name: "",
-    status: "published",
-    url_image: "",
+    name: data.name,
+    status: data.status,
+    url_image: data.url_image,
     file_image: null,
-    group_ingredients: [],
-    instructions: [
-      { step: "1", instruction: "", file_image: null, url_image: "" },
-    ],
-    cooking_time: 1,
-    serving: 1,
-    category_id: 1,
-    cuisine_id: 1,
-    level_id: 1,
-    tags: [],
+    group_ingredients: data.group_ingredients,
+    instructions: data.instructions,
+    cooking_time: data.cooking_time,
+    serving: data.serving,
+    category_id: data.category.id,
+    cuisine_id: data.cuisine.id,
+    level_id: data.level.id,
+    tags: data.tags,
   });
-
   const [isLoading, setIsLoading] = useState(false);
   const [image, setImage] = useState(null);
   const [openAtribute, setOpenAtribute] = useState(false);
 
   async function UploadRecipe(type) {
+    await deleteRecipe(props.recipe.id);
     setIsLoading(true);
     if (type != 'published') recipe.status = 'drafted';
+    if (type == 'published') recipe.status = 'published';
     var recipe_id;
     if (image) {
       const url_image = await UploadImageRecipe(image);
@@ -102,6 +102,7 @@ export default function UploadRecipe(props) {
             </h3>
             <InputText
               name="name"
+              value={recipe.name}
               placeholder="Nama Masakan"
               onChange={onChangeForm}
             ></InputText>
@@ -111,7 +112,7 @@ export default function UploadRecipe(props) {
               Foto Masakan
             </h3>
             <div className="h-128">
-              <Upload onChange={(file) => {
+              <Upload value={recipe.url_image} onChange={(file) => {
                 recipe.file_image = file;
                 setImage(file)
               }} />
@@ -123,6 +124,7 @@ export default function UploadRecipe(props) {
               Bahan
             </h3>
             <IngredientsForm
+              value={recipe.group_ingredients}
               onChange={(ingredient) => handleChangeIngredients(ingredient)}
             />
           </section>
@@ -131,6 +133,7 @@ export default function UploadRecipe(props) {
               Cara Membuat
             </h3>
             <InstructionsForm
+              value={recipe.instructions}
               onChange={(instruction) => handleChangeInstruction(instruction)}
             />
           </section>
@@ -226,12 +229,12 @@ export default function UploadRecipe(props) {
                   <div className="flex justify-center">
                     <svg
                       className="animate-spin h-5 w-5 mr-3"
-                      width="24px"
-                      height="24px"
+                      width="16px"
+                      height="16px"
                       viewBox="0 0 24 24"
                       xmlns="http://www.w3.org/2000/svg"
                     >
-                      <Spinner />
+                      <Angle_right />
                     </svg>
                     <span>Mengupload Resep</span>
                   </div>
@@ -279,7 +282,11 @@ export async function getServerSideProps(context) {
       }
     }
   }
+  var recipe = {};
+  const response = await fetch(`http://47.254.242.193:5000/recipes/${context.query.recipe_id}`,)
+  recipe = await response.json()
+
   return {
-    props: {}
+    props: { recipe: recipe.recipe }
   }
 }

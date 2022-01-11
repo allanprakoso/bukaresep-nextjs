@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Button from "./Button";
 
-const ItemCollectionSelection = ({ collection, recipe_id }) => {
+const ItemCollectionSelection = ({ collection, onSave }) => {
   const [isHovering, setIsHovered] = useState(false);
   const onMouseEnter = () => setIsHovered(true);
   const onMouseLeave = () => setIsHovered(false);
@@ -27,7 +27,7 @@ const ItemCollectionSelection = ({ collection, recipe_id }) => {
       </div>
       <div className="basis-3/12 h-fit grid justify-items-end">
         <div className={"w-fit " + (isHovering ? "visible" : "invisible")}>
-          <Button>Simpan</Button>
+          <Button onClick={onSave}>Simpan</Button>
         </div>
       </div>
     </div>

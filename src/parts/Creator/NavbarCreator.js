@@ -87,7 +87,7 @@ function NavbarCreator() {
               {isLogin && (
                 <div className="profile flex items-center space-x-8 ">
                   <Button color="LINK" onMouseEnter={() => setIsOpen(true)}>
-                    <img src="/pic/lp3.jpg" className="w-8 h-8 rounded-full" />
+                    <img src={creator.url_image ?? "/placeholder.jpeg"} className="w-8 h-8 rounded-full" />
                   </Button>
                   <Button
                     onClick={() => router.push("/creator/upload")}
@@ -118,15 +118,15 @@ function NavbarCreator() {
           <DropdownItem onClick={() => router.push(`/creator/${creator.username}`)}>Profil Saya</DropdownItem>
           <DropdownItem onClick={() => router.push(`/creator/${creator.username}/edit`)}>Edit profil</DropdownItem>
           <Divider />
-          <DropdownItem onClick={() => router.push(`/creator/${creator.username}?tab=collection`)}>Koleksi</DropdownItem>
-          <DropdownItem onClick={() => router.push(`/creator/${creator.username}?tab=draft`)}>Draft</DropdownItem>
+          <DropdownItem onClick={() => router.push(`/creator/${creator.username}?tab=collections`)}>Koleksi</DropdownItem>
+          <DropdownItem onClick={() => router.push(`/creator/${creator.username}?tab=drafts`)}>Draft</DropdownItem>
           <Divider />
           <DropdownItem
             color="RED"
             onClick={async () => {
+              router.push("/creator");
               await logoutCreator();
               setIsOpen(false);
-              router.push("/creator");
             }}
           >
             Keluar

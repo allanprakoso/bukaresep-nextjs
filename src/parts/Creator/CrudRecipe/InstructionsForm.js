@@ -3,8 +3,8 @@ import { Crossl } from "../../../assets/icons";
 import ButtonPlus from "../../../components/ButtonPlus";
 import Upload from "../../../components/Upload";
 
-const InstructionsForm = (props) => {
-  const [formValues, setFormValues] = useState([
+const InstructionsForm = ({ value, ...props }) => {
+  const [formValues, setFormValues] = useState(value ?? [
     { step: 1, instruction: "", file_image: null, url_image: "" },
   ]);
   const handleChangeImage = (index, file) => {
@@ -48,6 +48,7 @@ const InstructionsForm = (props) => {
             <div className="text-base flex bg-white border-[0.8px] border-gray-300 justify-between p-5 rounded-lg font-regular my-2">
               <textarea
                 rows={1}
+                value={element.instruction}
                 name="instruction"
                 className="focus:outline-none w-full"
                 onChange={(e) => handleChange(index, e)}
@@ -64,7 +65,7 @@ const InstructionsForm = (props) => {
               </svg>
             </div>
             <div className="w-[276px] h-[184px]">
-              <Upload onChange={(file) => handleChangeImage(index, file)} />
+              <Upload value={element.url_image} onChange={(file) => handleChangeImage(index, file)} />
             </div>
           </div>
         ))}
