@@ -64,6 +64,25 @@ export const CreatorAuthProvider = ({ children }) => {
         }
     }
 
+    let registeCreator = async (e) => {
+        e.preventDefault()
+        let response = await fetch('http://47.254.242.193:5000/creators', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                'username': e.target.username.value,
+                'password': e.target.password.value,
+                'email': e.target.email.value,
+            })
+        })
+        let data = await response.json()
+        if (response.status === 201) {
+            await loginCreator(e);
+        }
+    }
+
 
     let logoutCreator = async () => {
         await fetch(`${baseURL}creator/authentications`, {
@@ -183,6 +202,7 @@ export const CreatorAuthProvider = ({ children }) => {
     }
 
     let contextData = {
+        registeCreator: registeCreator,
         editCollection: editCollection,
         deleteCollection: deleteCollection,
         getCollection: getCollection,

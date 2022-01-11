@@ -4,9 +4,11 @@ import { useState } from "react";
 import { DropdownMenu, DropdownItem } from "../components/Dropdown"
 import DeleteRecipe from "../parts/creator/dialog/DeleteRecipe";
 import AddRecipetoCollection from "../parts/creator/dialog/AddRecipetoCollection";
+import { useRouter } from 'next/router';
 
 //create card recipe using tailwindcss
 const CardRecipe = ({ recipe, path, onDelete, type = 'creator' }) => {
+  const router = useRouter();
   //open dropdown
   const [openDeleteRecipe, setOpenDeleteRecipe] = useState(false);
   const [openSaveCollection, setOpenCollection] = useState(false);
@@ -20,7 +22,7 @@ const CardRecipe = ({ recipe, path, onDelete, type = 'creator' }) => {
           <div className="relative">
             <div className="w-full h-[184px] overflow-hidden">
               <img
-                src={recipe.image}
+                src={recipe.image == "" ? "/placeholder.jpeg" : recipe.image ?? "/placeholder.jpeg"}
                 alt="recipe"
                 className="rounded-t-lg object-coverh h-[184px] w-64"
               />
@@ -76,7 +78,7 @@ const CardRecipe = ({ recipe, path, onDelete, type = 'creator' }) => {
               <div className="absolute top-0 left-4">
                 <DropdownMenu size="SMALL" onMouseLeave={() => setOpenOption(false)}>
                   <DropdownItem onClick={() => setOpenCollection(true)}>simpan ke koleksi</DropdownItem>
-                  <DropdownItem>edit resep</DropdownItem>
+                  <DropdownItem onClick={() => router.push(`/creator/${router.query.username}/recipes/${recipe.id}`)}>edit resep</DropdownItem>
                   <DropdownItem>unggah</DropdownItem>
                   <DropdownItem onClick={() => setOpenDeleteRecipe(true)} >hapus</DropdownItem>
                 </DropdownMenu>

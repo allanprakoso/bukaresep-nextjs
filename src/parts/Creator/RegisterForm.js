@@ -5,9 +5,10 @@ import { useState, useContext } from 'react';
 import AuthContext from '../../context/CreatorAuthContext';
 
 const RegisterForm = ({ onClose, show }) => {
-    const { loginCreator, creator } = useContext(AuthContext)
+    const { registeCreator, creator } = useContext(AuthContext)
     const [valueForm, setValue] = useState({
         username: "",
+        email: "",
         password: "",
     });
     const onChange = (event) => {
@@ -16,7 +17,7 @@ const RegisterForm = ({ onClose, show }) => {
     };
 
     const onSubmit = async (e) => {
-        await loginCreator(e);
+        await registeCreator(e);
         onClose();
     }
 
@@ -31,17 +32,17 @@ const RegisterForm = ({ onClose, show }) => {
                 <form onSubmit={onSubmit}>
                     <div className="form-group grid grid-cols-1 gap-10">
                         <InputText
-                            label="Nama Lengkap"
+                            label="Username"
                             type="text"
-                            value={valueForm.password}
-                            name="fullname"
+                            value={valueForm.username}
+                            name="username"
                             onChange={onChange}
                         />
                         <div>
                             <InputText
                                 label="Alamat Email"
                                 type="email"
-                                value={valueForm.username}
+                                value={valueForm.email}
                                 name="email"
                                 onChange={onChange}
                             /> <p className='text-sm text-gray-600 mt-2'>Contoh: inemuy@gmail.com</p>
@@ -51,7 +52,7 @@ const RegisterForm = ({ onClose, show }) => {
                             <InputText
                                 label="Password"
                                 type="password"
-                                //value={valueForm.password}
+                                value={valueForm.password}
                                 name="password"
                                 onChange={onChange}
                             /> <p className='text-sm text-gray-600 mt-2'>Minimal 6 karakter</p>
@@ -69,7 +70,7 @@ const RegisterForm = ({ onClose, show }) => {
                                 name="kebijakan"
                             />
                         </div>
-                        <Button size="LONG">Masuk</Button>
+                        <Button size="LONG">Daftar</Button>
                     </div>
                 </form>
             </ModalContent>
