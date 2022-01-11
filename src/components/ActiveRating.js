@@ -21,7 +21,7 @@ export function IStar({ active }) {
         </div>
         :
         <div className="m-1">
-            <svg width="25px" className="fill-white" height="25px" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+            <svg width="28px" className="fill-white" height="28px" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
                 <StarBorder />
             </svg>
         </div>

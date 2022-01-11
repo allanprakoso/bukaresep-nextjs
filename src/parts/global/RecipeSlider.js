@@ -5,63 +5,63 @@ import CardRecipe from "../../components/CardRecipe";
 import { Angle_right } from "../../assets/icons";
 
 function RecipeSlider({ recipes }) {
-  const recipe = [
-    {
-      id: 1,
-      title: "Udang Goreng Tepung Saus Asam Manis",
-      level: "Mudah",
-      time: 30,
-      rating: 4.5,
-      category: "Makanan",
-      creator: "Inem Susanti",
-      image:
-        "https://www.sidechef.com/recipe/c8738a39-6d2b-4905-a8b7-ad0f0c80311b.jpg",
-    },
-    {
-      id: 2,
-      title: "Udang Goreng Tepung Saus Asam Manis",
-      level: "Mudah",
-      time: 30,
-      rating: 4.5,
-      category: "Makanan",
-      creator: "Inem Susanti",
-      image:
-        "https://www.sidechef.com/recipe/c8738a39-6d2b-4905-a8b7-ad0f0c80311b.jpg",
-    },
-    {
-      id: 3,
-      title: "Udang Goreng Tepung Saus Asam Manis",
-      level: "Mudah",
-      time: 30,
-      rating: 4.5,
-      category: "Makanan",
-      creator: "Inem Susanti",
-      image:
-        "https://www.sidechef.com/recipe/c8738a39-6d2b-4905-a8b7-ad0f0c80311b.jpg",
-    },
-    {
-      id: 4,
-      title: "Udang Goreng Tepung Saus Asam Manis",
-      level: "Mudah",
-      time: 30,
-      rating: 4.5,
-      category: "Makanan",
-      creator: "Inem Susanti",
-      image:
-        "https://www.sidechef.com/recipe/c8738a39-6d2b-4905-a8b7-ad0f0c80311b.jpg",
-    },
-    {
-      id: 5,
-      title: "Udang Goreng Tepung Saus Asam Manis",
-      level: "Mudah",
-      time: 30,
-      rating: 4.5,
-      category: "Makanan",
-      creator: "Inem Susanti",
-      image:
-        "https://www.sidechef.com/recipe/c8738a39-6d2b-4905-a8b7-ad0f0c80311b.jpg",
-    },
-  ];
+  // const recipe = [
+  //   {
+  //     id: 1,
+  //     title: "Udang Goreng Tepung Saus Asam Manis",
+  //     level: "Mudah",
+  //     time: 30,
+  //     rating: 4.5,
+  //     category: "Makanan",
+  //     creator: "Inem Susanti",
+  //     image:
+  //       "https://www.sidechef.com/recipe/c8738a39-6d2b-4905-a8b7-ad0f0c80311b.jpg",
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "Udang Goreng Tepung Saus Asam Manis",
+  //     level: "Mudah",
+  //     time: 30,
+  //     rating: 4.5,
+  //     category: "Makanan",
+  //     creator: "Inem Susanti",
+  //     image:
+  //       "https://www.sidechef.com/recipe/c8738a39-6d2b-4905-a8b7-ad0f0c80311b.jpg",
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "Udang Goreng Tepung Saus Asam Manis",
+  //     level: "Mudah",
+  //     time: 30,
+  //     rating: 4.5,
+  //     category: "Makanan",
+  //     creator: "Inem Susanti",
+  //     image:
+  //       "https://www.sidechef.com/recipe/c8738a39-6d2b-4905-a8b7-ad0f0c80311b.jpg",
+  //   },
+  //   {
+  //     id: 4,
+  //     title: "Udang Goreng Tepung Saus Asam Manis",
+  //     level: "Mudah",
+  //     time: 30,
+  //     rating: 4.5,
+  //     category: "Makanan",
+  //     creator: "Inem Susanti",
+  //     image:
+  //       "https://www.sidechef.com/recipe/c8738a39-6d2b-4905-a8b7-ad0f0c80311b.jpg",
+  //   },
+  //   {
+  //     id: 5,
+  //     title: "Udang Goreng Tepung Saus Asam Manis",
+  //     level: "Mudah",
+  //     time: 30,
+  //     rating: 4.5,
+  //     category: "Makanan",
+  //     creator: "Inem Susanti",
+  //     image:
+  //       "https://www.sidechef.com/recipe/c8738a39-6d2b-4905-a8b7-ad0f0c80311b.jpg",
+  //   },
+  // ];
 
   //custom nextButton
   const ArrowRight = ({ onClick }) => (

@@ -63,7 +63,7 @@ const Home = () => {
           <CarouselRecipe />
         </section>
 
-        <section className="grid-recipe">
+        <section className="grid-recipe mt-40">
           <div className="grid grid-cols-4 gap-x-8 gap-y-11">
             {recipes.map((recipe) => (
               <CardRecipe recipe={recipe} path="recipes" type="user" />
