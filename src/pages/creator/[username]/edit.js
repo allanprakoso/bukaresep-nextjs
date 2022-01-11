@@ -7,15 +7,17 @@ import { InputText } from "../../../components/InputField"
 import { useState, useContext, useEffect } from 'react';
 import { Angle_down } from "../../../assets/icons";
 import { useAxios, useAxiosWithContext } from '../../../configs/creator/useAxios';
-
+import UploadImageProfile from "../../../utils/UploadImageRecipe";
 
 import AuthContext from "../../../context/CreatorAuthContext";
+import { set } from "js-cookie";
 
 const EditProfile = () => {
     const api = useAxiosWithContext();
     const { creator } = useContext(AuthContext);
 
     const [valueForm, setValue] = useState({
+        url_image: creator?.url_image ?? "",
         username: creator?.username ?? "",
         email: creator?.email ?? "",
         gender: creator?.gender ?? "",
@@ -24,6 +26,18 @@ const EditProfile = () => {
         last_name: creator?.last_name ?? "",
     });
     const [id, setId] = useState();
+    const [alert, setAlert] = useState(undefined);
+    const [image, setImage] = useState();
+    const [files, setFiles] = useState()
+    const [onUpdate, setOnUpdate] = useState(false);
+
+    const handleFileSelected = (e) => {
+        const files = e.target.files;
+        (files.length > 0) ?
+            setImage(URL.createObjectURL(files[0])) :
+            setImage(undefined);
+        setFiles(files);
+    }
 
     const onChange = (event) => {
         valueForm[event.target.name] = event.target.value;
@@ -31,22 +45,45 @@ const EditProfile = () => {
     }
     const onSubmit = async (event) => {
         event.preventDefault();
+        if (files) {
+            const url_image = await UploadImageProfile(files[0]);
+            valueForm.url_image = url_image;
+        }
         delete valueForm['id'];
         Object.keys(valueForm).forEach(key => {
             if (valueForm[key] === null)
                 delete valueForm[key];
         });
-        await api.put(`/creators/${id}`, JSON.stringify(valueForm)).catch(err => {
-            console.error('error')
-        })
+
+        await api.put(`/creators/${id}`, JSON.stringify(valueForm))
+            .then((res) => {
+                setAlert('success');
+                setTimeout(function () {
+                    setAlert(undefined);
+                }, 3000);
+            })
+            .catch(err => {
+                setAlert('error');
+                setTimeout(function () {
+                    setAlert(undefined);
+                }, 3000);
+            })
+        setOnUpdate(true);
     }
 
     useEffect(() => {
         if (creator) {
+            async function getData() {
+                const data = await fetch(`http://47.254.242.193:5000/creators/${creator.id}`);
+                const json = await data.json();
+                setImage(json.data.creator.url_image);
+                setValue(json.data.creator);
+            }
+            getData();
             setId(creator.id);
-            setValue(creator)
         };
-    }, [creator]
+        setOnUpdate(false);
+    }, [creator, onUpdate]
     )
     const [isOpen, setIsOpen] = useState();
     const genderOption = [
@@ -74,10 +111,15 @@ const EditProfile = () => {
                         <p className="pb-4 pt-10 text-lg text-gray-600 font-semibold">Foto Profil</p>
                         <div className="flex space-x-5 items-center">
                             <div>
-                                <img src="/pic/lp3.jpg" className="w-24 h-24 rounded-full object-cover" />
+                                <img src={image} className="w-24 h-24 rounded-full object-cover" />
                             </div>
                             <div className="flex space-x-3">
-                                <Button>Pilih foto baru</Button>
+                                <Button>
+                                    <label className="cursor-pointer">
+                                        <span className="mt-2 text-base leading-normal cursor-pointer">Pilih Foto</span>
+                                        <input type='file' onChange={handleFileSelected} accept="image/png, image/jpeg" className="hidden" />
+                                    </label>
+                                </Button>
                                 <Button color="SECONDARY">Hapus foto</Button>
                             </div>
                         </div>
@@ -144,10 +186,9 @@ const EditProfile = () => {
                 </div>
             </div>
 
-            <div className="alert hidden">
-                <div className="success w-full absolute top-[72px] left-0 h-14 bg-emerald-500 flex justify-center text-white items-center text-lg font-semibold">Profil berhasil di update</div>
-                <div className="un-success w-full absolute top-[72px] left-0 h-14 bg-red-500 flex justify-center text-white items-center text-lg font-semibold">Profil gagal di update, pastikan anda terkoneksi internet</div>
-            </div>
+
+            {alert == "success" && <div className="success w-full fixed top-0 left-0 h-14 bg-emerald-500 flex justify-center text-white items-center text-lg font-semibold">Profil berhasil di update</div>}
+            {alert == "error" && <div className="un-success w-full fixed top-0 left-0 h-14 bg-red-500 flex justify-center text-white items-center text-lg font-semibold">Profil gagal di update, pastikan anda terkoneksi internet</div>}
         </ContainerXL>
     );
 }

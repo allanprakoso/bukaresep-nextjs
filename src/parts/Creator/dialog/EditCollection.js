@@ -5,22 +5,31 @@ import {
   ModalTitle,
   ModalContent,
 } from "../../../components/ModalDialog.js";
+import { useContext, useState } from "react";
+import { useRouter } from "next/router";
+import AuthContext from "../../../context/CreatorAuthContext";
 
-const EditCollection = () => {
+const EditCollection = ({ show, onClose, collection, onUpdate }) => {
+  const [name, setName] = useState(collection.name);
+  const { editCollection } = useContext(AuthContext);
   return (
-    <Modal>
-      <Modal close={close}>
-        <ModalTitle>Edit Koleksi</ModalTitle>
-        <ModalContent>
-          <InputText
-            name="name"
-            placeholder="contoh: Resep ayam"
-            label="Nama Koleksi"
-          ></InputText>
+    <Modal onClose={onClose} show={show}>
+      <ModalTitle>Edit Koleksi</ModalTitle>
+      <ModalContent>
+        <InputText
+          name="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="contoh: Resep ayam"
+          label="Nama Koleksi"
+        ></InputText>
 
-          <Button size="LONG">Simpan</Button>
-        </ModalContent>
-      </Modal>
+        <Button size="LONG" onClick={async () => {
+          await editCollection(collection.id, name);
+          onUpdate();
+          onClose(false);
+        }}>Simpan</Button>
+      </ModalContent>
     </Modal>
   );
 };

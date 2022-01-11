@@ -115,8 +115,8 @@ function NavbarCreator() {
           <DropdownItem onClick={() => router.push(`/creator/${creator.username}`)}>Profil Saya</DropdownItem>
           <DropdownItem onClick={() => router.push(`/creator/${creator.username}/edit`)}>Edit profil</DropdownItem>
           <Divider />
-          <DropdownItem onClick={() => router.push(`/creator/${creator.username}?tab=collection`)}>Koleksi</DropdownItem>
-          <DropdownItem onClick={() => router.push(`/creator/${creator.username}?tab=draft`)}>Draft</DropdownItem>
+          <DropdownItem onClick={() => router.push(`/creator/${creator.username}?tab=collections`)}>Koleksi</DropdownItem>
+          <DropdownItem onClick={() => router.push(`/creator/${creator.username}?tab=drafts`)}>Draft</DropdownItem>
           <Divider />
           <DropdownItem
             color="RED"

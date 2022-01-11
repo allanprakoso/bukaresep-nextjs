@@ -2,11 +2,15 @@ import { Angle_down, Settings, Star } from "../assets/icons";
 import Link from "next/link";
 import { useState } from "react";
 import { DropdownMenu, DropdownItem } from "../components/Dropdown"
+import DeleteRecipe from "../parts/creator/dialog/DeleteRecipe";
+import AddRecipetoCollection from "../parts/creator/dialog/AddRecipetoCollection";
 
 //create card recipe using tailwindcss
-const CardRecipe = ({ recipe, path, type = 'creator' }) => {
-
+const CardRecipe = ({ recipe, path, onDelete, type = 'creator' }) => {
   //open dropdown
+  const [openDeleteRecipe, setOpenDeleteRecipe] = useState(false);
+  const [openSaveCollection, setOpenCollection] = useState(false);
+
   const [openOption, setOpenOption] = useState();
 
   return (
@@ -14,11 +18,11 @@ const CardRecipe = ({ recipe, path, type = 'creator' }) => {
       <div className="font-inter text-gray-600 mx-auto my-4">
         <div className="bg-white rounded-lg shadow-lg max-w-sm w-64 pb-8 hover:shadow-xl hover:-translate-y-[2px] transition ease-out group">
           <div className="relative">
-            <div className="w-full max-h-[184px] overflow-hidden">
+            <div className="w-full h-[184px] overflow-hidden">
               <img
                 src={recipe.image}
                 alt="recipe"
-                className="rounded-t-lg object-cover"
+                className="rounded-t-lg object-coverh h-[184px] w-64"
               />
             </div>
             {type != "creator" && <div className="absolute top-0 left-0 mt-4 ml-4">
@@ -71,10 +75,10 @@ const CardRecipe = ({ recipe, path, type = 'creator' }) => {
             {openOption && (
               <div className="absolute top-0 left-4">
                 <DropdownMenu size="SMALL" onMouseLeave={() => setOpenOption(false)}>
-                  <DropdownItem>simpan ke koleksi</DropdownItem>
+                  <DropdownItem onClick={() => setOpenCollection(true)}>simpan ke koleksi</DropdownItem>
                   <DropdownItem>edit resep</DropdownItem>
                   <DropdownItem>unggah</DropdownItem>
-                  <DropdownItem>hapus</DropdownItem>
+                  <DropdownItem onClick={() => setOpenDeleteRecipe(true)} >hapus</DropdownItem>
                 </DropdownMenu>
               </div>
             )}
@@ -105,6 +109,8 @@ const CardRecipe = ({ recipe, path, type = 'creator' }) => {
           </div>
         </div>
       </div>
+      {openDeleteRecipe && <DeleteRecipe show={openDeleteRecipe} onClose={setOpenDeleteRecipe} recipe_id={recipe.id} onDelete={onDelete} />}
+      {openSaveCollection && <AddRecipetoCollection show={openSaveCollection} onClose={setOpenCollection} recipe_id={recipe.id} />}
     </>
 
   );

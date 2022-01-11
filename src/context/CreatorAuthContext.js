@@ -81,7 +81,117 @@ export const CreatorAuthProvider = ({ children }) => {
         })
     }
 
+    let addRecipeToCollection = async (recipes, collection_id) => {
+        await fetch(`${baseURL}creator/collections/${collection_id}/recipes`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + authTokens.accessToken
+            },
+            body: JSON.stringify({ 'recipe_id': recipes })
+        }).then(res => {
+            return res.status
+        }).catch(err => {
+            return err
+        }
+        )
+    }
+
+    let createNewCollection = async (name) => {
+        const res = await fetch(`${baseURL}creator/collections`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + authTokens.accessToken
+            },
+            body: JSON.stringify({ 'name': name })
+        })
+        const { data } = await res.json()
+        return data.collection_id;
+    }
+
+    let getCollections = async () => {
+        const res = await fetch(`${baseURL}creator/collections`, {
+            headers: {
+                'Authorization': 'Bearer ' + authTokens.accessToken
+            }
+        })
+        const { collections } = await res.json()
+        return collections;
+    }
+
+    let getCollection = async (collection_id) => {
+        const res = await fetch(`${baseURL}creator/collections/${collection_id}`, {
+            headers: {
+                'Authorization': 'Bearer ' + authTokens.accessToken
+            }
+        })
+        const { collection } = await res.json()
+        return collection;
+    }
+
+    let getRecipesCollection = async (collection_id) => {
+        const res = await fetch(`${baseURL}creator/collections/${collection_id}/recipes`, {
+            headers: {
+                'Authorization': 'Bearer ' + authTokens.accessToken
+            }
+        })
+        const { recipes } = await res.json()
+        return recipes;
+    }
+
+    let deleteRecipeFromCollection = async (recipe_id, collection_id) => {
+        const res = await fetch(`${baseURL}creator/collections/${collection_id}/recipes/${recipe_id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + authTokens.accessToken
+            }
+        })
+        return res.status;
+    }
+
+    let deleteRecipe = async (id) => {
+        await fetch(`${baseURL}creator/recipes/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + authTokens.accessToken
+            }
+        })
+    }
+
+    let deleteCollection = async (collection_id) => {
+        await fetch(`${baseURL}creator/collections/${collection_id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + authTokens.accessToken
+            }
+        })
+    }
+
+    let editCollection = async (collection_id, name) => {
+        await fetch(`${baseURL}creator/collections/${collection_id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + authTokens.accessToken
+            },
+            body: JSON.stringify({ 'name': name })
+        })
+    }
+
     let contextData = {
+        editCollection: editCollection,
+        deleteCollection: deleteCollection,
+        getCollection: getCollection,
+        deleteRecipeFromCollection: deleteRecipeFromCollection,
+        getRecipesCollection: getRecipesCollection,
+        addRecipeToCollection: addRecipeToCollection,
+        deleteRecipe: deleteRecipe,
+        createNewCollection: createNewCollection,
+        getCollections: getCollections,
         creator: creator,
         tempRecipe: tempRecipe,
         setTempRecipe: setTempRecipe,
