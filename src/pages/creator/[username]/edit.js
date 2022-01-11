@@ -1,7 +1,6 @@
 import Link from "next/link";
 import ContainerXL from "../../../components/ContainerXL"
 import Button from "../../../components/Button"
-import styles from "../../../styles/EditSelect.module.css"
 import { DropdownMenu, DropdownItem } from "../../../components/Dropdown"
 import { Menu } from '@headlessui/react'
 import { InputText } from "../../../components/InputField"
@@ -49,8 +48,11 @@ const EditProfile = () => {
         };
     }, [creator]
     )
-
-
+    const [isOpen, setIsOpen] = useState();
+    const genderOption = [
+        { value: "F", label: "Wanita", name: "Wanita" },
+        { value: "P", label: "Pria", name: "Pria" },
+    ];
 
     return (
         <ContainerXL>
@@ -123,57 +125,28 @@ const EditProfile = () => {
                             onChange={onChange}
                         />
 
-                        <div>
-                            <label className="text-gray-600 font-semibold text-lg">Jenis Kelamin</label>
-                            <select name="gender"
-                                value={valueForm.gender}
-                                onChange={onChange}
-                                className="border-[1.4px] border-gray-400 rounded-md w-full py-3 px-4 text-base font-medium text-gray-400 focus:outline-gray-600 flex justify-between items-center cursor-pointer" >
-                                <option value="Wanita">Wanita</option>
-                                <option value="Pria">Pria</option>
-                            </select>
-                        </div>
-
                         <div className="custom-select flex flex-col">
-                            <label className="text-gray-600 font-semibold text-lg">Jenis Kelamin</label>
-                            <div className={styles.wrapper}>
+                            <label className="text-gray-600 font-semibold text-lg mb-2">Jenis Kelamin</label>
+                            <div>
                                 <select name="gender"
                                     value={valueForm.gender}
                                     onChange={onChange}
-                                    className={styles.select}>
-                                    <option value="Wanita">Wanita</option>
-                                    <option value="Pria">Pria</option>
+                                    className="appearance-none border-[1.4px] border-gray-400 rounded-md w-full py-3 px-4 font-medium text-gray-600 focus:outline-gray-600">
+                                    {genderOption.map((genderOption) => (
+                                        <option value={genderOption.value}>{genderOption.label}</option>
+                                    ))}
                                 </select>
                             </div>
                         </div>
 
-
-
-                        {/* <div>                            
-                            <div onClick={() => setIsOpen(true)} className="border-[1.4px] border-gray-400 rounded-md w-full py-3 px-4 mt-2 text-base font-medium text-gray-400 focus:outline-gray-600 flex justify-between items-center cursor-pointer">
-                                Wanita
-                                <svg
-                                    fill="#9FA3AF"
-                                    width="16px"
-                                    height="16px"
-                                    viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="mr-2"
-                                    transform="translate(0,0) scale(-1, 1)">
-                                    <Angle_down />
-                                </svg>
-                            </div>
-
-                            {isOpen && (
-                                <DropdownMenu size="FULL" onClick={() => setIsOpen(false)}>
-                                    <DropdownItem>Wanita</DropdownItem>
-                                    <DropdownItem>Pria</DropdownItem>
-                                </DropdownMenu>
-                            )}
-                        </div> */}
                     </form>
                     <Button size="LARGE" onClick={onSubmit}>Simpan Perubahan</Button>
                 </div>
+            </div>
+
+            <div className="alert hidden">
+                <div className="success w-full absolute top-[72px] left-0 h-14 bg-emerald-500 flex justify-center text-white items-center text-lg font-semibold">Profil berhasil di update</div>
+                <div className="un-success w-full absolute top-[72px] left-0 h-14 bg-red-500 flex justify-center text-white items-center text-lg font-semibold">Profil gagal di update, pastikan anda terkoneksi internet</div>
             </div>
         </ContainerXL>
     );

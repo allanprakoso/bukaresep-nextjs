@@ -3,20 +3,20 @@ import React from "react";
 const DropdownMenu = ({ children, size, onMouseLeave, onClick, ...props }) => {
   // size : LARGE, FULL, SMALL
   const DROPDOWNSIZE = {
-    LARGE: " w-[244px] z-50 right-20 mt-16",
+    LARGE: " w-[244px] z-50 right-20 pt-16",
     FULL: " w-full relative",
-    SMALL: " w-[152px]",
+    SMALL: " w-[226px] pt-12",
   };
   const sizeClassName = DROPDOWNSIZE[size || "LARGE"];
 
   return (
     <div onMouseLeave={onMouseLeave} onClick={onClick} aria-hidden="true" className={"absolute" + sizeClassName}>
       <div
-      
-      className="bg-white py-6 rounded-md drop-shadow-xl flex flex-col space-y-2 border-solid border-[0.8px] border-gray-200 overflow-hidden" 
-    >
-      {children}
-    </div>
+
+        className="bg-white py-6 rounded-md drop-shadow-xl flex flex-col space-y-2 border-solid border-[0.8px] border-gray-200 overflow-hidden"
+      >
+        {children}
+      </div>
     </div>
   );
 };
