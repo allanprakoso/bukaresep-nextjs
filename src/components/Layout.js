@@ -1,5 +1,5 @@
 import Footer from "./Footer";
-import NavbarUser from "./NavbarUser";
+import NavbarUser from "../parts/user/NavbarUser";
 import NavbarCreator from "../parts/Creator/NavbarCreator";
 
 const Layout = ({ type, children }) => {

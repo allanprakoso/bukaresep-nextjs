@@ -1,19 +1,29 @@
 import Link from "next/link";
-import { useState } from "react";
-import { Menu_Burger, Sign_in, Search, Upload } from "../assets/icons";
-import { DropdownMenu, DropdownItem, Divider } from "./Dropdown";
-import Button from "./Button";
-import Sidebar from "./Sidebar";
+import { useState, useContext } from "react";
+import { Menu_Burger, Sign_in, Search, Upload } from "../../assets/icons";
+import { DropdownMenu, DropdownItem, Divider } from "../../components/Dropdown";
+import Button from "../../components/Button";
+import Sidebar from "../../components/Sidebar";
+import AuthContext from "../../context/UserAuthContext";
+import LoginForm from "./LoginForm";
+import RegisterForm from "./RegisterForm";
+import { useRouter } from 'next/router'
 
 function NavbarUser() {
-  var isLogin = true; // cek login
+  const router = useRouter();
+  const { user, logoutUser } = useContext(AuthContext);
+  var isLogin = user ? true : false; // cek login
 
   const [openMenu, setOpenMenu] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [openLogin, setOpenLogin] = useState(false);
+  const [openRegister, setOpenRegister] = useState(false);
 
   return (
     <>
       <nav className="absolute top-0 z-5 w-full bg-white border-solid border-[1px] border-gray-200">
+        <LoginForm onClose={setOpenLogin} show={openLogin} />
+        <RegisterForm onClose={setOpenRegister} show={openRegister} />
         <navlink className="flex justify-between items-center px-[7.5rem] py-1.5 ">
           <div className="flex items-center">
             <Button color="LINK" onClick={() => setOpenMenu(true)}>
@@ -55,7 +65,7 @@ function NavbarUser() {
               {/* if isLogin is false */}
               {!isLogin && (
                 <div className="flex space-x-4">
-                  <Button color="NOBG">
+                  <Button color="NOBG" onClick={() => setOpenLogin(true)}>
                     <svg
                       width="16px"
                       height="16px"
@@ -68,7 +78,7 @@ function NavbarUser() {
                     </svg>
                     Masuk
                   </Button>
-                  <Button>Daftar</Button>
+                  <Button onClick={() => setOpenRegister(true)}>Daftar</Button>
                 </div>
               )}
 
@@ -96,7 +106,13 @@ function NavbarUser() {
           <DropdownItem>Koleksi</DropdownItem>
           <DropdownItem>Review</DropdownItem>
           <Divider />
-          <DropdownItem color="RED">Keluar</DropdownItem>
+          <DropdownItem color="RED"
+            onClick={async () => {
+              router.push("/user");
+              await logoutUser();
+              setIsOpen(false);
+            }}
+          >Keluar</DropdownItem>
         </DropdownMenu>
       )}
 

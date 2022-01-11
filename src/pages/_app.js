@@ -1,6 +1,7 @@
 import Layout from "../components/layout";
 import "../styles/globals.css";
 import { CreatorAuthProvider } from '../context/CreatorAuthContext'
+import { UserAuthProvider } from '../context/UserAuthContext'
 import { useRouter } from 'next/router'
 
 
@@ -18,9 +19,11 @@ function MyApp({ Component, pageProps }) {
     );
   } else {
     return (
-      <Layout type="user">
-        <Component {...pageProps} />
-      </Layout>
+      <UserAuthProvider>
+        <Layout type="user">
+          <Component {...pageProps} />
+        </Layout>
+      </UserAuthProvider>
     );
   }
 }
