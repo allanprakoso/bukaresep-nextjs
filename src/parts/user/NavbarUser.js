@@ -100,12 +100,8 @@ function NavbarUser() {
 
       {isOpen && (
         <DropdownMenu onMouseLeave={() => setIsOpen(false)}>
-          <DropdownItem>Profil Saya</DropdownItem>
-          <DropdownItem>Edit profil</DropdownItem>
-          <Divider />
-          <DropdownItem>Koleksi</DropdownItem>
-          <DropdownItem>Review</DropdownItem>
-          <Divider />
+          <DropdownItem onClick={() => router.push(`/user/${user.username}`)}>Profil Saya</DropdownItem>
+          <DropdownItem onClick={() => router.push(`/user/${user.username}/edit`)}>Edit profil</DropdownItem>
           <DropdownItem color="RED"
             onClick={async () => {
               router.push("/user");

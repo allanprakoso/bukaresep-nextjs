@@ -21,7 +21,7 @@ const Button = ({
 
   const BUTTON_SIZE = {
     SMALL: " px-2 py-1.5 text-micro",
-    MEDIUM: " flex items-center px-5 py-2 text-sm w-full",
+    MEDIUM: " flex items-center px-5 py-3 text-sm",
     LARGE: " flex items-center px-5 py-3 text-sm",
     LONG: " py-3 text-sm w-full ",
     XL: " flex items-center px-5 py-4 text-base",

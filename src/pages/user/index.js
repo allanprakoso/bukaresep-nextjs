@@ -29,7 +29,7 @@ const Home = () => {
         </div>
 
         <div className="flex justify-center -mt-8 drop-shadow-md">
-          <form className="flex items-center ml-8 bg-white py-4 px-5 rounded-lg">
+          <form action="/user/searchresult" className="flex items-center ml-8 bg-white py-4 px-5 rounded-lg">
             <svg
               width="16px"
               height="16px"
@@ -39,7 +39,7 @@ const Home = () => {
             >
               <Search />
             </svg>
-            <input id="search" type="text" placeholder="Cari resep"
+            <input id="search" name="keyword" type="text" placeholder="Cari resep"
               className="focus:outline-none text-base text-gray-600 w-[520px]"
             />
           </form>

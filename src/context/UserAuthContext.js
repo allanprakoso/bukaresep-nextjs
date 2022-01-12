@@ -82,6 +82,7 @@ export const UserAuthProvider = ({ children }) => {
     }
 
 
+
     let logoutUser = async () => {
         await fetch(`${baseURL}user/authentications`, {
             method: 'DELETE',
@@ -155,6 +156,19 @@ export const UserAuthProvider = ({ children }) => {
         }
     }
 
+    let getRecipeCollection = async (collection_id) => {
+        let response = await fetch(`${baseURL}user/collections/${collection_id}/recipes`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${authTokens.accessToken}`
+            },
+        })
+        const data = await response.json()
+        if (response.status === 200) {
+            return data.recipes
+        }
+    }
     let deleteCollection = async (id) => {
         let response = await fetch(`${baseURL}user/collections/${id}`, {
             method: 'DELETE',
@@ -183,6 +197,7 @@ export const UserAuthProvider = ({ children }) => {
     }
 
     let contextData = {
+        getRecipeCollection: getRecipeCollection,
         registeUser: registeUser,
         getCollection: getCollection,
         addToCollection: addToCollection,
