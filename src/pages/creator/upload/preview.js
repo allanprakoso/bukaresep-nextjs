@@ -96,7 +96,7 @@ const DetailRecipe = (props) => {
                                     >
                                         <Clock />
                                     </svg>
-                                    <p className="text-lg font-semibold text-gray-600">{recipe.cooking_time}</p>
+                                    <p className="text-lg font-semibold text-gray-600">{recipe.cooking_time} Menit</p>
                                 </div>
                                 <div className="flex space-x-2 items-center">
                                     <svg

@@ -89,7 +89,7 @@ function NavbarUser() {
                     User Account
                   </p>
                   <Button color="LINK" onMouseEnter={() => setIsOpen(true)}>
-                    <img src="pic/lp3.jpg" className="w-8 h-8 rounded-full" />
+                    <img src={user.url_image ?? "/placeholder.jpeg"} className="w-8 h-8 rounded-full" />
                   </Button>
                 </div>
               )}

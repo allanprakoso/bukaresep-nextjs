@@ -5,7 +5,7 @@ import { useState, useContext } from 'react';
 import AuthContext from '../../context/UserAuthContext';
 
 const RegisterForm = ({ onClose, show }) => {
-    const { registerUser, user } = useContext(AuthContext)
+    const { registeUser, user } = useContext(AuthContext)
     const [valueForm, setValue] = useState({
         username: "",
         email: "",
@@ -17,7 +17,7 @@ const RegisterForm = ({ onClose, show }) => {
     };
 
     const onSubmit = async (e) => {
-        await registerUser(e);
+        await registeUser(e);
         onClose();
     };
 
@@ -70,7 +70,7 @@ const RegisterForm = ({ onClose, show }) => {
                                 name="kebijakan"
                             />
                         </div>
-                        <Button size="LONG">Daftar</Button>
+                        <Button size="LONG" type="submit">Daftar</Button>
                     </div>
                 </form>
             </ModalContent>

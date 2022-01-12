@@ -53,7 +53,7 @@ export const UserAuthProvider = ({ children }) => {
                 let response = await fetch('http://47.254.242.193:5000/users/' + id);
                 let res = await response.json();
                 setUser(res.user);
-                router.push("/user/" + res.data.user.username)
+                router.push("/user/" + res.user.username)
             }
             getUser();
             // history.push('/')
@@ -61,6 +61,26 @@ export const UserAuthProvider = ({ children }) => {
             alert('Something went wrong!')
         }
     }
+
+    let registeUser = async (e) => {
+        e.preventDefault()
+        let response = await fetch('http://47.254.242.193:5000/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                'username': e.target.username.value,
+                'password': e.target.password.value,
+                'email': e.target.email.value,
+            })
+        })
+        let data = await response.json()
+        if (response.status === 201) {
+            await loginUser(e);
+        }
+    }
+
 
     let logoutUser = async () => {
         await fetch(`${baseURL}user/authentications`, {
@@ -78,7 +98,98 @@ export const UserAuthProvider = ({ children }) => {
         })
     }
 
+    let getCollections = async () => {
+        let response = await fetch(`${baseURL}user/collections`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${authTokens.accessToken}`
+            },
+        })
+        let data = await response.json()
+        if (response.status === 200) {
+            return data.collections
+        }
+    }
+    let editProfile = async (valueForm) => {
+        let response = await fetch(`${baseURL}users/${user.id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${authTokens.accessToken}`
+            },
+            body: JSON.stringify(valueForm)
+        })
+
+        if (response.status === 200 || response.status == 201) {
+            return 'success'
+        } else {
+            return 'error'
+        }
+    }
+
+    let createCollection = async (name) => {
+        let response = await fetch(`${baseURL}user/collections`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${authTokens.accessToken}`
+            },
+            body: JSON.stringify({ name })
+        })
+        const { data } = await response.json()
+        return data.collection_id;
+    }
+
+    let getCollection = async (id) => {
+        let response = await fetch(`${baseURL}user/collections/${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${authTokens.accessToken}`
+            },
+        })
+        const data = await response.json()
+        if (response.status === 200) {
+            return data.collection
+        }
+    }
+
+    let deleteCollection = async (id) => {
+        let response = await fetch(`${baseURL}user/collections/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${authTokens.accessToken}`
+            },
+        })
+        if (response.status === 200) {
+            return 'success'
+        }
+    }
+
+    let addToCollection = async (id, collection_id) => {
+        let response = await fetch(`${baseURL}user/collections/${collection_id}/recipes`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${authTokens.accessToken}`
+            },
+            body: JSON.stringify({ recipe_id: id })
+        })
+        if (response.status === 200) {
+            return 'success'
+        }
+    }
+
     let contextData = {
+        registeUser: registeUser,
+        getCollection: getCollection,
+        addToCollection: addToCollection,
+        deleteCollection: deleteCollection,
+        createCollection: createCollection,
+        editProfile: editProfile,
+        getCollections: getCollections,
         authTokens: authTokens,
         setAuthTokens: setAuthTokens,
         user: user,

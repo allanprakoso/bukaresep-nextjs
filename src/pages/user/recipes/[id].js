@@ -5,13 +5,15 @@ import ItemInstruction from "../../../components/ItemInstruction"
 import Button from "../../../components/Button"
 import ActiveRating from "../../../components/ActiveRating"
 import { useState } from "react";
-
+import AddRecipetoCollection from "../../../parts/user/dialog/AddRecipetoCollection"
 const DetailRecipe = (props) => {
     const [recipe, setRecipe] = useState(props.recipe);
+    const [openSaveCollection, setOpenCollection] = useState(false);
 
     return (
         <>
             <ContainterXL>
+                {openSaveCollection && <AddRecipetoCollection show={openSaveCollection} onClose={setOpenCollection} recipe_id={recipe.id} />}
                 <section className="preview flex flex-row justify-between items-center mt-20">
                     <div className="basis-5/12">
                         <h5 className="text-h5 font-quicksand font-bold text-brand-dark mb-3 capitalize">{recipe.category.name}</h5>
@@ -78,7 +80,7 @@ const DetailRecipe = (props) => {
                                     >
                                         <Clock />
                                     </svg>
-                                    <p className="text-lg font-semibold text-gray-600">{recipe.cooking_time}</p>
+                                    <p className="text-lg font-semibold text-gray-600">{recipe.cooking_time} Menit</p>
                                 </div>
                                 <div className="flex space-x-2 items-center">
                                     <svg
@@ -105,7 +107,7 @@ const DetailRecipe = (props) => {
                         </div>
 
                         <div className="mt-20 flex space-x-3">
-                            <Button>
+                            <Button onClick={() => setOpenCollection(true)}>
                                 <div className="mr-2">
                                     <svg
                                         fill="#fff"
@@ -161,7 +163,7 @@ const DetailRecipe = (props) => {
                                                 <Minus />
                                             </svg>
                                         </button>
-                                        <input type="number" name="portion" value={recipe.serving} onChange={onChangeForm}
+                                        <input type="number" value={recipe.serving}
                                             className="w-16 text-center text-h5 font-quicksand font-bold text-gray-600 focus:outline-none focus:border-b-2"></input>
                                         <button className="bg-gray-200 p-2 rounded-md">
                                             <svg
