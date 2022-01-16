@@ -14,7 +14,6 @@ const CardRecipe = ({ recipe, path, onDelete, type = 'creator' }) => {
   const [openSaveCollection, setOpenCollection] = useState(false);
 
   const [openOption, setOpenOption] = useState();
-
   return (
     <>
       <div className="font-inter text-gray-600 mx-auto my-4">

@@ -182,6 +182,54 @@ export const UserAuthProvider = ({ children }) => {
         }
     }
 
+    let postRating = async (recipe_id, rating) => {
+        let response = await fetch(`${baseURL}user/recipes/${recipe_id}/ratings`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${authTokens.accessToken}`
+            },
+            body: JSON.stringify({ rating: +rating })
+        })
+        const data = await response.json()
+        if (response.status === 200) {
+            return data.rating
+        }
+    }
+
+    let getRecipeRatingUser = async (recipe_id) => {
+        if (authTokens) {
+            let response = await fetch(`${baseURL}user/recipes/${recipe_id}/rating`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${authTokens.accessToken}`
+                },
+            })
+            const data = await response.json()
+            if (response.status === 200) {
+                return data.rating
+            }
+        }
+        return null
+    }
+
+    let putRecipeRating = async (recipe_id, rating) => {
+        let response = await fetch(`${baseURL}user/recipes/${recipe_id}/ratings`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${authTokens.accessToken}`
+            },
+            body: JSON.stringify({ rating: +rating })
+        })
+
+        const data = await response.json()
+        if (response.status === 200) {
+            return data.rating
+        }
+    }
+
     let addToCollection = async (id, collection_id) => {
         let response = await fetch(`${baseURL}user/collections/${collection_id}/recipes`, {
             method: 'POST',
@@ -197,6 +245,9 @@ export const UserAuthProvider = ({ children }) => {
     }
 
     let contextData = {
+        putRecipeRating: putRecipeRating,
+        getRecipeRatingUser: getRecipeRatingUser,
+        postRating: postRating,
         getRecipeCollection: getRecipeCollection,
         registeUser: registeUser,
         getCollection: getCollection,

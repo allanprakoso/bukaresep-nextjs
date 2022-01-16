@@ -4,11 +4,38 @@ import ItemIngredient from "../../../components/ItemIngredient"
 import ItemInstruction from "../../../components/ItemInstruction"
 import Button from "../../../components/Button"
 import ActiveRating from "../../../components/ActiveRating"
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
+import AuthContext from "../../../context/UserAuthContext";
 import AddRecipetoCollection from "../../../parts/user/dialog/AddRecipetoCollection"
 const DetailRecipe = (props) => {
     const [recipe, setRecipe] = useState(props.recipe);
+    const { putRecipeRating, getRecipeRatingUser, user, postRating } = useContext(AuthContext)
     const [openSaveCollection, setOpenCollection] = useState(false);
+    const [rating, setRating] = useState()
+    const [ratingValue, setRatingValue] = useState()
+    const [updatedata, setUpadate] = useState(true)
+
+    const sendRating = async () => {
+        if (rating != undefined) {
+            const data = await putRecipeRating(recipe.id, ratingValue);
+            setRating(data)
+            setUpadate(true)
+        }
+        const data = await postRating(recipe.id, ratingValue)
+        setRating(data)
+        setUpadate(true)
+    }
+
+    useEffect(() => {
+        async function fetchData() {
+            const data = await getRecipeRatingUser(recipe.id)
+            setRating(data)
+        }
+        if (updatedata) {
+            fetchData();
+        }
+        setUpadate(false)
+    }, [recipe.id, updatedata])
 
     return (
         <>
@@ -212,17 +239,20 @@ const DetailRecipe = (props) => {
                         </div>
                     </div>
 
-                    <div className="border-b-[1px] mt-40"></div>
-                    <section className="rating-tag mt-16">
-                        <div className="rating flex items-center space-x-48">
-                            <div>
-                                <h4 className="text-h4 font-quicksand font-bold text-gray-800">Beri ulasan</h4>
-                                <p className="text-lg text-gray-600">Apakah kamu suka dengan resep ini?</p>
-                            </div>
-                            <ActiveRating />
-                        </div>
+                    {user &&
+                        <>
+                            <div className="border-b-[1px] mt-40"></div>
+                            <section className="rating-tag mt-16">
+                                <div className="rating flex items-center space-x-48">
+                                    <div>
+                                        <h4 className="text-h4 font-quicksand font-bold text-gray-800">Beri ulasan</h4>
+                                        <p className="text-lg text-gray-600">Apakah kamu suka dengan resep ini?</p>
+                                    </div>
+                                    <ActiveRating initialRating={rating?.rating ?? 0} onChange={value => setRatingValue(value)} />
+                                    <Button onClick={sendRating}>Kirim Ulasan</Button>
+                                </div>
 
-                        {/* <div className="tag mt-16">
+                                {/* <div className="tag mt-16">
                             <h4 className="text-h4 font-quicksand font-bold text-gray-800">Tags</h4>
                             {
                                 recipe.tags.map((tag, index) => (
@@ -230,7 +260,9 @@ const DetailRecipe = (props) => {
                                 ))
                             }
                         </div> */}
-                    </section>
+                            </section>
+                        </>
+                    }
                 </div>
             </ContainterXL>
 
