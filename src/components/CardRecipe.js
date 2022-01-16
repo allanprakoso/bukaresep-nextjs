@@ -16,7 +16,7 @@ const CardRecipe = ({ recipe, path, onDelete, type = 'creator' }) => {
   const [openOption, setOpenOption] = useState();
   return (
     <>
-      <div className="font-inter text-gray-600 mx-auto my-4">
+      <div className="font-inter text-gray-600 mx-auto mb-6">
         <div className="bg-white rounded-lg shadow-lg max-w-sm w-64 pb-8 hover:shadow-xl hover:-translate-y-[2px] transition ease-out group">
           <div className="relative">
             <div className="w-full h-[184px] overflow-hidden">

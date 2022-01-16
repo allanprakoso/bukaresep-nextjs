@@ -1,5 +1,5 @@
 import Rating from 'react-rating';
-import { Star, StarBorder } from '../assets/icons'
+import { Star, StarBorder, StarNull, StarRating } from '../assets/icons'
 const ActiveRating = ({ onChange, initialRating }) => {
 
     return (
@@ -15,15 +15,15 @@ const ActiveRating = ({ onChange, initialRating }) => {
 
 export function IStar({ active }) {
     return (active ?
-        <div className="m-1">
-            <svg width="40px" height="40px" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-                <Star />
+        <div className="mr-4">
+            <svg width="36px" height="36px" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+                <StarRating />
             </svg>
         </div>
         :
-        <div className="m-1">
-            <svg width="28px" className="fill-white" height="28px" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
-                <StarBorder />
+        <div className="mr-4">
+            <svg width="36px" className="fill-white" height="36px" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+                <StarNull />
             </svg>
         </div>
     )

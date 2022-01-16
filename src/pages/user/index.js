@@ -23,7 +23,7 @@ const Home = () => {
   return (
     <>
       <section className="header">
-        <div className="bg-[url('/pic/userHeader.jpg')] bg-cover rounded-xl flex flex-col items-center space-y-6 pt-48 pb-20">
+        <div className="bg-[url('/pic/userHeader.jpg')] bg-cover rounded-xl flex flex-col items-center space-y-6 pt-48 pb-20 -mt-2">
           <h1 className="text-display font-quicksand font-bold text-gray-800">Temukan resep masakan</h1>
           <p className="text-h5 font-quicksand font-medium ">Kumpulan beragam resep masakan lezat untuk makan sehari-hari</p>
         </div>

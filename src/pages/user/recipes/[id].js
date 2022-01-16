@@ -243,17 +243,20 @@ const DetailRecipe = (props) => {
                         <>
                             <div className="border-b-[1px] mt-40"></div>
                             <section className="rating-tag mt-16">
-                                <div className="rating flex items-center space-x-48">
+                                <div className="rating">
                                     <div>
                                         <h4 className="text-h4 font-quicksand font-bold text-gray-800">Beri ulasan</h4>
                                         <p className="text-lg text-gray-600">Apakah kamu suka dengan resep ini?</p>
                                     </div>
-                                    <ActiveRating initialRating={rating?.rating ?? 0} onChange={value => setRatingValue(value)} />
-                                    <Button onClick={sendRating}>Kirim Ulasan</Button>
+                                    <div className="flex mt-6 justify-between">
+                                        <ActiveRating initialRating={rating?.rating ?? 0} onChange={value => setRatingValue(value)} />
+                                        <Button onClick={sendRating}>Kirim Ulasan</Button>
+                                    </div>
+
                                 </div>
 
                                 {/* <div className="tag mt-16">
-                            <h4 className="text-h4 font-quicksand font-bold text-gray-800">Tags</h4>
+                                <h4 className="text-h4 font-quicksand font-bold text-gray-800">Tags</h4>
                             {
                                 recipe.tags.map((tag, index) => (
                                     <button key={index} className="border border-gray-400 px-4 py-2 rounded-full">{tag.id}</button>
