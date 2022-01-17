@@ -9,7 +9,7 @@ const CarouselRecipe = () => {
       title: "Gado gado",
       level: "Mudah",
       time: 5,
-      rating: 5,
+      rating: 4.5,
       category: "Makanan",
       creator: "olinuyi",
       image:
@@ -22,7 +22,7 @@ const CarouselRecipe = () => {
       title: "Sate Ayam Madura Sambel Kacang",
       level: "Mudah",
       time: 10,
-      rating: 4.8,
+      rating: 3.0,
       category: "Makanan",
       creator: "olinuyi",
       image:
