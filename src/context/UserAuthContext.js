@@ -53,7 +53,7 @@ export const UserAuthProvider = ({ children }) => {
                 let response = await fetch('http://47.254.242.193:5000/users/' + id);
                 let res = await response.json();
                 setUser(res.user);
-                router.push("/user/" + res.user.username)
+                router.push("/user")
             }
             getUser();
             // history.push('/')
